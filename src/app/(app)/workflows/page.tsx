@@ -1,16 +1,25 @@
 import {
-  Mail,
-  Phone,
-  CheckCircle2,
-  CircleDot,
-  Tag,
-  Reply,
   AlertTriangle,
-  Sparkles,
+  ArrowRight,
+  Bot,
+  Building2,
+  CheckCircle2,
+  CircleDollarSign,
+  FileText,
+  Headphones,
+  Inbox,
+  Mail,
   Plus,
+  Receipt,
   Save,
-  Play,
+  Send,
+  Sparkles,
+  TrendingUp,
+  UserCheck,
+  Users2,
+  Workflow as WorkflowIcon,
 } from "lucide-react";
+import Link from "next/link";
 import { PageHeader } from "@/components/layout/page-header";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -21,8 +30,18 @@ export default function WorkflowsPage() {
   return (
     <div className="space-y-6">
       <PageHeader
+        eyebrow="Visual automation builder"
         title="Workflows"
-        description="Compose multi-step AI workflows with branching, approvals and human-in-the-loop steps."
+        description="Compose what happens when work arrives. Drag triggers, agents and actions — every step runs in your tenant with full audit and approvals."
+        meta={
+          <>
+            <span>14 workflows live</span>
+            <span className="hidden md:inline">·</span>
+            <span>4,217 runs today</span>
+            <span className="hidden md:inline">·</span>
+            <span>99.94% success rate</span>
+          </>
+        }
         actions={
           <>
             <Button variant="outline" size="sm">
@@ -42,57 +61,148 @@ export default function WorkflowsPage() {
 
         <div className="relative space-y-10">
           <WorkflowExample
-            title="Lead received → qualify → outreach"
+            title="Lead arrives → Sales Agent → Email → CRM"
             tag="Sales · Active"
             badgeVariant="success"
-            description="Triggered when a new lead is created in HubSpot or via webhook."
+            description="Triggered the moment an inbound lead lands in HubSpot, your form, or via webhook."
+            metric="2,184 runs · 612 hrs saved"
           >
-            <div className="flex flex-wrap items-center gap-1.5">
-              <WorkflowNode icon={<Mail />} title="Lead received" subtitle="Trigger · Webhook" tone="brand" index={0} />
-              <WorkflowConnector />
-              <WorkflowNode icon={<CircleDot />} title="Qualify" subtitle="AI · Score 0-100" tone="warning" index={1} />
-              <WorkflowConnector />
-              <WorkflowNode icon={<Reply />} title="Send email" subtitle="AI drafts · Auto-send" tone="brand" index={2} />
-              <WorkflowConnector />
-              <WorkflowNode icon={<Phone />} title="Schedule call" subtitle="If score ≥ 70" tone="success" index={3} />
-            </div>
+            <WorkflowNode icon={<Inbox />} title="Lead arrives" subtitle="Webhook · HubSpot · Form" tone="brand" index={0} />
+            <WorkflowConnector />
+            <WorkflowNode
+              icon={<Bot />}
+              title="Sales Agent"
+              subtitle="Score · Personalize · Draft"
+              tone="brand"
+              index={1}
+              accent
+            />
+            <WorkflowConnector />
+            <WorkflowNode icon={<Mail />} title="Email" subtitle="Auto-send · in your voice" tone="success" index={2} />
+            <WorkflowConnector />
+            <WorkflowNode icon={<Building2 />} title="CRM" subtitle="Update · Salesforce / HubSpot" tone="muted" index={3} />
           </WorkflowExample>
 
           <WorkflowExample
-            title="Ticket received → triage → resolve"
+            title="Invoice uploaded → Finance Agent → Process"
+            tag="Finance · Active"
+            badgeVariant="success"
+            description="Reads incoming invoices, validates against POs and routes for the right approver."
+            metric="612 runs · 274 hrs saved"
+          >
+            <WorkflowNode icon={<Receipt />} title="Invoice uploaded" subtitle="Email · Drive · Drop" tone="brand" index={0} />
+            <WorkflowConnector />
+            <WorkflowNode
+              icon={<Bot />}
+              title="Finance Agent"
+              subtitle="OCR · Match PO · Validate"
+              tone="warning"
+              index={1}
+              accent
+            />
+            <WorkflowConnector />
+            <WorkflowNode icon={<UserCheck />} title="Approval" subtitle="Manager · 2-step rule" tone="brand" index={2} />
+            <WorkflowConnector />
+            <WorkflowNode icon={<CheckCircle2 />} title="Process" subtitle="Post to ERP · Reconcile" tone="success" index={3} />
+          </WorkflowExample>
+
+          <WorkflowExample
+            title="Ticket arrives → Support Agent → Resolve"
             tag="Support · Active"
             badgeVariant="success"
-            description="Routes incoming tickets to the right agent and proposes grounded answers."
+            description="Triages every incoming ticket, drafts a grounded answer and escalates only what truly needs a human."
+            metric="9,420 runs · 1,184 hrs saved"
           >
-            <div className="flex flex-wrap items-center gap-1.5">
-              <WorkflowNode icon={<Mail />} title="Ticket received" subtitle="Zendesk · Inbox" tone="brand" index={0} />
-              <WorkflowConnector />
-              <WorkflowNode icon={<Tag />} title="Categorize" subtitle="AI · 12 categories" tone="warning" index={1} />
-              <WorkflowConnector />
-              <WorkflowNode icon={<Sparkles />} title="Suggest answer" subtitle="Grounded on SOPs" tone="brand" index={2} />
-              <WorkflowConnector />
-              <WorkflowNode icon={<AlertTriangle />} title="Escalate" subtitle="If sentiment < 0.3" tone="warning" index={3} />
-              <WorkflowConnector />
-              <WorkflowNode icon={<CheckCircle2 />} title="Resolve" subtitle="Auto-close" tone="success" index={4} />
-            </div>
+            <WorkflowNode icon={<Headphones />} title="Ticket arrives" subtitle="Zendesk · Inbox · Chat" tone="brand" index={0} />
+            <WorkflowConnector />
+            <WorkflowNode
+              icon={<Bot />}
+              title="Support Agent"
+              subtitle="Classify · Sentiment · Draft"
+              tone="success"
+              index={1}
+              accent
+            />
+            <WorkflowConnector />
+            <WorkflowNode icon={<AlertTriangle />} title="Escalate" subtitle="If sentiment < 0.3" tone="warning" index={2} />
+            <WorkflowConnector />
+            <WorkflowNode icon={<Send />} title="Resolve" subtitle="Auto-reply · Close" tone="success" index={3} />
           </WorkflowExample>
 
           <WorkflowExample
-            title="Invoice received → validate → approve"
-            tag="Finance · Draft"
-            badgeVariant="muted"
-            description="Reads incoming invoices, validates against POs and routes for approval."
+            title="Internal request → Ops Agent → Done"
+            tag="Ops · Active"
+            badgeVariant="success"
+            description="A teammate asks a question or files an internal request. The Ops Agent runs the SOP end-to-end."
+            metric="2,104 runs · 318 hrs saved"
           >
-            <div className="flex flex-wrap items-center gap-1.5">
-              <WorkflowNode icon={<Mail />} title="Invoice received" subtitle="Email · PDF" tone="brand" index={0} />
-              <WorkflowConnector />
-              <WorkflowNode icon={<Sparkles />} title="Extract fields" subtitle="AI · OCR + parse" tone="warning" index={1} />
-              <WorkflowConnector />
-              <WorkflowNode icon={<CheckCircle2 />} title="Match PO" subtitle="ERP lookup" tone="brand" index={2} />
-              <WorkflowConnector />
-              <WorkflowNode icon={<Reply />} title="Approval" subtitle="Manager review" tone="muted" index={3} />
-            </div>
+            <WorkflowNode icon={<Users2 />} title="Request" subtitle="Slack · Teams · Form" tone="brand" index={0} />
+            <WorkflowConnector />
+            <WorkflowNode
+              icon={<Bot />}
+              title="Ops Agent"
+              subtitle="Match SOP · Run · Notify"
+              tone="warning"
+              index={1}
+              accent
+            />
+            <WorkflowConnector />
+            <WorkflowNode icon={<FileText />} title="Run SOP" subtitle="7-step playbook" tone="brand" index={2} />
+            <WorkflowConnector />
+            <WorkflowNode icon={<CheckCircle2 />} title="Notify" subtitle="Reply with proof" tone="success" index={3} />
           </WorkflowExample>
+
+          <WorkflowExample
+            title="Weekly review → Executive Analyst → Briefing"
+            tag="Analyst · Training"
+            badgeVariant="muted"
+            description="Every Monday, the Executive Analyst drafts a board-ready briefing with anomalies, trends and next-action recommendations."
+            metric="312 runs · 96 hrs saved"
+          >
+            <WorkflowNode icon={<TrendingUp />} title="Weekly trigger" subtitle="Mon 07:00 UTC" tone="brand" index={0} />
+            <WorkflowConnector />
+            <WorkflowNode
+              icon={<Bot />}
+              title="Executive Analyst"
+              subtitle="Detect · Explain · Draft"
+              tone="muted"
+              index={1}
+              accent
+            />
+            <WorkflowConnector />
+            <WorkflowNode icon={<CircleDollarSign />} title="ROI rollup" subtitle="Cross-functional" tone="brand" index={2} />
+            <WorkflowConnector />
+            <WorkflowNode icon={<Send />} title="Briefing" subtitle="Slack · Email · PDF" tone="success" index={3} />
+          </WorkflowExample>
+        </div>
+      </Card>
+
+      <Card className="relative overflow-hidden p-6">
+        <div className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-brand/10 blur-3xl" />
+        <div className="relative flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+          <div className="flex items-center gap-4">
+            <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white">
+              <Sparkles className="h-5 w-5" />
+            </span>
+            <div>
+              <h3 className="text-lg font-semibold">Compose your own workflow</h3>
+              <p className="text-sm text-muted-foreground">
+                Start from a template or drag triggers, agents and actions onto a canvas. Every connection is auditable.
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" asChild>
+              <Link href="/agents">
+                Browse agents
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Button>
+            <Button>
+              <WorkflowIcon className="h-4 w-4" />
+              Open builder
+            </Button>
+          </div>
         </div>
       </Card>
     </div>
@@ -104,12 +214,14 @@ function WorkflowExample({
   tag,
   description,
   badgeVariant,
+  metric,
   children,
 }: {
   title: string;
   tag: string;
   description: string;
   badgeVariant: "success" | "warning" | "muted";
+  metric?: string;
   children: React.ReactNode;
 }) {
   return (
@@ -122,12 +234,16 @@ function WorkflowExample({
           </div>
           <p className="text-sm text-muted-foreground">{description}</p>
         </div>
-        <Button variant="ghost" size="sm">
-          <Play className="h-4 w-4" />
-          Test run
-        </Button>
+        {metric && (
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground">
+            <span className="h-1.5 w-1.5 rounded-full bg-success" />
+            {metric}
+          </span>
+        )}
       </div>
-      <div className="overflow-x-auto pb-2">{children}</div>
+      <div className="overflow-x-auto pb-2">
+        <div className="flex flex-nowrap items-center gap-1.5">{children}</div>
+      </div>
     </div>
   );
 }

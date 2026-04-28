@@ -16,16 +16,16 @@ export default function NotFound() {
         404 · page not found
       </span>
       <h1 className="relative mt-4 max-w-xl text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-        Looks like this page isn’t in your knowledge base.
+        That page is off-shift right now.
       </h1>
       <p className="relative mt-2 max-w-md text-sm text-muted-foreground">
-        The page you’re looking for has moved or never existed. Let’s get you back to your private intelligence dashboard.
+        The page you’re looking for has moved or never existed. Let’s get you back to your digital workforce.
       </p>
       <div className="relative mt-8 flex flex-col items-center gap-3 sm:flex-row">
         <Button asChild>
-          <Link href="/dashboard">
+          <Link href="/overview">
             <ArrowLeft className="h-4 w-4" />
-            Back to dashboard
+            Back to Overview
           </Link>
         </Button>
         <Button asChild variant="outline">

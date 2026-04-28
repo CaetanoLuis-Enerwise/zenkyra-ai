@@ -16,7 +16,7 @@ const personas = [
   {
     icon: CircleDollarSign,
     role: "For the CFO",
-    title: "Predictable spend. Compounding ROI.",
+    title: "Workers you can underwrite.",
     bullets: [
       "Fixed monthly price — no per-token surprises",
       "Live ROI dashboard with finance-grade exports",
@@ -27,10 +27,10 @@ const personas = [
   {
     icon: Users2,
     role: "For the CHRO",
-    title: "Day-one-ready people.",
+    title: "Scale operations, not headcount.",
     bullets: [
-      "Onboarding co-pilot per role and office",
-      "Instant answers on policy, payroll, IT and benefits",
+      "Hire agents per role — Sales, Support, Ops, Finance",
+      "Every employee gets a senior teammate on demand",
       "Performance reviews drafted on grounded data",
     ],
     proof: "Onboarding 2× faster · 38% fewer Slack questions",
@@ -38,10 +38,10 @@ const personas = [
   {
     icon: Workflow,
     role: "For the COO",
-    title: "Run the boring 30% — automatically.",
+    title: "A workforce that doesn't sleep.",
     bullets: [
       "Triage, summarise, route — 24/7, in your tone",
-      "SOPs, runbooks and vendors, instantly searchable",
+      "SOPs, runbooks and vendors, instantly executable",
       "1,200+ hours saved monthly per 100 employees",
     ],
     proof: "−62% average response time across teams",
@@ -57,10 +57,10 @@ export function BuyingCommittee() {
             Built for the buying committee
           </p>
           <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            Every stakeholder gets the answer they need.
+            One workforce. Every executive sees their case.
           </h2>
           <p className="mt-3 text-balance text-muted-foreground">
-            Most enterprise AI projects stall in committee. Zenkyra arrives pre-cleared by Security, pre-budgeted for Finance and pre-owned by the team that uses it.
+            Most enterprise AI projects stall in committee. Zenkyra arrives pre-cleared by Security, pre-budgeted for Finance and pre-owned by the team that hires the agent.
           </p>
         </div>
 

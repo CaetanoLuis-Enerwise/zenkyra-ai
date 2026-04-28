@@ -9,8 +9,8 @@ const outcomes = [
   },
   {
     icon: MessageSquare,
-    value: "4,217,840",
-    label: "Grounded answers delivered",
+    value: "1,217,402",
+    label: "Tasks completed by Zenkyra agents",
   },
   {
     icon: TrendingUp,

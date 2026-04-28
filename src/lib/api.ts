@@ -8,25 +8,27 @@
  */
 
 import {
+  agents,
+  agentPerformanceData,
   auditEvents,
   automations,
   chatThreads,
   companies,
-  dashboardStats,
   departmentAdoption,
   faqs,
   howItWorks,
   knowledgeFiles,
   notifications,
+  overviewStats,
   promptSuggestions,
   recentActivity,
   roiData,
   teamMembers,
   testimonials,
-  topAutomationsData,
   usageByDept,
   usageData,
   type ActivityItem,
+  type Agent,
   type Automation,
   type ChatThread,
   type KnowledgeFile,
@@ -41,11 +43,12 @@ function withLatency<T>(value: T, ms: number = SIMULATED_LATENCY): Promise<T> {
   return new Promise((resolve) => setTimeout(() => resolve(value), ms));
 }
 
-export interface DashboardData {
+export interface OverviewData {
   stats: Stat[];
   usage: typeof usageData;
   adoption: typeof departmentAdoption;
   activity: ActivityItem[];
+  agents: Agent[];
   monthlySaved: { value: string; deltaPct: string };
 }
 
@@ -60,18 +63,25 @@ export interface AnalyticsData {
   }[];
   roi: typeof roiData;
   byDept: typeof usageByDept;
-  topAutomations: typeof topAutomationsData;
+  agentPerformance: typeof agentPerformanceData;
+  agents: Agent[];
 }
 
 export const api = {
-  dashboard: async (): Promise<DashboardData> =>
+  overview: async (): Promise<OverviewData> =>
     withLatency({
-      stats: dashboardStats,
+      stats: overviewStats,
       usage: usageData,
       adoption: departmentAdoption,
       activity: recentActivity,
-      monthlySaved: { value: "€38,420", deltaPct: "+24% MoM" },
+      agents,
+      monthlySaved: { value: "€384,210", deltaPct: "+24% MoM" },
     }),
+
+  // Backwards-compat alias for any cached imports.
+  dashboard: async (): Promise<OverviewData> => api.overview(),
+
+  agents: async (): Promise<Agent[]> => withLatency(agents, 80),
 
   knowledge: async (): Promise<KnowledgeFile[]> => withLatency(knowledgeFiles, 120),
 
@@ -85,40 +95,41 @@ export const api = {
       kpis: [
         {
           label: "Estimated cost saved",
-          value: "€384,210",
-          delta: "+22.4%",
+          value: "€1.84M",
+          delta: "+32.4%",
           trend: "up",
-          hint: "vs last quarter",
+          hint: "annualized",
           spark: [110, 130, 145, 160, 178, 195, 220, 240, 268, 290, 312, 340],
         },
         {
-          label: "Productivity gain",
+          label: "Hours reclaimed",
+          value: "42,180",
+          delta: "+18.2%",
+          trend: "up",
+          hint: "across all agents",
+          spark: [180, 220, 260, 290, 320, 360, 410, 460, 510, 560, 620, 680],
+        },
+        {
+          label: "Department efficiency",
           value: "+38%",
           delta: "+4.1pts",
           trend: "up",
-          hint: "across all teams",
+          hint: "weighted avg.",
           spark: [22, 24, 26, 27, 29, 30, 32, 33, 34, 36, 37, 38],
         },
         {
-          label: "Avg response time",
-          value: "−62%",
-          delta: "2m 18s",
-          trend: "down",
-          hint: "support tickets",
-          spark: [80, 76, 72, 70, 66, 60, 54, 50, 46, 42, 40, 38],
-        },
-        {
-          label: "Monthly active users",
-          value: "412",
-          delta: "+11.0%",
+          label: "Avg agent uptime",
+          value: "99.94%",
+          delta: "+0.18pts",
           trend: "up",
-          hint: "across 6 departments",
-          spark: [240, 260, 270, 290, 310, 330, 350, 366, 380, 395, 405, 412],
+          hint: "rolling 90d",
+          spark: [99.6, 99.7, 99.7, 99.8, 99.8, 99.8, 99.9, 99.9, 99.9, 99.94, 99.94, 99.94],
         },
       ],
       roi: roiData,
       byDept: usageByDept,
-      topAutomations: topAutomationsData,
+      agentPerformance: agentPerformanceData,
+      agents,
     }),
 
   team: async (): Promise<TeamMember[]> => withLatency(teamMembers),

@@ -10,63 +10,63 @@ import { Card } from "@/components/ui/card";
 const cases = [
   {
     icon: Briefcase,
-    title: "Sales",
-    headline: "Close 22% faster, on your playbook.",
+    title: "Sales Agent",
+    headline: "Qualify, reply, follow up — 24/7, in your voice.",
     bullets: [
-      "Auto-qualify and reply to inbound leads in your voice",
+      "Auto-score and reply to inbound leads under 90 seconds",
       "Draft proposals grounded on past closed-won deals",
-      "Surface the right case study on every account",
+      "Update your CRM and book the meeting",
     ],
-    proof: "12 mins → 38 secs to draft a proposal",
+    proof: "Northwind closed 22% faster after 9 weeks",
   },
   {
     icon: Headphones,
-    title: "Support",
-    headline: "Cut handle-time by 41% without growing headcount.",
+    title: "Support Agent",
+    headline: "Resolve tier-1, escalate only what matters.",
     bullets: [
       "Triage tickets by priority, sentiment and SLA",
-      "Suggest grounded answers from SOPs in real time",
+      "Draft grounded answers with page-level citations",
       "Escalate intelligently — not when the queue is long",
     ],
-    proof: "7,200 tickets handled by AI agents last month",
-  },
-  {
-    icon: Users2,
-    title: "HR",
-    headline: "Day-one-ready new hires across every office.",
-    bullets: [
-      "Onboarding co-pilot tailored to each role",
-      "Instant answers on policies, benefits and IT",
-      "Performance review drafts grounded on real data",
-    ],
-    proof: "Onboarding 2× faster, 38% fewer Slack questions",
+    proof: "9,420 tickets handled · CSAT 4.9",
   },
   {
     icon: Settings2,
-    title: "Operations",
-    headline: "Run the boring 30% of work — automatically.",
+    title: "Ops Agent",
+    headline: "Run the boring 30% — automatically.",
     bullets: [
-      "SOPs, vendors, runbooks searchable in one place",
-      "Invoice OCR + PO matching out of the box",
-      "Meeting summaries posted to the right channel",
+      "Internal requests routed and resolved on-policy",
+      "SOPs and runbooks executed end-to-end",
+      "Vendor + procurement triage in Slack and Teams",
     ],
-    proof: "1,284 hours saved this month at Acme",
+    proof: "1,200+ hrs saved monthly per 100 employees",
+  },
+  {
+    icon: Users2,
+    title: "Finance Agent + Executive Analyst",
+    headline: "Close the books faster. Brief the board weekly.",
+    bullets: [
+      "Invoice OCR, PO matching and approval routing",
+      "Variance analysis the second numbers land",
+      "Board-ready briefings drafted every Monday",
+    ],
+    proof: "Vertex closes 4 days faster — every month",
   },
 ];
 
 export function UseCases() {
   return (
-    <section id="use-cases" className="border-b border-border bg-secondary/30 py-20 lg:py-28">
+    <section id="workflows" className="border-b border-border bg-secondary/30 py-20 lg:py-28">
       <div className="container">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">
-            Built for every team
+            What each agent does
           </p>
           <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
             One platform. Every department. Measurable outcomes.
           </h2>
           <p className="mt-3 text-balance text-muted-foreground">
-            We start where the pain is loudest and expand horizontally as ROI compounds.
+            Hire the agent your team needs first. Add the rest as ROI compounds.
           </p>
         </div>
 

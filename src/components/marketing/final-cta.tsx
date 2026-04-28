@@ -19,15 +19,15 @@ export function FinalCTA() {
               Ready when you are
             </p>
             <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-              Turn your knowledge into your unfair advantage.
+              Hire your digital workforce today.
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-balance text-muted-foreground">
-              30 minutes with our team and you'll have a tailored ROI projection, a security pack and a clear path to live in 7 days. No procurement nightmare. No data leaving your tenant.
+              30 minutes with our team and you'll leave with a tailored ROI projection, a security pack and a clear path to your first agent on shift in 7 days. No procurement nightmare. No data leaving your tenant.
             </p>
             <div className="mt-7 flex flex-wrap justify-center gap-3">
               <Button size="xl" onClick={() => open("final-cta")}>
                 <CalendarCheck className="h-4 w-4" />
-                Book 30-min demo
+                Book Executive Demo
                 <ArrowRight className="h-4 w-4" />
               </Button>
               <Button size="xl" variant="outline" asChild>

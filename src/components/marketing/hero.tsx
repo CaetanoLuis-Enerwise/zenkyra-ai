@@ -4,11 +4,13 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
+  Bot,
   CalendarCheck,
-  Sparkles,
+  CheckCircle2,
   ShieldCheck,
-  Zap,
+  Sparkles,
   Star,
+  Zap,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDemoDialog } from "@/components/marketing/demo-dialog";
@@ -32,7 +34,7 @@ export function Hero() {
                 <Star key={i} className="h-3 w-3 fill-current" />
               ))}
             </span>
-            <span>Rated 4.9 by COOs &amp; CIOs at 140+ enterprises</span>
+            <span>Trusted by COOs &amp; CIOs at 140+ enterprises</span>
           </motion.div>
 
           <motion.h1
@@ -41,9 +43,9 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.05 }}
             className="mt-6 text-balance text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-[64px]"
           >
-            Your company already has knowledge.
+            Hire your first
             <span className="block bg-gradient-to-br from-brand via-brand-400 to-brand-300 bg-clip-text text-transparent">
-              We turn it into intelligence.
+              digital workforce.
             </span>
           </motion.h1>
 
@@ -53,7 +55,7 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="mt-5 max-w-xl text-balance text-base text-muted-foreground sm:text-lg"
           >
-            Zenkyra is the private AI platform that grounds every answer on your documents, deploys agents that act on your business, and lives entirely inside your tenant. Pilot live in 7 days. Average payback in 9 weeks.
+            Zenkyra AI gives companies autonomous AI agents that reduce workload, increase speed and scale operations — privately, in your tenant. Ship the first agent in 7 days. Average payback in 9 weeks.
           </motion.p>
 
           <motion.div
@@ -68,7 +70,7 @@ export function Hero() {
               className="group relative overflow-hidden"
             >
               <CalendarCheck className="h-4 w-4" />
-              Book a 30-min demo
+              Book Executive Demo
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               <span
                 aria-hidden
@@ -101,7 +103,7 @@ export function Hero() {
             </li>
             <li className="flex items-center gap-1.5">
               <Zap className="h-4 w-4 text-brand" />
-              Live in 7 days · pilot in 24h
+              First agent live in 7 days
             </li>
             <li className="flex items-center gap-1.5">
               <Sparkles className="h-4 w-4 text-brand" />
@@ -116,8 +118,8 @@ export function Hero() {
             className="mt-10 grid max-w-lg grid-cols-3 gap-6 border-t border-border pt-6"
           >
             <Stat value="7.4×" label="Avg. ROI" />
-            <Stat value="−62%" label="Response time" />
-            <Stat value="99.99%" label="Uptime SLA" />
+            <Stat value="9 wks" label="Payback" />
+            <Stat value="99.94%" label="Agent uptime" />
           </motion.div>
         </div>
 
@@ -128,6 +130,13 @@ export function Hero() {
 }
 
 function HeroPreview() {
+  const agents = [
+    { name: "Sales Agent", status: "active", tasks: "4,812 tasks", color: "from-brand/30 to-brand/0", dot: "bg-brand" },
+    { name: "Support Agent", status: "active", tasks: "9,420 tasks", color: "from-emerald-500/30 to-emerald-500/0", dot: "bg-emerald-500" },
+    { name: "Ops Agent", status: "active", tasks: "2,104 tasks", color: "from-amber-500/30 to-amber-500/0", dot: "bg-amber-500" },
+    { name: "Finance Agent", status: "active", tasks: "1,864 tasks", color: "from-violet-500/30 to-violet-500/0", dot: "bg-violet-500" },
+    { name: "Executive Analyst", status: "training", tasks: "312 tasks", color: "from-rose-500/30 to-rose-500/0", dot: "bg-rose-500" },
+  ];
   return (
     <motion.div
       initial={{ opacity: 0, y: 12, scale: 0.98 }}
@@ -141,67 +150,62 @@ function HeroPreview() {
           <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/30" />
           <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/30" />
           <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/30" />
-          <span className="ml-3 text-xs text-muted-foreground">acme · Zenkyra</span>
+          <span className="ml-3 text-xs text-muted-foreground">acme · Zenkyra workforce</span>
           <span className="ml-auto inline-flex items-center gap-1 text-[10px] text-muted-foreground">
             <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse-slow" />
             Live · EU-Frankfurt
           </span>
         </div>
-        <div className="grid grid-cols-[150px_1fr]">
-          <div className="space-y-1.5 border-r border-border p-3 text-xs">
-            {["Dashboard", "Knowledge", "Assistant", "Automations", "Workflows", "Analytics"].map(
-              (s, i) => (
-                <div
-                  key={s}
-                  className={
-                    i === 2
-                      ? "flex items-center gap-2 rounded-md bg-accent px-2 py-1.5 font-medium"
-                      : "flex items-center gap-2 rounded-md px-2 py-1.5 text-muted-foreground"
-                  }
-                >
-                  <span className="h-1.5 w-1.5 rounded-full bg-brand/70" />
-                  {s}
-                </div>
-              )
-            )}
+        <div className="space-y-3 p-4">
+          <div className="flex items-center justify-between">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+              Active workforce
+            </p>
+            <span className="text-[10px] text-muted-foreground">5 agents · 4 on shift</span>
           </div>
-          <div className="space-y-3 p-4">
-            <div className="flex items-start gap-3">
-              <span className="h-7 w-7 shrink-0 rounded-full bg-secondary" />
-              <div className="rounded-lg bg-secondary px-3 py-2 text-xs">
-                Compare last year's discounting bands for our EMEA enterprise deals.
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand text-white">
-                <Sparkles className="h-3.5 w-3.5" />
+
+          <ul className="space-y-1.5">
+            {agents.map((a, i) => (
+              <motion.li
+                key={a.name}
+                initial={{ opacity: 0, x: 8 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: 0.3 + i * 0.06 }}
+                className="relative flex items-center gap-3 overflow-hidden rounded-lg border border-border bg-card/60 px-3 py-2"
+              >
+                <span
+                  aria-hidden
+                  className={`pointer-events-none absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r ${a.color}`}
+                />
+                <span className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-card text-foreground/80">
+                  <Bot className="h-3.5 w-3.5" />
+                </span>
+                <div className="relative min-w-0 flex-1">
+                  <p className="truncate text-xs font-medium">{a.name}</p>
+                  <p className="truncate text-[10px] text-muted-foreground">{a.tasks}</p>
+                </div>
+                <span className="relative inline-flex items-center gap-1 text-[10px] text-muted-foreground">
+                  <span className={`h-1.5 w-1.5 rounded-full ${a.dot} ${a.status === "active" ? "animate-pulse-slow" : ""}`} />
+                  {a.status === "active" ? "On shift" : "Training"}
+                </span>
+              </motion.li>
+            ))}
+          </ul>
+
+          <div className="rounded-lg border border-dashed border-border bg-secondary/40 p-3">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+              Most recent · 2 min ago
+            </p>
+            <p className="mt-1 flex items-start gap-2 text-xs leading-5">
+              <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-success" />
+              <span>
+                <b>Sales Agent</b> qualified <b>Northwind Logistics</b> · scored 87/100 and booked a 30-min discovery call for Thursday 14:00.
               </span>
-              <div className="space-y-2">
-                <div className="rounded-lg border border-border bg-card px-3 py-2 text-xs leading-5 shadow-sm">
-                  Median discount was <b>18.4%</b> in 2025. Deals above €120k jumped to <b>24.6%</b>. I'd tighten Tier-2 thresholds by 3 pts and bundle Support+SLA…
-                </div>
-                <div className="flex flex-wrap gap-1.5">
-                  <Source label="Sales Playbook · p.24" />
-                  <Source label="Annual Forecast · p.3" />
-                </div>
-              </div>
-            </div>
-            <div className="rounded-lg border border-dashed border-border bg-secondary/50 px-3 py-2 text-xs text-muted-foreground">
-              Ask anything about your company knowledge…
-            </div>
+            </p>
           </div>
         </div>
       </div>
     </motion.div>
-  );
-}
-
-function Source({ label }: { label: string }) {
-  return (
-    <span className="inline-flex items-center gap-1 rounded-md border border-border bg-card px-2 py-0.5 text-[10px]">
-      <span className="h-1.5 w-1.5 rounded-full bg-brand" />
-      {label}
-    </span>
   );
 }
 

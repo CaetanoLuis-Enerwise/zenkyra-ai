@@ -6,12 +6,12 @@ const cols = [
   {
     title: "Product",
     links: [
-      { label: "Dashboard", href: "/dashboard" },
-      { label: "Knowledge Base", href: "/knowledge" },
-      { label: "AI Assistant", href: "/assistant" },
-      { label: "Automations", href: "/automations" },
+      { label: "Overview", href: "/overview" },
+      { label: "Agents", href: "/agents" },
       { label: "Workflows", href: "/workflows" },
+      { label: "Knowledge Hub", href: "/knowledge" },
       { label: "Analytics", href: "/analytics" },
+      { label: "Security", href: "/security" },
     ],
   },
   {
@@ -63,7 +63,7 @@ export function Footer() {
           <div className="col-span-2">
             <Logo />
             <p className="mt-4 max-w-sm text-sm text-muted-foreground">
-              Your company already has knowledge. We turn it into intelligence. Private AI for modern enterprises.
+              Digital workforce for modern companies. Hire autonomous AI agents that perform real business work — privately, in your tenant.
             </p>
             <div className="mt-5 flex flex-col gap-2 text-xs text-muted-foreground">
               <span className="inline-flex items-center gap-2">

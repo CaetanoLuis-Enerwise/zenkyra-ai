@@ -1,9 +1,8 @@
 import {
   LayoutDashboard,
-  Database,
-  Sparkles,
-  Workflow,
+  Bot,
   GitBranch,
+  Database,
   BarChart3,
   Users,
   CreditCard,
@@ -20,11 +19,10 @@ export interface NavItem {
 }
 
 export const mainNav: NavItem[] = [
-  { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { label: "Knowledge Base", href: "/knowledge", icon: Database },
-  { label: "AI Assistant", href: "/assistant", icon: Sparkles, badge: "New" },
-  { label: "Automations", href: "/automations", icon: Workflow },
+  { label: "Overview", href: "/overview", icon: LayoutDashboard },
+  { label: "Agents", href: "/agents", icon: Bot, badge: "5" },
   { label: "Workflows", href: "/workflows", icon: GitBranch },
+  { label: "Knowledge Hub", href: "/knowledge", icon: Database },
   { label: "Analytics", href: "/analytics", icon: BarChart3 },
 ];
 

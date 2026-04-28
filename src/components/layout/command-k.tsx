@@ -13,8 +13,7 @@ import {
   CommandShortcut,
 } from "@/components/ui/command";
 import { mainNav, secondaryNav } from "@/lib/nav";
-import { promptSuggestions } from "@/lib/mock-data";
-import { Sparkles, Upload, FileText, Users, Plus } from "lucide-react";
+import { Bot, GitBranch, Sparkles, Upload, UserPlus } from "lucide-react";
 
 interface Props {
   open: boolean;
@@ -30,36 +29,46 @@ export function CommandK({ open, onOpenChange }: Props) {
 
   return (
     <CommandDialog open={open} onOpenChange={onOpenChange}>
-      <CommandInput placeholder="Search pages, ask AI, or run actions…" />
+      <CommandInput placeholder="Search pages, hire an agent, or run actions…" />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup heading="Quick actions">
-          <CommandItem onSelect={() => go("/assistant")}>
-            <Sparkles className="text-brand" />
-            Ask Zenkyra AI
+          <CommandItem onSelect={() => go("/agents")}>
+            <Bot className="text-brand" />
+            Hire a new agent
             <CommandShortcut>⌘J</CommandShortcut>
+          </CommandItem>
+          <CommandItem onSelect={() => go("/workflows")}>
+            <GitBranch />
+            Build a workflow
           </CommandItem>
           <CommandItem onSelect={() => go("/knowledge")}>
             <Upload />
-            Upload documents
-          </CommandItem>
-          <CommandItem onSelect={() => go("/workflows")}>
-            <Plus />
-            Create workflow
+            Upload to Knowledge Hub
           </CommandItem>
           <CommandItem onSelect={() => go("/team")}>
-            <Users />
-            Invite team
+            <UserPlus />
+            Invite teammate
           </CommandItem>
         </CommandGroup>
         <CommandSeparator />
-        <CommandGroup heading="Suggested prompts">
-          {promptSuggestions.map((p) => (
-            <CommandItem key={p} onSelect={() => go("/assistant")}>
-              <FileText />
-              {p}
-            </CommandItem>
-          ))}
+        <CommandGroup heading="Suggested briefings">
+          <CommandItem onSelect={() => go("/analytics")}>
+            <Sparkles />
+            Brief me on this week's pipeline
+          </CommandItem>
+          <CommandItem onSelect={() => go("/agents")}>
+            <Sparkles />
+            Show top-performing agents
+          </CommandItem>
+          <CommandItem onSelect={() => go("/analytics")}>
+            <Sparkles />
+            Why did refund tickets spike?
+          </CommandItem>
+          <CommandItem onSelect={() => go("/analytics")}>
+            <Sparkles />
+            Summarize Q2 vendor invoices
+          </CommandItem>
         </CommandGroup>
         <CommandSeparator />
         <CommandGroup heading="Pages">

@@ -14,11 +14,12 @@ export interface Stat {
 
 export interface ActivityItem {
   id: string;
-  type: "proposal" | "ticket" | "search" | "lead" | "upload" | "automation";
+  type: "lead" | "ticket" | "invoice" | "report" | "ops" | "upload";
   title: string;
   description: string;
   time: string;
-  user: string;
+  agent: string;
+  agentId?: string;
 }
 
 export interface KnowledgeFile {
@@ -29,6 +30,25 @@ export interface KnowledgeFile {
   uploaded: string;
   status: "Indexed" | "Processing" | "Failed";
   pages: number;
+}
+
+export type AgentRole = "sales" | "support" | "ops" | "finance" | "analyst";
+
+export interface Agent {
+  id: AgentRole;
+  name: string;
+  tagline: string;
+  description: string;
+  status: "active" | "training" | "draft";
+  tasksCompleted: number;
+  hoursSaved: number;
+  accuracy: number;
+  uptimeDays: number;
+  trainedOn: string[];
+  workflows: number;
+  spark: number[];
+  capabilities: string[];
+  accent: "indigo" | "emerald" | "amber" | "violet" | "rose";
 }
 
 export interface Automation {
@@ -77,38 +97,154 @@ function sparkSeries(base: number, drift: number, len = 14): number[] {
   });
 }
 
-export const dashboardStats: Stat[] = [
+export const overviewStats: Stat[] = [
   {
-    label: "Hours Saved This Month",
-    value: "1,284",
+    label: "Tasks completed this month",
+    value: "18,420",
+    delta: "+24.6%",
+    trend: "up",
+    hint: "across all agents",
+    spark: sparkSeries(1200, 480),
+  },
+  {
+    label: "Hours saved",
+    value: "4,217",
     delta: "+18.2%",
     trend: "up",
     hint: "vs last month",
-    spark: sparkSeries(80, 35),
+    spark: sparkSeries(280, 110),
   },
   {
-    label: "Queries Answered",
-    value: "42,917",
-    delta: "+9.4%",
+    label: "Revenue opportunities captured",
+    value: "€2.4M",
+    delta: "+31.0%",
     trend: "up",
-    hint: "across 6 teams",
-    spark: sparkSeries(2800, 900),
+    hint: "qualified by Sales Agent",
+    spark: sparkSeries(160, 80),
   },
   {
-    label: "Documents Indexed",
-    value: "8,402",
-    delta: "+3.1%",
+    label: "Team productivity gain",
+    value: "+38%",
+    delta: "+4.1pts",
     trend: "up",
-    hint: "84 added today",
-    spark: sparkSeries(540, 90),
+    hint: "across 6 departments",
+    spark: sparkSeries(28, 12),
+  },
+];
+
+// Kept for backwards compat with any cached imports. Now identical to overviewStats.
+export const dashboardStats = overviewStats;
+
+export const agents: Agent[] = [
+  {
+    id: "sales",
+    name: "Sales Agent",
+    tagline: "Qualifies leads, drafts replies, follows up.",
+    description:
+      "Auto-qualifies inbound leads, drafts replies in your voice and books follow-ups against your CRM.",
+    status: "active",
+    tasksCompleted: 4_812,
+    hoursSaved: 612,
+    accuracy: 97,
+    uptimeDays: 142,
+    trainedOn: ["Sales Playbook 2026", "Closed-won deals", "ICP & objections"],
+    workflows: 6,
+    spark: sparkSeries(140, 80),
+    capabilities: [
+      "Lead scoring · 0-100",
+      "Personalized outbound replies",
+      "CRM updates · HubSpot, Salesforce",
+      "Meeting booking · Calendly, Outlook",
+    ],
+    accent: "indigo",
   },
   {
-    label: "Active Automations",
-    value: "27",
-    delta: "+4",
-    trend: "up",
-    hint: "3 scaling up",
-    spark: sparkSeries(20, 8),
+    id: "support",
+    name: "Support Agent",
+    tagline: "Answers tickets, classifies issues, escalates.",
+    description:
+      "Triages incoming tickets, drafts grounded answers from your SOPs and escalates only what truly needs a human.",
+    status: "active",
+    tasksCompleted: 9_420,
+    hoursSaved: 1_184,
+    accuracy: 96,
+    uptimeDays: 142,
+    trainedOn: ["Refund Policy v3.2", "Customer Success Runbook", "12 SOP categories"],
+    workflows: 4,
+    spark: sparkSeries(220, 70),
+    capabilities: [
+      "Ticket classification · 12 categories",
+      "Sentiment + priority routing",
+      "Grounded answer drafts with citations",
+      "Smart escalation · sentiment < 0.3",
+    ],
+    accent: "emerald",
+  },
+  {
+    id: "ops",
+    name: "Ops Agent",
+    tagline: "Handles SOPs, internal requests, tasks.",
+    description:
+      "Resolves internal requests, runs SOPs end-to-end and keeps every process consistent across teams.",
+    status: "active",
+    tasksCompleted: 2_104,
+    hoursSaved: 318,
+    accuracy: 98,
+    uptimeDays: 89,
+    trainedOn: ["Onboarding Handbook", "IT runbooks", "Vendor playbooks"],
+    workflows: 5,
+    spark: sparkSeries(80, 36),
+    capabilities: [
+      "SOP execution · runbooks",
+      "Internal request routing",
+      "Vendor & procurement triage",
+      "Slack + Teams native",
+    ],
+    accent: "amber",
+  },
+  {
+    id: "finance",
+    name: "Finance Agent",
+    tagline: "Processes invoices, summaries, reminders.",
+    description:
+      "Reads invoices, validates against POs, drafts month-end summaries and chases overdue payments — politely.",
+    status: "active",
+    tasksCompleted: 1_864,
+    hoursSaved: 274,
+    accuracy: 99,
+    uptimeDays: 67,
+    trainedOn: ["Vendor Pricing Q2", "Annual Forecast", "Approval matrix"],
+    workflows: 4,
+    spark: sparkSeries(120, 60),
+    capabilities: [
+      "Invoice OCR + PO matching",
+      "Approval routing · ERP-aware",
+      "Month-end variance summaries",
+      "Polite payment reminders",
+    ],
+    accent: "violet",
+  },
+  {
+    id: "analyst",
+    name: "Executive Analyst",
+    tagline: "Creates reports, detects trends, insights.",
+    description:
+      "Drafts board-ready reports, detects anomalies in the numbers and explains them in plain language to your leadership team.",
+    status: "training",
+    tasksCompleted: 312,
+    hoursSaved: 96,
+    accuracy: 94,
+    uptimeDays: 21,
+    trainedOn: ["Annual Forecast", "OKRs Q1-Q4", "Board materials"],
+    workflows: 3,
+    spark: sparkSeries(40, 22),
+    capabilities: [
+      "Weekly executive briefings",
+      "Anomaly + trend detection",
+      "Cross-functional ROI rollups",
+      "Plain-language commentary",
+    ],
+    accent: "rose",
   },
 ];
 
@@ -133,51 +269,56 @@ export const departmentAdoption = [
 export const recentActivity: ActivityItem[] = [
   {
     id: "a1",
-    type: "proposal",
-    title: "Proposal generated",
-    description: "Proposal for Northwind Logistics drafted and sent to legal.",
+    type: "lead",
+    title: "Lead qualified",
+    description: "Northwind Logistics scored 87/100 · meeting booked for Thu 14:00.",
     time: "2m ago",
-    user: "Sales Agent",
+    agent: "Sales Agent",
+    agentId: "sales",
   },
   {
     id: "a2",
     type: "ticket",
-    title: "Ticket answered",
-    description: "Refund inquiry #4821 resolved with policy reference.",
+    title: "Ticket resolved",
+    description: "Refund inquiry #4821 closed with policy ref · CSAT 4.9.",
     time: "12m ago",
-    user: "Support Triage",
+    agent: "Support Agent",
+    agentId: "support",
   },
   {
     id: "a3",
-    type: "search",
-    title: "SOP searched",
-    description: '"Onboarding new hire" procedure surfaced for HR.',
+    type: "invoice",
+    title: "Invoice processed",
+    description: "PO #88231 matched · routed to Liam for 2-step approval.",
     time: "27m ago",
-    user: "Maria K.",
+    agent: "Finance Agent",
+    agentId: "finance",
   },
   {
     id: "a4",
-    type: "lead",
-    title: "Lead replied",
-    description: "Auto-reply sent to inbound enterprise lead.",
+    type: "ops",
+    title: "SOP executed",
+    description: "New-hire IT setup · all 7 steps completed in 4m 12s.",
     time: "41m ago",
-    user: "Lead Agent",
+    agent: "Ops Agent",
+    agentId: "ops",
   },
   {
     id: "a5",
-    type: "upload",
-    title: "Documents indexed",
-    description: "12 finance reports indexed and embedded.",
+    type: "report",
+    title: "Executive briefing drafted",
+    description: "Weekly revenue digest delivered to #leadership.",
     time: "1h ago",
-    user: "James P.",
+    agent: "Executive Analyst",
+    agentId: "analyst",
   },
   {
     id: "a6",
-    type: "automation",
-    title: "Workflow triggered",
-    description: "Meeting summary delivered to #ops channel.",
+    type: "upload",
+    title: "Knowledge re-indexed",
+    description: "12 finance reports embedded · all agents updated.",
     time: "3h ago",
-    user: "Meeting Bot",
+    agent: "Knowledge Hub",
   },
 ];
 
@@ -319,13 +460,16 @@ export const roiData = Array.from({ length: 12 }).map((_, i) => {
   };
 });
 
-export const topAutomationsData = [
-  { name: "Support Triage", value: 318 },
-  { name: "Lead Response", value: 142 },
-  { name: "Proposal Gen.", value: 96 },
-  { name: "Invoice Assistant", value: 88 },
-  { name: "Meeting Summaries", value: 71 },
+export const agentPerformanceData = [
+  { name: "Support Agent", value: 1184 },
+  { name: "Sales Agent", value: 612 },
+  { name: "Ops Agent", value: 318 },
+  { name: "Finance Agent", value: 274 },
+  { name: "Executive Analyst", value: 96 },
 ];
+
+// Backwards compat alias.
+export const topAutomationsData = agentPerformanceData;
 
 export const usageByDept = [
   { department: "Sales", value: 38 },
@@ -343,32 +487,32 @@ export const companies = [
 ];
 
 export const promptSuggestions = [
-  "Summarize onboarding process",
-  "Draft client proposal",
-  "Explain refund policy",
-  "Generate follow-up email",
+  "Brief me on this week's pipeline",
+  "Draft a follow-up to Northwind",
+  "Why did refund tickets spike?",
+  "Summarize Q2 vendor invoices",
 ];
 
 export const testimonials = [
   {
     quote:
-      "Zenkyra replaced 4 internal tools and freed our ops team from 12 hours of weekly busywork. ROI was measurable within the first quarter.",
+      "We hired the Zenkyra Sales Agent in May. By Q3 it had qualified 4,800 leads and booked 612 demos — without expanding the team. It paid for itself in 7 weeks.",
     author: "Helena Schmidt",
     role: "COO, Northwind",
     company: "Northwind",
   },
   {
     quote:
-      "Finally an AI platform our security team approves. EU residency, full audit trail, and our knowledge never leaves our tenant.",
+      "The Support Agent now handles 71% of tier-1 tickets autonomously, with citations our compliance team trusts. EU-resident, fully audited, zero data sharing.",
     author: "David Reyes",
     role: "CISO, Constella",
     company: "Constella",
   },
   {
     quote:
-      "Sales reps using Zenkyra close 22% faster. Proposals are drafted in minutes, grounded on our playbook.",
+      "Finance close used to swallow a week. Our Finance Agent reconciles invoices in real time and our Executive Analyst writes the board memo. It feels like 8 new hires.",
     author: "Marta Oliveira",
-    role: "VP Sales, Vertex",
+    role: "CFO, Vertex",
     company: "Vertex",
   },
 ];
@@ -378,34 +522,38 @@ export const howItWorks = [
     step: "01",
     title: "Connect your knowledge",
     description:
-      "Drag-drop documents or sync Drive, Notion, Slack and SharePoint. We chunk, embed and index — fully tenant-isolated.",
+      "Drop documents or sync Drive, Notion, Slack, SharePoint and your ERP. Indexed inside your tenant — never shared.",
   },
   {
     step: "02",
-    title: "Compose your agents",
+    title: "Hire your agents",
     description:
-      "Pick from battle-tested templates or compose your own multi-step workflows. Bring humans in the loop where it matters.",
+      "Activate Sales, Support, Ops, Finance or Executive Analyst. Each agent inherits your knowledge, voice and approval rules.",
   },
   {
     step: "03",
-    title: "Measure the lift",
+    title: "Watch the workforce work",
     description:
-      "Watch hours saved, ROI and adoption climb in real time. Export executive reports in one click.",
+      "Live ROI dashboard for every executive. Hours saved, revenue captured and productivity gains — measurable from day one.",
   },
 ];
 
 export const faqs = [
   {
-    q: "How is Zenkyra different from ChatGPT Enterprise or Microsoft Copilot?",
-    a: "ChatGPT Enterprise and Copilot are great chat tools — Zenkyra is a private intelligence layer. We deploy single-tenant inside your VPC, ground every answer on your documents with page-level citations, and ship production-grade agents that act on your business. Bring your own LLM (Azure, AWS Bedrock, Anthropic, Mistral, self-hosted Llama 3) and switch any time.",
+    q: "What exactly does a Zenkyra agent do?",
+    a: "A Zenkyra agent is an autonomous worker that performs a specific business job — qualifying leads, resolving tickets, processing invoices, drafting executive reports. It reads your knowledge, follows your rules, takes action across your tools (CRM, ERP, helpdesk, Slack), and asks a human only when policy requires.",
+  },
+  {
+    q: "How is this different from ChatGPT Enterprise or Microsoft Copilot?",
+    a: "Chat tools answer questions. Zenkyra agents do the work. They run on your private tenant, are grounded on your documents, act inside your CRM/ERP/helpdesk, and ship with audit trails, approval rules and SLAs. You can also bring your own LLM (Azure, Bedrock, Anthropic, Mistral, self-hosted Llama 3) and switch any time.",
   },
   {
     q: "Where is my data stored, and will any of it train a model?",
     a: "Your data lives in eu-central-1 (Frankfurt) or eu-west-1 (Lisbon) by default — never the US. On Enterprise you bring your own cloud account with VPC isolation. Your knowledge, queries and documents are tenant-isolated and never used to train shared or public models. Ever.",
   },
   {
-    q: "How long does it take to go live, and what does the pilot cost?",
-    a: "Most pilots are live in under 7 days. Enterprise deployments with SSO, SCIM and private VPC peering typically take 2–4 weeks. The 14-day pilot is free, no credit card and no procurement required — you only pay once value is proven.",
+    q: "How long does it take to deploy our first agent?",
+    a: "Most pilots have an agent live in under 7 days. Enterprise deployments with SSO, SCIM and private VPC peering typically take 2–4 weeks. The 14-day pilot is free, no credit card and no procurement required — you only pay once value is proven.",
   },
   {
     q: "What does our security and compliance team need to review?",
@@ -414,10 +562,6 @@ export const faqs = [
   {
     q: "What if it doesn't work for us?",
     a: "Exit anytime in the first 90 days with a full data export (zero lock-in) and we hand back any unused fees pro-rata. We track adoption weekly and publicly publish customer ROI — we only succeed when you do.",
-  },
-  {
-    q: "Who owns the project on our side?",
-    a: "You'll work with a dedicated CSM plus a senior solutions engineer for the pilot. We co-design the first three workflows with your team, then hand the keys over. You stay in control of every model, prompt and data source — always.",
   },
 ];
 
@@ -440,9 +584,9 @@ export const auditEvents = [
   },
   {
     id: "ae3",
-    actor: "James Carter",
-    event: "Document accessed",
-    detail: "Q1 Sales Playbook.pdf · viewed in Assistant.",
+    actor: "Sales Agent",
+    event: "CRM action",
+    detail: "Updated 12 deals in HubSpot · Northwind opportunity.",
     time: "3h ago",
     severity: "info" as const,
   },
@@ -467,29 +611,29 @@ export const auditEvents = [
 export const notifications = [
   {
     id: "n1",
-    title: "Index complete",
-    description: "12 finance reports indexed and embedded.",
+    title: "Sales Agent booked 4 meetings",
+    description: "Northwind, Globex, Vertex and Acme Logistics confirmed for next week.",
     time: "2m ago",
     unread: true,
   },
   {
     id: "n2",
-    title: "New automation run",
-    description: "Lead Response Agent replied to 4 leads in the last hour.",
+    title: "Support Agent SLA hit · 99.4%",
+    description: "Median first response time held at 38 seconds across 1,217 tickets.",
     time: "12m ago",
     unread: true,
   },
   {
     id: "n3",
-    title: "Security audit",
-    description: "SOC 2 evidence updated by Vanta sync.",
+    title: "Finance Agent flagged variance",
+    description: "Vendor Pricing Q2 deviation +€48k vs forecast — review queued.",
     time: "1h ago",
     unread: true,
   },
   {
     id: "n4",
-    title: "Workspace upgraded",
-    description: "Storage limit increased to 200 GB.",
+    title: "Executive Analyst report ready",
+    description: "Weekly board digest delivered to #leadership.",
     time: "Yesterday",
     unread: false,
   },

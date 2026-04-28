@@ -9,8 +9,8 @@ import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { useDemoDialog } from "@/components/marketing/demo-dialog";
 
 const links = [
-  { label: "Product", href: "#product" },
-  { label: "Use cases", href: "#use-cases" },
+  { label: "Agents", href: "#agents" },
+  { label: "Workflows", href: "#workflows" },
   { label: "Pricing", href: "#pricing" },
   { label: "Security", href: "/security" },
 ];
@@ -38,7 +38,7 @@ export function MarketingNav() {
         <div className="ml-auto flex items-center gap-2">
           <ThemeToggle />
           <Button variant="ghost" size="sm" asChild className="hidden sm:inline-flex">
-            <Link href="/dashboard">Sign in</Link>
+            <Link href="/overview">Sign in</Link>
           </Button>
           <Button
             variant="outline"
@@ -50,7 +50,7 @@ export function MarketingNav() {
           </Button>
           <Button size="sm" onClick={() => openDemo("nav")}>
             <CalendarCheck className="h-4 w-4" />
-            Book a demo
+            Book Executive Demo
           </Button>
           <Button
             variant="ghost"

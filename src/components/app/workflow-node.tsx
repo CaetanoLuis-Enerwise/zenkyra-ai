@@ -9,6 +9,8 @@ interface WorkflowNodeProps {
   title: string;
   subtitle: string;
   tone?: "brand" | "success" | "warning" | "muted";
+  /** Highlight as the agent step (the brain of the workflow). */
+  accent?: boolean;
   index?: number;
 }
 
@@ -24,6 +26,7 @@ export function WorkflowNode({
   title,
   subtitle,
   tone = "brand",
+  accent = false,
   index = 0,
 }: WorkflowNodeProps) {
   return (
@@ -31,20 +34,40 @@ export function WorkflowNode({
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: index * 0.06, ease: "easeOut" }}
-      className="flex w-full max-w-[280px] items-center gap-3 rounded-xl border border-border bg-card p-3.5 shadow-elev transition hover:border-brand/30"
+      className={cn(
+        "relative flex w-[210px] shrink-0 items-center gap-3 rounded-xl border bg-card p-3.5 shadow-elev transition hover:border-brand/30",
+        accent
+          ? "border-brand/30 ring-1 ring-brand/20"
+          : "border-border"
+      )}
     >
+      {accent && (
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-br from-brand/10 via-transparent to-transparent"
+        />
+      )}
       <span
         className={cn(
-          "flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border [&_svg]:h-5 [&_svg]:w-5",
+          "relative flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border [&_svg]:h-5 [&_svg]:w-5",
           tones[tone]
         )}
       >
         {icon}
       </span>
-      <div className="min-w-0">
+      <div className="relative min-w-0">
         <p className="truncate text-sm font-semibold">{title}</p>
         <p className="truncate text-xs text-muted-foreground">{subtitle}</p>
       </div>
+      {accent && (
+        <span
+          aria-hidden
+          className="absolute -right-1.5 -top-1.5 flex h-3 w-3 items-center justify-center"
+        >
+          <span className="absolute inset-0 animate-ping rounded-full bg-brand/40" />
+          <span className="relative h-2 w-2 rounded-full bg-brand" />
+        </span>
+      )}
     </motion.div>
   );
 }

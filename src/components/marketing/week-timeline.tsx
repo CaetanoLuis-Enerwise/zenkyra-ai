@@ -4,27 +4,27 @@ const steps = [
   {
     day: "Day 1",
     title: "NDA signed, tenant provisioned",
-    desc: "Private workspace live in Frankfurt or Lisbon. Your security pack and DPA are in your inbox.",
+    desc: "Private workspace live in Frankfurt or Lisbon. Trust pack and DPA delivered to your inbox.",
   },
   {
     day: "Day 2",
-    title: "Knowledge connected",
-    desc: "Drag-drop or sync Drive, Notion, Slack, SharePoint. Embeddings finish overnight inside your tenant.",
+    title: "Knowledge Hub connected",
+    desc: "Drop documents or sync Drive, Notion, Slack, SharePoint, ERP. Embeddings finish overnight inside your tenant.",
   },
   {
     day: "Day 3",
-    title: "Agents tailored to your playbook",
-    desc: "We pair with your team to compose the first 3 automations against real workflows.",
+    title: "First agent hired",
+    desc: "Pick Sales, Support, Ops or Finance. We co-tune voice, rules and integrations against your real workflows.",
   },
   {
     day: "Day 5",
-    title: "Stakeholder rollout",
-    desc: "10 named users, SSO connected, audit trail live. First measurable hours saved.",
+    title: "Workforce on duty",
+    desc: "10 named users · SSO live · audit trail flowing. The agent ships its first measurable hours saved.",
   },
   {
     day: "Day 7",
     title: "Production handoff",
-    desc: "Executive ROI dashboard, rollback runbook and CSM sync — your platform from here.",
+    desc: "Executive ROI dashboard, rollback runbook and CSM sync — your workforce from here.",
   },
 ];
 
@@ -34,13 +34,13 @@ export function WeekTimeline() {
       <div className="container">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">
-            From signed NDA to measurable ROI
+            From signed NDA to working agent
           </p>
           <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            The 7-day enterprise pilot.
+            Hire your first agent in 7 days.
           </h2>
           <p className="mt-3 text-balance text-muted-foreground">
-            No 6-month implementation. No army of consultants. Zenkyra is engineered to ship value before your next board meeting.
+            No 6-month implementation. No army of consultants. Zenkyra is engineered to put a working agent on shift before your next board meeting.
           </p>
         </div>
 
@@ -74,7 +74,7 @@ export function WeekTimeline() {
 
           <div className="mx-auto mt-12 inline-flex w-full items-center justify-center gap-2 text-sm text-muted-foreground">
             <CheckCircle2 className="h-4 w-4 text-success" />
-            Most pilots are extended to production within 14 days.
+            Most pilots extend to a second agent within 14 days.
           </div>
         </div>
       </div>

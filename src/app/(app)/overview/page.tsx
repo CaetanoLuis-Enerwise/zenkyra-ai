@@ -1,13 +1,11 @@
 import {
-  Clock,
-  MessageSquare,
-  FileStack,
-  Workflow,
-  Sparkles,
-  Upload,
-  Plus,
-  UserPlus,
   ArrowRight,
+  Bot,
+  Briefcase,
+  CircleDollarSign,
+  Clock,
+  Plus,
+  TrendingUp,
 } from "lucide-react";
 import Link from "next/link";
 import { StatCard } from "@/components/app/stat-card";
@@ -22,14 +20,14 @@ import { initials } from "@/lib/utils";
 import { api } from "@/lib/api";
 
 const STAT_ICONS = [
+  <Briefcase key="b" className="h-4 w-4" />,
   <Clock key="c" className="h-4 w-4" />,
-  <MessageSquare key="m" className="h-4 w-4" />,
-  <FileStack key="f" className="h-4 w-4" />,
-  <Workflow key="w" className="h-4 w-4" />,
+  <CircleDollarSign key="d" className="h-4 w-4" />,
+  <TrendingUp key="t" className="h-4 w-4" />,
 ];
 
-export default async function DashboardPage() {
-  const data = await api.dashboard();
+export default async function OverviewPage() {
+  const data = await api.overview();
 
   return (
     <div className="space-y-6">
@@ -54,17 +52,81 @@ export default async function DashboardPage() {
       </section>
 
       <section className="grid grid-cols-1 gap-4 xl:grid-cols-3">
+        <Card className="xl:col-span-2 p-5">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-base font-semibold">Active workforce</h3>
+              <p className="text-sm text-muted-foreground">
+                Live across {data.agents.length} agents · {data.agents.filter((a) => a.status === "active").length} on shift
+              </p>
+            </div>
+            <Button variant="ghost" size="sm" className="text-muted-foreground" asChild>
+              <Link href="/agents">
+                Manage agents
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+
+          <ul className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
+            {data.agents.map((a) => (
+              <li
+                key={a.id}
+                className="group flex items-center gap-3 rounded-lg border border-border bg-card/40 p-3 transition hover:border-brand/30"
+              >
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand/10 text-brand">
+                  <Bot className="h-4 w-4" />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center justify-between gap-2">
+                    <p className="truncate text-sm font-medium">{a.name}</p>
+                    <AgentDot status={a.status} />
+                  </div>
+                  <p className="mt-0.5 truncate text-xs text-muted-foreground">
+                    {a.tasksCompleted.toLocaleString()} tasks · {a.hoursSaved} hrs saved
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </Card>
+
+        <Card className="relative overflow-hidden p-5">
+          <div className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-brand/15 blur-3xl" />
+          <p className="relative text-xs font-semibold uppercase tracking-[0.14em] text-brand">
+            Workforce ROI
+          </p>
+          <p className="relative mt-2 text-3xl font-semibold tabular-nums">
+            {data.monthlySaved.value}
+          </p>
+          <p className="relative text-xs text-muted-foreground">
+            Estimated cost saved by your Zenkyra workforce this month
+          </p>
+          <div className="relative mt-3 flex items-center gap-2">
+            <Badge variant="success">{data.monthlySaved.deltaPct}</Badge>
+            <span className="text-xs text-muted-foreground">vs March</span>
+          </div>
+          <Button variant="outline" size="sm" className="relative mt-5 w-full" asChild>
+            <Link href="/analytics">
+              Open ROI dashboard
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </Button>
+        </Card>
+      </section>
+
+      <section className="grid grid-cols-1 gap-4 xl:grid-cols-3">
         <ChartCard
-          title="Usage — last 30 days"
-          description="Queries answered and automations triggered"
+          title="Workforce activity — last 30 days"
+          description="Tasks completed and workflows triggered"
           className="xl:col-span-2"
           action={
             <div className="flex items-center gap-3 text-xs text-muted-foreground">
               <span className="flex items-center gap-1.5">
-                <span className="h-2 w-2 rounded-full bg-brand" /> Queries
+                <span className="h-2 w-2 rounded-full bg-brand" /> Tasks
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="h-2 w-2 rounded-full bg-brand-300" /> Automations
+                <span className="h-2 w-2 rounded-full bg-brand-300" /> Workflows
               </span>
             </div>
           }
@@ -72,7 +134,7 @@ export default async function DashboardPage() {
           <UsageAreaChart data={data.usage} />
         </ChartCard>
 
-        <ChartCard title="Department adoption" description="Active users by department">
+        <ChartCard title="Department adoption" description="Active users per department">
           <AdoptionBarChart data={data.adoption} />
         </ChartCard>
       </section>
@@ -81,9 +143,9 @@ export default async function DashboardPage() {
         <Card className="p-5 lg:col-span-2">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-base font-semibold">Recent activity</h3>
+              <h3 className="text-base font-semibold">Live agent activity</h3>
               <p className="text-sm text-muted-foreground">
-                Live across your AI agents and team
+                Every action your workforce took recently
               </p>
             </div>
             <Button variant="ghost" size="sm" className="text-muted-foreground">
@@ -96,12 +158,17 @@ export default async function DashboardPage() {
               <li key={item.id} className="flex items-start gap-3 py-3">
                 <Avatar className="h-8 w-8">
                   <AvatarFallback className="bg-brand/15 text-brand text-[11px]">
-                    {initials(item.user)}
+                    {initials(item.agent)}
                   </AvatarFallback>
                 </Avatar>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center justify-between gap-3">
-                    <p className="truncate text-sm font-medium">{item.title}</p>
+                    <div className="flex min-w-0 items-center gap-2">
+                      <p className="truncate text-sm font-medium">{item.title}</p>
+                      <Badge variant="muted" className="hidden text-[10px] sm:inline-flex">
+                        {item.agent}
+                      </Badge>
+                    </div>
                     <span className="shrink-0 text-xs text-muted-foreground">
                       {item.time}
                     </span>
@@ -119,10 +186,10 @@ export default async function DashboardPage() {
           <h3 className="text-base font-semibold">Quick actions</h3>
           <p className="text-sm text-muted-foreground">Most-used commands</p>
           <div className="mt-4 grid grid-cols-2 gap-2">
-            <QuickAction icon={<Sparkles className="h-4 w-4" />} label="Ask AI" href="/assistant" highlight />
-            <QuickAction icon={<Upload className="h-4 w-4" />} label="Upload Docs" href="/knowledge" />
-            <QuickAction icon={<Plus className="h-4 w-4" />} label="Create Workflow" href="/workflows" />
-            <QuickAction icon={<UserPlus className="h-4 w-4" />} label="Invite Team" href="/team" />
+            <QuickAction icon={<Bot className="h-4 w-4" />} label="Hire agent" href="/agents" highlight />
+            <QuickAction icon={<Plus className="h-4 w-4" />} label="New workflow" href="/workflows" />
+            <QuickAction icon={<TrendingUp className="h-4 w-4" />} label="View ROI" href="/analytics" />
+            <QuickAction icon={<Clock className="h-4 w-4" />} label="Audit log" href="/security" />
           </div>
 
           <div className="mt-5 rounded-lg border border-border bg-secondary/40 p-4">
@@ -154,39 +221,62 @@ function Hero() {
       <div className="relative flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
         <div className="space-y-2">
           <Badge variant="default" className="rounded-md px-2 py-0.5">
-            <span className="mr-1 inline-block h-1.5 w-1.5 rounded-full bg-brand animate-pulse-slow" />
-            System active · eu-central-1
+            <span className="mr-1 inline-block h-1.5 w-1.5 rounded-full bg-success animate-pulse-slow" />
+            Workforce online · 4 of 5 agents on shift
           </Badge>
           <h1 className="text-2xl font-semibold tracking-tight md:text-3xl">
-            Good afternoon, Sofia.
+            Your digital workforce is active.
           </h1>
           <p className="max-w-xl text-sm text-muted-foreground md:text-base">
-            Acme’s private intelligence system is humming — 142 teammates, 8,402 documents indexed, 27 automations live. Here’s what changed since you last looked.
+            Five Zenkyra agents are working for Acme right now — qualifying leads, resolving tickets, processing invoices and drafting executive briefings. Here's what they shipped today.
           </p>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 pt-1 text-xs text-muted-foreground">
             <span className="inline-flex items-center gap-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-success" />
-              All systems operational
+              All agents healthy
             </span>
             <span aria-hidden>·</span>
             <span>Last sync 2 min ago</span>
             <span aria-hidden>·</span>
-            <span>3 new alerts in audit log</span>
+            <span>3 new approvals waiting</span>
           </div>
         </div>
         <div className="flex items-center gap-2">
           <Button asChild>
-            <Link href="/assistant">
-              <Sparkles className="h-4 w-4" />
-              Ask Zenkyra
+            <Link href="/agents">
+              <Bot className="h-4 w-4" />
+              Manage agents
             </Link>
           </Button>
           <Button asChild variant="outline">
-            <Link href="/analytics">View analytics</Link>
+            <Link href="/analytics">View ROI</Link>
           </Button>
         </div>
       </div>
     </div>
+  );
+}
+
+function AgentDot({ status }: { status: "active" | "training" | "draft" }) {
+  if (status === "active")
+    return (
+      <span className="inline-flex items-center gap-1 text-[10px] text-success">
+        <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse-slow" />
+        Active
+      </span>
+    );
+  if (status === "training")
+    return (
+      <span className="inline-flex items-center gap-1 text-[10px] text-warning">
+        <span className="h-1.5 w-1.5 rounded-full bg-warning animate-pulse-slow" />
+        Training
+      </span>
+    );
+  return (
+    <span className="inline-flex items-center gap-1 text-[10px] text-muted-foreground">
+      <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/40" />
+      Paused
+    </span>
   );
 }
 

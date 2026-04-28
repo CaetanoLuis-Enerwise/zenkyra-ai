@@ -1,6 +1,7 @@
 import { Hero } from "@/components/marketing/hero";
 import { Logos } from "@/components/marketing/logos";
 import { OutcomeStrip } from "@/components/marketing/outcome-strip";
+import { AgentsShowcase } from "@/components/marketing/agents-showcase";
 import { Benefits } from "@/components/marketing/benefits";
 import { HowItWorks } from "@/components/marketing/how-it-works";
 import { BuyingCommittee } from "@/components/marketing/buying-committee";
@@ -19,6 +20,7 @@ export default function HomePage() {
       <Hero />
       <Logos />
       <OutcomeStrip />
+      <AgentsShowcase />
       <Benefits />
       <BuyingCommittee />
       <HowItWorks />

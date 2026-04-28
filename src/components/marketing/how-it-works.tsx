@@ -9,7 +9,7 @@ export function HowItWorks() {
             How it works
           </p>
           <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            From private knowledge to private intelligence — in three steps.
+            From signed NDA to a working digital teammate — in three steps.
           </h2>
         </div>
 

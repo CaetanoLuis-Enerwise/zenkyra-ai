@@ -87,10 +87,10 @@ export function DemoDialog() {
         <div className="grid grid-cols-1 md:grid-cols-[1fr_240px]">
           <form onSubmit={submit} className="p-6 sm:p-7">
             <DialogTitle className="text-xl tracking-tight">
-              Book a 30-min private demo
+              Book your Executive Demo
             </DialogTitle>
             <DialogDescription className="text-sm">
-              See Zenkyra run on a tenant just like yours. We tailor the agenda to your team's playbook.
+              30 minutes. See a Zenkyra workforce running on a tenant like yours, with a tailored ROI projection for your team.
             </DialogDescription>
 
             <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -181,16 +181,16 @@ export function DemoDialog() {
             </p>
             <ul className="mt-3 space-y-3 text-sm">
               <Bullet icon={<Clock className="h-4 w-4 text-brand" />}>
-                30 minutes, tailored to your stack
+                30 minutes · CFO/CIO friendly
               </Bullet>
               <Bullet icon={<Calendar className="h-4 w-4 text-brand" />}>
                 Confirmation within the hour
               </Bullet>
               <Bullet icon={<CheckCircle2 className="h-4 w-4 text-brand" />}>
-                Live ROI estimate for your team
+                Live agent demo on your industry
               </Bullet>
               <Bullet icon={<ShieldCheck className="h-4 w-4 text-brand" />}>
-                Trust report &amp; sample DPA shared
+                Trust pack &amp; sample DPA shared
               </Bullet>
               <Bullet icon={<Globe2 className="h-4 w-4 text-brand" />}>
                 EU-resident · SOC 2 Type II

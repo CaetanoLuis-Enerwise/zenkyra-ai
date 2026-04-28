@@ -32,7 +32,7 @@ export function MobileCtaBar() {
             onClick={() => open("mobile-bar")}
           >
             <CalendarCheck className="h-4 w-4" />
-            Book a demo
+            Book Executive Demo
           </Button>
           <Button size="sm" variant="outline" asChild className="flex-1">
             <Link href="/onboarding">Free pilot</Link>

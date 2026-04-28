@@ -49,7 +49,7 @@ const STEPS: { id: StepId; title: string; description: string }[] = [
   {
     id: "ready",
     title: "Ready",
-    description: "Your private intelligence system is provisioning.",
+    description: "Your digital workforce is being provisioned.",
   },
 ];
 
@@ -192,8 +192,8 @@ export default function OnboardingPage() {
 
           {isReadyStep ? (
             <Button asChild>
-              <Link href="/dashboard">
-                Open dashboard
+              <Link href="/overview">
+                Open Overview
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </Button>
@@ -593,9 +593,9 @@ function ReadyStep({
           What to do next
         </p>
         <ul className="mt-3 space-y-3 text-sm">
-          <NextLink href="/assistant" title="Ask your first question" desc="Try a real query in the Assistant." />
-          <NextLink href="/knowledge" title="Upload a document" desc="See it indexed in seconds." />
-          <NextLink href="/automations" title="Activate an automation" desc="Pick one of 27 templates." />
+          <NextLink href="/agents" title="Activate your first agent" desc="Sales, Support, Ops, Finance — pick one." />
+          <NextLink href="/knowledge" title="Upload a document" desc="Knowledge Hub will train every agent." />
+          <NextLink href="/workflows" title="Wire a workflow" desc="Lead → Sales Agent → Email → CRM." />
         </ul>
       </Card>
     </div>

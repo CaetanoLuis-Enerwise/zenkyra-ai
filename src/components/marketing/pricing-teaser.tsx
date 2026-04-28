@@ -12,23 +12,23 @@ const plans = [
   {
     name: "Starter",
     price: "€299",
-    description: "For small teams getting started with private AI.",
+    description: "Hire your first agent. Best for small teams running pilots.",
     features: [
+      "1 agent · pre-built role",
       "Up to 25 users",
-      "5,000 queries / month",
-      "20 GB knowledge storage",
+      "20 GB Knowledge Hub",
       "Email support",
     ],
   },
   {
     name: "Growth",
     price: "€799",
-    description: "For scaling companies that need full automation.",
+    description: "Build a digital workforce across multiple teams.",
     features: [
+      "Up to 5 agents · custom workflows",
       "Up to 200 users",
-      "Unlimited queries",
-      "200 GB storage",
-      "Custom workflows",
+      "200 GB Knowledge Hub",
+      "Live ROI dashboard",
       "Priority support",
     ],
     highlight: true,
@@ -36,13 +36,13 @@ const plans = [
   {
     name: "Enterprise",
     price: "Custom",
-    description: "Private deployment with full controls.",
+    description: "Private deployment with unlimited agents and full controls.",
     features: [
-      "Unlimited users",
-      "EU data residency",
+      "Unlimited agents · custom-built roles",
+      "EU data residency · BYO LLM",
       "SSO + SCIM",
       "SOC 2 / ISO evidence",
-      "Dedicated CSM",
+      "Dedicated CSM + Solutions Engineer",
     ],
   },
 ];

@@ -5,11 +5,11 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
+  Bot,
   Check,
   CloudUpload,
-  Sparkles,
+  GitBranch,
   UserPlus,
-  Workflow,
   X,
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
@@ -31,31 +31,31 @@ interface Item {
 const ITEMS: Item[] = [
   {
     id: "upload",
-    title: "Upload your first 5 documents",
-    description: "Indexed in under 60 seconds.",
+    title: "Upload your first documents",
+    description: "Knowledge Hub indexes in under 60 seconds.",
     href: "/knowledge",
     icon: <CloudUpload className="h-4 w-4" />,
     defaultDone: true,
   },
   {
-    id: "ask",
-    title: "Ask Zenkyra your first question",
-    description: "Try “Summarize our Q1 sales playbook”.",
-    href: "/assistant",
-    icon: <Sparkles className="h-4 w-4" />,
+    id: "agent",
+    title: "Activate your first agent",
+    description: "Sales, Support, Ops, Finance — pick one to start.",
+    href: "/agents",
+    icon: <Bot className="h-4 w-4" />,
     defaultDone: true,
   },
   {
-    id: "automation",
-    title: "Activate an automation template",
-    description: "Lead Response Agent · 12-min setup.",
-    href: "/automations",
-    icon: <Workflow className="h-4 w-4" />,
+    id: "workflow",
+    title: "Wire up a workflow",
+    description: "Lead → Sales Agent → Email → CRM in 3 clicks.",
+    href: "/workflows",
+    icon: <GitBranch className="h-4 w-4" />,
   },
   {
     id: "invite",
     title: "Invite 2 teammates",
-    description: "Sales + Support champions unlock 3× ROI.",
+    description: "One champion per department unlocks 3× ROI.",
     href: "/team",
     icon: <UserPlus className="h-4 w-4" />,
   },

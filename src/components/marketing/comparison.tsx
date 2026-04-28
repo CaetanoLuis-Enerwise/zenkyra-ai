@@ -9,19 +9,24 @@ const rows: {
   values: [Cell, Cell, Cell, Cell];
 }[] = [
   {
+    label: "Performs work, not just chat",
+    desc: "Autonomous agents that take action across your tools.",
+    values: ["yes", "no", "partial", "partial"],
+  },
+  {
+    label: "Pre-trained for business roles",
+    desc: "Sales, Support, Ops, Finance, Executive Analyst.",
+    values: ["yes", "no", "no", "no"],
+  },
+  {
     label: "Single-tenant deployment",
     desc: "Your data, your VPC, your encryption keys.",
     values: ["yes", "no", "no", "partial"],
   },
   {
     label: "Grounded on your knowledge",
-    desc: "Every answer cited with page-level sources.",
+    desc: "Every action cited with page-level sources.",
     values: ["yes", "partial", "partial", "partial"],
-  },
-  {
-    label: "Production-grade agents & workflows",
-    desc: "Multi-step automations that act on your business.",
-    values: ["yes", "no", "partial", "partial"],
   },
   {
     label: "Bring-your-own LLM (Azure / AWS / OSS)",
@@ -34,7 +39,7 @@ const rows: {
     values: ["yes", "partial", "partial", "partial"],
   },
   {
-    label: "Live in 7 days",
+    label: "First agent live in 7 days",
     desc: "Pilot in 24 hours. No engineering team needed.",
     values: ["yes", "yes", "partial", "no"],
   },
@@ -45,7 +50,7 @@ const rows: {
   },
 ];
 
-const cols = ["Zenkyra", "ChatGPT Enterprise", "Microsoft Copilot", "DIY RAG stack"];
+const cols = ["Zenkyra", "ChatGPT Enterprise", "Microsoft Copilot", "DIY agents"];
 
 export function Comparison() {
   return (
@@ -56,10 +61,10 @@ export function Comparison() {
             Why Zenkyra, not the alternatives
           </p>
           <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            Built where general-purpose AI quietly stops working.
+            Chat tools answer. Zenkyra agents work.
           </h2>
           <p className="mt-3 text-balance text-muted-foreground">
-            We're not a chat wrapper. Zenkyra is a private intelligence layer engineered for the controls, evidence and uptime your enterprise actually requires.
+            Most AI tools stop at the chat box. Zenkyra ships a digital workforce — autonomous agents engineered for the controls, evidence and uptime your enterprise actually requires.
           </p>
         </div>
 
