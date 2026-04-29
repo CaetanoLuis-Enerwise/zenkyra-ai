@@ -50,21 +50,21 @@ const personas = [
 
 export function BuyingCommittee() {
   return (
-    <section className="border-b border-border py-20 lg:py-28">
+    <section className="section-marketing border-border">
       <div className="container">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="marketing-eyebrow">
             Built for the buying committee
           </p>
-          <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
+          <h2 className="marketing-headline">
             One workforce. Every executive sees their case.
           </h2>
-          <p className="mt-3 text-balance text-muted-foreground">
+          <p className="marketing-sub">
             Most enterprise AI projects stall in committee. Zenkyra arrives pre-cleared by Security, pre-budgeted for Finance and pre-owned by the team that hires the agent.
           </p>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="mt-16 grid grid-cols-1 gap-5 md:grid-cols-2 lg:gap-6">
           {personas.map((p) => (
             <Card
               key={p.role}

@@ -13,17 +13,15 @@ export function Faq() {
   const openDemo = useDemoDialog((s) => s.openDialog);
 
   return (
-    <section className="border-b border-border py-20 lg:py-28">
+    <section className="section-marketing border-border">
       <div className="container">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.8fr_1fr]">
+        <div className="grid grid-cols-1 gap-14 lg:grid-cols-[0.85fr_1fr] lg:gap-16">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">
-              Frequently asked
-            </p>
-            <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
+            <p className="marketing-eyebrow">Frequently asked</p>
+            <h2 className="marketing-headline">
               Everything Security &amp; Procurement asks first.
             </h2>
-            <p className="mt-4 text-sm text-muted-foreground">
+            <p className="mt-6 text-base leading-relaxed text-muted-foreground sm:text-[15px]">
               Our trust report covers everything in detail. If a question is
               missing, ask it on your demo — we'll send a written answer the
               same day.

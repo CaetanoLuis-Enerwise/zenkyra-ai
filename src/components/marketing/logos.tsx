@@ -10,12 +10,12 @@ const logos = [
 
 export function Logos() {
   return (
-    <section className="border-b border-border bg-background py-12">
+    <section className="section-marketing-tight border-border bg-background">
       <div className="container">
-        <p className="text-center text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+        <p className="text-center text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
           Trusted by 140+ enterprises — from Series-B startups to listed groups
         </p>
-        <div className="mt-8 grid grid-cols-2 items-center justify-items-center gap-y-7 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7">
+        <div className="mt-10 grid grid-cols-2 items-center justify-items-center gap-x-8 gap-y-9 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7">
           {logos.map((l) => (
             <span
               key={l}

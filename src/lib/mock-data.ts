@@ -493,27 +493,45 @@ export const promptSuggestions = [
   "Summarize Q2 vendor invoices",
 ];
 
-export const testimonials = [
+/** Landing-page executive quotes — placeholders until CRM-backed testimonials ship */
+export interface MarketingTestimonial {
+  quote: string;
+  author: string;
+  role: string;
+  company: string;
+  /** Short exec function tag for cards */
+  badge: string;
+  /** Quantified outcome — reads like board-ready proof */
+  metric: string;
+}
+
+export const testimonials: MarketingTestimonial[] = [
   {
     quote:
-      "We hired the Zenkyra Sales Agent in May. By Q3 it had qualified 4,800 leads and booked 612 demos — without expanding the team. It paid for itself in 7 weeks.",
-    author: "Helena Schmidt",
-    role: "COO, Northwind",
-    company: "Northwind",
+      "We deployed the Sales Agent across EMEA in nine weeks. It qualified inbound at SLA, drafted proposals from closed-won patterns and booked discovery calls — without adding quota capacity. Finance signed off after week seven.",
+    author: "Dr. Helena Vogel",
+    role: "Chief Operating Officer",
+    company: "Northwind Logistics AG",
+    badge: "Operations",
+    metric: "612 demos booked · pipeline +€14M attributed",
   },
   {
     quote:
-      "The Support Agent now handles 71% of tier-1 tickets autonomously, with citations our compliance team trusts. EU-resident, fully audited, zero data sharing.",
+      "Our tier-one tickets now resolve with citations tied to policy pages — auditors love the traceability. Nothing leaves eu-central-1. That cleared Legal faster than any vendor we've onboarded in five years.",
     author: "David Reyes",
-    role: "CISO, Constella",
-    company: "Constella",
+    role: "Chief Information Security Officer",
+    company: "Constella Financial",
+    badge: "Security & risk",
+    metric: "71% autonomous resolution · zero export incidents",
   },
   {
     quote:
-      "Finance close used to swallow a week. Our Finance Agent reconciles invoices in real time and our Executive Analyst writes the board memo. It feels like 8 new hires.",
+      "Close shrank by four working days. The Finance Agent matches invoices before my team wakes up; the Executive Analyst drafts my CFO briefing pack every Monday morning. Board asks fewer spreadsheet questions.",
     author: "Marta Oliveira",
-    role: "CFO, Vertex",
-    company: "Vertex",
+    role: "Chief Financial Officer",
+    company: "Vertex Precision Manufacturing",
+    badge: "Finance",
+    metric: "€2.1M labour arbitrage · YoY",
   },
 ];
 

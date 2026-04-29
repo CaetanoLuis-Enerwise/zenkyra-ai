@@ -2,8 +2,9 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Calculator, Clock, TrendingUp } from "lucide-react";
+import { ArrowRight, Calculator, Clock, TrendingUp, Zap } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useDemoDialog } from "@/components/marketing/demo-dialog";
 import { formatCurrency } from "@/lib/utils";
@@ -24,21 +25,32 @@ export function RoiSnapshot() {
   const hours = Math.round(users * 5 * 0.62 * 48);
 
   return (
-    <section className="border-b border-border py-20 lg:py-28">
+    <section className="section-marketing border-border bg-gradient-to-b from-background via-secondary/25 to-background">
       <div className="container">
-        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 lg:grid-cols-[0.95fr_1fr] lg:items-center">
+        <div className="mx-auto mb-10 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+          <Badge
+            variant="secondary"
+            className="gap-1.5 border border-brand/20 bg-brand/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-brand"
+          >
+            <Zap className="h-3 w-3" />
+            CFO-ready model · interactive teaser
+          </Badge>
+          <span className="text-xs text-muted-foreground">
+            Bring your actual headcount — we reconcile assumptions live on the Executive Demo.
+          </span>
+        </div>
+
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 lg:grid-cols-[0.95fr_1fr] lg:items-center lg:gap-16">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">
-              Build the business case
-            </p>
-            <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-              See your ROI before the demo even starts.
+            <p className="marketing-eyebrow">Build the business case</p>
+            <h2 className="marketing-headline max-w-xl">
+              Model enterprise ROI before Legal finishes redlining.
             </h2>
-            <p className="mt-4 text-balance text-muted-foreground">
-              Two sliders. Conservative model. Same math your CFO will run. We bring the detailed projection — sourced from 140+ deployments — to the call.
+            <p className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
+              Two sliders — conservative benchmarks from 140+ deployments. Same math your CFO runs in diligence; we validate inputs live.
             </p>
 
-            <div className="mt-7 space-y-3 text-sm text-muted-foreground">
+            <div className="mt-9 space-y-3 text-sm text-muted-foreground">
               <Row icon={<Calculator className="h-4 w-4 text-brand" />}>
                 Sourced from validated benchmarks across SaaS, finance, manufacturing and healthcare.
               </Row>
@@ -50,9 +62,9 @@ export function RoiSnapshot() {
               </Row>
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button size="lg" onClick={() => open("roi")}>
-                Get the full projection
+            <div className="mt-10 flex flex-wrap gap-3">
+              <Button size="lg" onClick={() => open("roi")} className="gap-2 shadow-md shadow-brand/15">
+                Lock your ROI session this week
                 <ArrowRight className="h-4 w-4" />
               </Button>
               <Button size="lg" variant="outline" asChild>
@@ -61,26 +73,31 @@ export function RoiSnapshot() {
             </div>
           </div>
 
-          <Card className="relative overflow-hidden p-6 sm:p-8">
-            <div className="pointer-events-none absolute -right-20 -top-24 h-72 w-72 rounded-full bg-brand/15 blur-3xl" />
+          <Card className="relative overflow-hidden border-brand/15 p-6 shadow-xl shadow-brand/10 ring-1 ring-brand/10 sm:p-9">
+            <div className="pointer-events-none absolute -right-24 -top-28 h-80 w-80 animate-pulse-slow rounded-full bg-brand/20 blur-3xl" />
             <div className="relative">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">
-                Live estimate
-              </p>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">
+                  Live estimate
+                </p>
+                <span className="rounded-full bg-secondary px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
+                  Conservative scenario
+                </span>
+              </div>
               <motion.p
                 key={annual}
-                initial={{ opacity: 0.6, y: 4 }}
+                initial={{ opacity: 0.65, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.25 }}
-                className="mt-2 text-5xl font-semibold tracking-tight tabular-nums sm:text-6xl"
+                transition={{ duration: 0.28 }}
+                className="mt-4 text-5xl font-semibold tracking-tight text-foreground tabular-nums sm:text-6xl"
               >
                 {formatCurrency(annual)}
               </motion.p>
-              <p className="text-sm text-muted-foreground">
-                projected annual savings
+              <p className="mt-1 text-sm font-medium text-muted-foreground">
+                projected annual labour arbitrage
               </p>
 
-              <div className="mt-6 grid grid-cols-2 gap-4 rounded-xl border border-border bg-secondary/40 p-4">
+              <div className="mt-8 grid grid-cols-2 gap-4 rounded-xl border border-border bg-secondary/50 p-4 backdrop-blur-sm">
                 <Mini label="Monthly savings" value={formatCurrency(monthly)} />
                 <Mini label="Hours reclaimed / yr" value={hours.toLocaleString("en-US")} />
               </div>
@@ -106,10 +123,9 @@ export function RoiSnapshot() {
                 />
               </div>
 
-              <p className="mt-5 text-[11px] leading-relaxed text-muted-foreground">
-                Conservative model. Median customer outperforms by 30%. We'll
-                walk through your specifics live — DPA &amp; security pack
-                included.
+              <p className="mt-6 text-[11px] leading-relaxed text-muted-foreground">
+                Conservative baseline — median deployments outperform within two quarters.
+                Executive Demo ships model workbook + security pack.
               </p>
             </div>
           </Card>

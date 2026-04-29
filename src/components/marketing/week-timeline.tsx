@@ -30,21 +30,19 @@ const steps = [
 
 export function WeekTimeline() {
   return (
-    <section className="border-b border-border py-20 lg:py-28">
+    <section className="section-marketing border-border bg-secondary/25">
       <div className="container">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">
-            From signed NDA to working agent
-          </p>
-          <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="marketing-eyebrow">From signed NDA to working agent</p>
+          <h2 className="marketing-headline">
             Hire your first agent in 7 days.
           </h2>
-          <p className="mt-3 text-balance text-muted-foreground">
+          <p className="marketing-sub">
             No 6-month implementation. No army of consultants. Zenkyra is engineered to put a working agent on shift before your next board meeting.
           </p>
         </div>
 
-        <div className="relative mt-14">
+        <div className="relative mt-16">
           <div className="pointer-events-none absolute left-3 top-2 bottom-2 w-px bg-gradient-to-b from-brand/40 via-border to-transparent md:left-1/2" />
           <ol className="space-y-8 md:space-y-10">
             {steps.map((s, i) => (

@@ -101,6 +101,15 @@ const config: Config = {
           "0%,100%": { opacity: "1" },
           "50%": { opacity: "0.6" },
         },
+        ambient: {
+          "0%, 100%": { transform: "translate(0, 0) scale(1)" },
+          "33%": { transform: "translate(3%, -2%) scale(1.03)" },
+          "66%": { transform: "translate(-2%, 2%) scale(0.98)" },
+        },
+        "fade-up": {
+          "0%": { opacity: "0", transform: "translateY(16px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -108,6 +117,8 @@ const config: Config = {
         shimmer: "shimmer 2.2s linear infinite",
         "fade-in": "fade-in 0.4s ease-out",
         "pulse-slow": "pulse-slow 3s ease-in-out infinite",
+        ambient: "ambient 22s ease-in-out infinite",
+        "fade-up": "fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards",
       },
       backgroundImage: {
         "grid-light":

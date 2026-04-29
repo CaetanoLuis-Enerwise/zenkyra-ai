@@ -20,8 +20,8 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-border">
       <div className="pointer-events-none absolute inset-0 bg-grid opacity-[0.4] mask-fade-b" />
-      <div className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[820px] -translate-x-1/2 rounded-full bg-brand/20 blur-[120px]" />
-      <div className="container relative grid gap-12 py-20 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:py-28">
+      <div className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[820px] -translate-x-1/2 animate-ambient rounded-full bg-brand/20 blur-[120px]" />
+      <div className="container relative grid gap-14 py-24 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-16 lg:py-36 xl:py-[10rem]">
         <div>
           <motion.div
             initial={{ opacity: 0, y: 6 }}
@@ -41,7 +41,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.05 }}
-            className="mt-6 text-balance text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-[64px]"
+            className="mt-8 text-balance text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-[64px]"
           >
             Hire your first
             <span className="block bg-gradient-to-br from-brand via-brand-400 to-brand-300 bg-clip-text text-transparent">
@@ -53,7 +53,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="mt-5 max-w-xl text-balance text-base text-muted-foreground sm:text-lg"
+            className="mt-6 max-w-xl text-balance text-base leading-relaxed text-muted-foreground sm:text-lg"
           >
             Zenkyra AI gives companies autonomous AI agents that reduce workload, increase speed and scale operations — privately, in your tenant. Ship the first agent in 7 days. Average payback in 9 weeks.
           </motion.p>
@@ -62,7 +62,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="mt-8 flex flex-wrap items-center gap-3"
+            className="mt-10 flex flex-wrap items-center gap-3"
           >
             <Button
               size="xl"
@@ -82,14 +82,19 @@ export function Hero() {
             </Button>
           </motion.div>
 
-          <motion.p
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-3 text-xs text-muted-foreground"
+            className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4"
           >
-            No credit card · No procurement needed for pilot · Exit anytime
-          </motion.p>
+            <span className="inline-flex w-fit items-center rounded-full border border-brand/25 bg-brand/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-brand">
+              Advisory reply · typically same business day
+            </span>
+            <p className="text-xs text-muted-foreground">
+              No credit card · Pilot without procurement · Exit anytime
+            </p>
+          </motion.div>
 
           <motion.ul
             initial={{ opacity: 0 }}
@@ -115,7 +120,7 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.35 }}
-            className="mt-10 grid max-w-lg grid-cols-3 gap-6 border-t border-border pt-6"
+            className="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-border pt-8"
           >
             <Stat value="7.4×" label="Avg. ROI" />
             <Stat value="9 wks" label="Payback" />
@@ -145,7 +150,7 @@ function HeroPreview() {
       className="relative"
     >
       <div className="absolute -inset-x-8 -inset-y-12 -z-10 bg-gradient-to-tr from-brand/20 via-transparent to-transparent blur-3xl" />
-      <div className="rounded-2xl border border-border bg-card shadow-elev">
+      <div className="rounded-2xl border border-border bg-card shadow-elev transition-all duration-500 hover:border-brand/25 hover:shadow-xl hover:shadow-brand/[0.07] dark:hover:shadow-brand/10">
         <div className="flex items-center gap-1.5 border-b border-border px-4 py-2.5">
           <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/30" />
           <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/30" />

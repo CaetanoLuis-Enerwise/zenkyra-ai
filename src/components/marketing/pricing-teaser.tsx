@@ -50,21 +50,19 @@ const plans = [
 export function PricingTeaser() {
   const open = useDemoDialog((s) => s.openDialog);
   return (
-    <section id="pricing" className="border-b border-border py-20 lg:py-28">
+    <section id="pricing" className="section-marketing border-border bg-secondary/20">
       <div className="container">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">
-            Pricing
-          </p>
-          <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="marketing-eyebrow">Pricing</p>
+          <h2 className="marketing-headline">
             Transparent pricing. ROI from week one.
           </h2>
-          <p className="mt-3 text-balance text-muted-foreground">
+          <p className="marketing-sub">
             Most customers reach 5×+ ROI within their first quarter — and we put that in writing on Enterprise.
           </p>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-4 lg:grid-cols-3">
+        <div className="mt-16 grid grid-cols-1 gap-5 lg:grid-cols-3 lg:gap-6">
           {plans.map((p) => (
             <Card
               key={p.name}

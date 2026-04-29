@@ -169,6 +169,23 @@
   .mask-fade-r {
     mask-image: linear-gradient(to right, black 60%, transparent 100%);
   }
+
+  /* Landing rhythm — elite spacing scale */
+  .section-marketing {
+    @apply border-b border-border py-24 lg:py-32 xl:py-[8.5rem];
+  }
+  .section-marketing-tight {
+    @apply border-b border-border py-14 lg:py-20;
+  }
+  .marketing-headline {
+    @apply mt-5 text-balance text-[2rem] font-semibold leading-[1.12] tracking-tight sm:text-[2.35rem] lg:text-[2.65rem];
+  }
+  .marketing-sub {
+    @apply mx-auto mt-5 max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg;
+  }
+  .marketing-eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.22em] text-brand;
+  }
 }
 
 .zenkyra-range {

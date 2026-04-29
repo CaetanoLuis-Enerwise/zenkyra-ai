@@ -60,21 +60,19 @@ const team = [
 
 export function AgentsShowcase() {
   return (
-    <section id="agents" className="border-b border-border py-20 lg:py-28">
+    <section id="agents" className="section-marketing border-border">
       <div className="container">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">
-            Meet the workforce
-          </p>
-          <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="marketing-eyebrow">Meet the workforce</p>
+          <h2 className="marketing-headline">
             Five agents you can hire today.
           </h2>
-          <p className="mt-3 text-balance text-muted-foreground">
+          <p className="marketing-sub">
             Each agent ships pre-trained for a specific business job, integrates with your stack, and runs on your tenant. Custom agents in 7 days.
           </p>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
           {team.map((m, i) => (
             <Card
               key={m.name}

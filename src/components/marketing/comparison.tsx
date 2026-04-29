@@ -54,21 +54,21 @@ const cols = ["Zenkyra", "ChatGPT Enterprise", "Microsoft Copilot", "DIY agents"
 
 export function Comparison() {
   return (
-    <section className="border-b border-border bg-secondary/30 py-20 lg:py-28">
+    <section className="section-marketing border-border bg-secondary/35">
       <div className="container">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="marketing-eyebrow">
             Why Zenkyra, not the alternatives
           </p>
-          <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
+          <h2 className="marketing-headline">
             Chat tools answer. Zenkyra agents work.
           </h2>
-          <p className="mt-3 text-balance text-muted-foreground">
+          <p className="marketing-sub">
             Most AI tools stop at the chat box. Zenkyra ships a digital workforce — autonomous agents engineered for the controls, evidence and uptime your enterprise actually requires.
           </p>
         </div>
 
-        <div className="mt-12 overflow-hidden rounded-2xl border border-border bg-card shadow-elev">
+        <div className="mt-16 overflow-hidden rounded-2xl border border-border bg-card shadow-elev">
           <div className="grid grid-cols-[1.6fr_repeat(4,1fr)] border-b border-border bg-secondary/40 text-xs font-medium">
             <div className="px-5 py-4 text-muted-foreground">Capability</div>
             {cols.map((c, i) => (

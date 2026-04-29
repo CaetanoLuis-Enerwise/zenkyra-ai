@@ -38,21 +38,19 @@ const benefits = [
 
 export function Benefits() {
   return (
-    <section id="platform" className="border-b border-border py-20 lg:py-28">
+    <section id="platform" className="section-marketing border-border">
       <div className="container">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">
-            Why Zenkyra
-          </p>
-          <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="marketing-eyebrow">Why Zenkyra</p>
+          <h2 className="marketing-headline">
             The first company that hires workers instead of seats.
           </h2>
-          <p className="mt-3 text-balance text-muted-foreground">
+          <p className="marketing-sub">
             One private platform. Every department gets a digital teammate. Security, finance and operations on board from day one.
           </p>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
           {benefits.map((b) => (
             <Card key={b.title} className="group relative flex flex-col p-6 transition hover:border-brand/30">
               <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand/10 text-brand transition group-hover:bg-brand/15">
