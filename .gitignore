@@ -30,8 +30,11 @@ yarn-error.log*
 dev.log
 *.log
 
-# env files
-.env*
+# env files (keep tracked templates)
+.env
+.env.local
+!.env.example
+backend/.env
 
 # scratch
 .commit-msg.tmp
@@ -48,3 +51,10 @@ next-env.d.ts
 .idea/
 .vscode/
 Thumbs.db
+
+# Python backend
+backend/.venv/
+backend/**/__pycache__/
+backend/storage/
+backend/.env
+
