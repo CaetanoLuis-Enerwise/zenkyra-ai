@@ -28,6 +28,17 @@ const STAT_ICONS = [
 
 export default async function OverviewPage() {
   const data = await api.overview();
+  const stats = data.stats.map((s) =>
+    /€|\$/.test(s.value)
+      ? {
+          ...s,
+          value: "—",
+          delta: "Preview",
+          hint: "Not a live tenant figure",
+          trend: "flat" as const,
+        }
+      : s
+  );
 
   return (
     <div className="space-y-6">
@@ -36,7 +47,7 @@ export default async function OverviewPage() {
       <OnboardingChecklist />
 
       <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {data.stats.map((s, i) => (
+        {stats.map((s, i) => (
           <StatCard
             key={s.label}
             label={s.label}
@@ -57,7 +68,7 @@ export default async function OverviewPage() {
             <div>
               <h3 className="text-base font-semibold">Active workforce</h3>
               <p className="text-sm text-muted-foreground">
-                Live across {data.agents.length} agents · {data.agents.filter((a) => a.status === "active").length} on shift
+                Preview of {data.agents.length} agent roles · not a live tenant ledger
               </p>
             </div>
             <Button variant="ghost" size="sm" className="text-muted-foreground" asChild>
@@ -83,7 +94,7 @@ export default async function OverviewPage() {
                     <AgentDot status={a.status} />
                   </div>
                   <p className="mt-0.5 truncate text-xs text-muted-foreground">
-                    {a.tasksCompleted.toLocaleString()} tasks · {a.hoursSaved} hrs saved
+                    {a.tagline}
                   </p>
                 </div>
               </li>
@@ -94,21 +105,17 @@ export default async function OverviewPage() {
         <Card className="relative overflow-hidden p-5">
           <div className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-brand/15 blur-3xl" />
           <p className="relative text-xs font-semibold uppercase tracking-[0.14em] text-brand">
-            Workforce ROI
+            Workforce outcomes
           </p>
-          <p className="relative mt-2 text-3xl font-semibold tabular-nums">
-            {data.monthlySaved.value}
+          <p className="relative mt-2 text-3xl font-semibold tracking-tight">
+            Not live yet
           </p>
           <p className="relative text-xs text-muted-foreground">
-            Estimated cost saved by your Zenkyra workforce this month
+            Estimated savings appear after agents run in your tenant. This overview is a product preview — not a customer ledger.
           </p>
-          <div className="relative mt-3 flex items-center gap-2">
-            <Badge variant="success">{data.monthlySaved.deltaPct}</Badge>
-            <span className="text-xs text-muted-foreground">vs March</span>
-          </div>
           <Button variant="outline" size="sm" className="relative mt-5 w-full" asChild>
             <Link href="/analytics">
-              Open ROI dashboard
+              Open analytics
               <ArrowRight className="h-4 w-4" />
             </Link>
           </Button>
@@ -118,7 +125,7 @@ export default async function OverviewPage() {
       <section className="grid grid-cols-1 gap-4 xl:grid-cols-3">
         <ChartCard
           title="Workforce activity — last 30 days"
-          description="Tasks completed and workflows triggered"
+          description="Sample preview series — not live tenant traffic"
           className="xl:col-span-2"
           action={
             <div className="flex items-center gap-3 text-xs text-muted-foreground">
@@ -134,7 +141,7 @@ export default async function OverviewPage() {
           <UsageAreaChart data={data.usage} />
         </ChartCard>
 
-        <ChartCard title="Department adoption" description="Active users per department">
+        <ChartCard title="Department adoption" description="Preview layout — not a live tenant">
           <AdoptionBarChart data={data.adoption} />
         </ChartCard>
       </section>
@@ -143,9 +150,9 @@ export default async function OverviewPage() {
         <Card className="p-5 lg:col-span-2">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-base font-semibold">Live agent activity</h3>
+              <h3 className="text-base font-semibold">Sample agent activity</h3>
               <p className="text-sm text-muted-foreground">
-                Every action your workforce took recently
+                Illustrative feed so you can see the product — not a live tenant
               </p>
             </div>
             <Button variant="ghost" size="sm" className="text-muted-foreground">
@@ -188,7 +195,7 @@ export default async function OverviewPage() {
           <div className="mt-4 grid grid-cols-2 gap-2">
             <QuickAction icon={<Bot className="h-4 w-4" />} label="Hire agent" href="/agents" highlight />
             <QuickAction icon={<Plus className="h-4 w-4" />} label="New workflow" href="/workflows" />
-            <QuickAction icon={<TrendingUp className="h-4 w-4" />} label="View ROI" href="/analytics" />
+            <QuickAction icon={<TrendingUp className="h-4 w-4" />} label="View analytics" href="/analytics" />
             <QuickAction icon={<Clock className="h-4 w-4" />} label="Audit log" href="/security" />
           </div>
 
@@ -197,15 +204,11 @@ export default async function OverviewPage() {
               This month
             </p>
             <p className="mt-1 text-2xl font-semibold tracking-tight">
-              {data.monthlySaved.value}
+              No live total
             </p>
             <p className="text-xs text-muted-foreground">
-              estimated cost saved by Zenkyra AI
+              Invented euro amounts are not shown. Savings appear after agents run in your tenant.
             </p>
-            <div className="mt-3 flex items-center gap-2">
-              <Badge variant="success">{data.monthlySaved.deltaPct}</Badge>
-              <span className="text-xs text-muted-foreground">vs March</span>
-            </div>
           </div>
         </Card>
       </section>
@@ -221,25 +224,14 @@ function Hero() {
       <div className="relative flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
         <div className="space-y-2">
           <Badge variant="default" className="rounded-md px-2 py-0.5">
-            <span className="mr-1 inline-block h-1.5 w-1.5 rounded-full bg-success animate-pulse-slow" />
-            Workforce online · 4 of 5 agents on shift
+            Product preview · not a live tenant ledger
           </Badge>
           <h1 className="text-2xl font-semibold tracking-tight md:text-3xl">
-            Your digital workforce is active.
+            Your digital workforce starts here.
           </h1>
           <p className="max-w-xl text-sm text-muted-foreground md:text-base">
-            Five Zenkyra agents are working for Acme right now — qualifying leads, resolving tickets, processing invoices and drafting executive briefings. Here's what they shipped today.
+            Explore the product surface with sample agents and workflows. Savings, ROI and euro totals are not live tenant figures — they appear after agents run in your workspace.
           </p>
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 pt-1 text-xs text-muted-foreground">
-            <span className="inline-flex items-center gap-1.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-success" />
-              All agents healthy
-            </span>
-            <span aria-hidden>·</span>
-            <span>Last sync 2 min ago</span>
-            <span aria-hidden>·</span>
-            <span>3 new approvals waiting</span>
-          </div>
         </div>
         <div className="flex items-center gap-2">
           <Button asChild>
@@ -249,7 +241,7 @@ function Hero() {
             </Link>
           </Button>
           <Button asChild variant="outline">
-            <Link href="/analytics">View ROI</Link>
+            <Link href="/analytics">View analytics</Link>
           </Button>
         </div>
       </div>
