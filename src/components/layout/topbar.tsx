@@ -136,7 +136,7 @@ function TrustStrip() {
             <span className="font-medium">Operational</span>
           </span>
         </TooltipTrigger>
-        <TooltipContent>All systems operational · 99.99% uptime</TooltipContent>
+        <TooltipContent>All systems operational. No published uptime SLA.</TooltipContent>
       </Tooltip>
       <span className="h-3 w-px bg-border" aria-hidden />
       <Tooltip>

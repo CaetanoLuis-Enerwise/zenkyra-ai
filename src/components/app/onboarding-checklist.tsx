@@ -55,7 +55,7 @@ const ITEMS: Item[] = [
   {
     id: "invite",
     title: "Invite 2 teammates",
-    description: "One champion per department unlocks 3× ROI.",
+    description: "Invite a champion per department to share the workspace.",
     href: "/team",
     icon: <UserPlus className="h-4 w-4" />,
   },
