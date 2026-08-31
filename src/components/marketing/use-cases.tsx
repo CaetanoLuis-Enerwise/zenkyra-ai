@@ -24,7 +24,7 @@ const cases = [
       "Draft proposals grounded on past closed-won deals",
       "Update your CRM and book the meeting",
     ],
-    proof: "Northwind closed 22% faster after 9 weeks",
+    proof: "Capability: qualify, draft, book — not a published customer result",
     accent:
       "hover:border-brand/40 hover:shadow-brand/10 hover:ring-brand/15",
     glow: "from-brand/35",
@@ -38,7 +38,7 @@ const cases = [
       "Draft grounded answers with page-level citations",
       "Escalate intelligently — not when the queue is long",
     ],
-    proof: "9,420 tickets handled · CSAT 4.9",
+    proof: "Capability: grounded tier-1 drafts with citations",
     accent:
       "hover:border-emerald-500/40 hover:shadow-emerald-500/10 hover:ring-emerald-500/15",
     glow: "from-emerald-500/35",
@@ -52,7 +52,7 @@ const cases = [
       "SOPs and runbooks executed end-to-end",
       "Vendor + procurement triage in Slack and Teams",
     ],
-    proof: "1,200+ hrs saved monthly per 100 employees",
+    proof: "Capability: run SOPs and internal requests — no claimed hours SLA",
     accent:
       "hover:border-amber-500/40 hover:shadow-amber-500/10 hover:ring-amber-500/15",
     glow: "from-amber-500/35",
@@ -66,7 +66,7 @@ const cases = [
       "Variance analysis the second numbers land",
       "Board-ready briefings drafted every Monday",
     ],
-    proof: "Vertex closes 4 days faster — every month",
+    proof: "Capability: invoice match and Monday briefings — not a customer result",
     accent:
       "hover:border-violet-500/40 hover:shadow-violet-500/10 hover:ring-violet-500/15",
     glow: "from-violet-500/35",
@@ -94,8 +94,8 @@ export function UseCases() {
             One platform. Every department. Measurable outcomes.
           </h2>
           <p className="marketing-sub">
-            Hire the agent your pain demands first — compound ROI before you
-            expand the footprint.
+            Hire the agent your pain demands first — then expand the footprint.
+            We do not publish a claimed ROI.
           </p>
         </motion.div>
 

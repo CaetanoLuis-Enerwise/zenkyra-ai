@@ -49,7 +49,7 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="mt-6 max-w-xl text-balance text-base leading-relaxed text-muted-foreground sm:text-lg"
           >
-            Zenkyra AI gives companies autonomous AI agents that reduce workload, increase speed and scale operations — privately, in your tenant. Ship the first agent in 7 days.
+            Zenkyra AI gives companies autonomous AI agents that reduce workload, increase speed and scale operations — privately, in your tenant. Ship the first agent in 7 days. We do not publish a claimed ROI or uptime SLA.
           </motion.p>
 
           <motion.div
@@ -116,9 +116,9 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.35 }}
             className="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-border pt-8"
           >
-            <Stat value="5" label="Ready agents" />
             <Stat value="7 days" label="First agent live" />
-            <Stat value="EU" label="Your tenant" />
+            <Stat value="€149" label="14-day pilot" />
+            <Stat value="EU" label="Private tenant" />
           </motion.div>
         </div>
 
@@ -149,10 +149,10 @@ function HeroPreview() {
           <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/30" />
           <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/30" />
           <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/30" />
-          <span className="ml-3 text-xs text-muted-foreground">acme · Zenkyra workforce</span>
+          <span className="ml-3 text-xs text-muted-foreground">preview · Zenkyra workforce</span>
           <span className="ml-auto inline-flex items-center gap-1 text-[10px] text-muted-foreground">
             <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse-slow" />
-            Live · EU-Frankfurt
+            Preview · EU-Frankfurt
           </span>
         </div>
         <div className="space-y-3 p-4">
@@ -160,7 +160,7 @@ function HeroPreview() {
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
               Active workforce
             </p>
-            <span className="text-[10px] text-muted-foreground">5 agents · 4 on shift</span>
+            <span className="text-[10px] text-muted-foreground">5 roles · product preview</span>
           </div>
 
           <ul className="space-y-1.5">
@@ -193,7 +193,7 @@ function HeroPreview() {
 
           <div className="rounded-lg border border-dashed border-border bg-secondary/40 p-3">
             <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-              Most recent · 2 min ago
+              Sample activity · not a live tenant
             </p>
             <p className="mt-1 flex items-start gap-2 text-xs leading-5">
               <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-success" />
