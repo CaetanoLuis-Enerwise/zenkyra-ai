@@ -53,12 +53,10 @@ const cards = [
 ];
 
 const compliance = [
-  "SOC 2 Type II",
-  "ISO 27001",
+  "No SOC 2 yet",
+  "EU-first",
   "GDPR",
-  "HIPAA-ready",
-  "ISO 27701",
-  "AI Act-aligned",
+  "Private tenant",
 ];
 
 export default async function SecurityPage() {
@@ -79,7 +77,7 @@ export default async function SecurityPage() {
         }
         actions={
           <Button variant="outline" size="sm">
-            Download trust report
+            Request DPA
           </Button>
         }
       />
