@@ -10,7 +10,7 @@ interface CountUpProps {
 }
 
 /**
- * Smoothly counts up to the numeric portion of `value` (e.g. "€384,210", "+38%", "−62%")
+ * Smoothly counts up to the numeric portion of `value` (e.g. "€149", "7 days", "5")
  * preserving prefix/suffix exactly. Falls back to the raw string for users who prefer
  * reduced motion or for values without a numeric anchor.
  */

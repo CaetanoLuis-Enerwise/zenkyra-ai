@@ -45,7 +45,7 @@ export function FinalCTA() {
             </h2>
 
             <p className="mx-auto mt-5 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Thirty minutes — tailored ROI projection, security packet walk-through,
+              Thirty minutes — illustrative labour-arbitrage model (not a claimed ROI), security walk-through,
               and a deployment path that lands your first agent on shift inside seven days.
               Most pilots provision within forty-eight hours of the call.
             </p>

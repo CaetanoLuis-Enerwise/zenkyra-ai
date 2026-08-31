@@ -64,7 +64,7 @@ export function Comparison() {
             Chat tools answer. Zenkyra agents work.
           </h2>
           <p className="marketing-sub">
-            Most AI tools stop at the chat box. Zenkyra ships a digital workforce — autonomous agents engineered for the controls, evidence and uptime your enterprise actually requires.
+            Most AI tools stop at the chat box. Zenkyra ships a digital workforce — autonomous agents engineered for the controls and evidence your enterprise actually requires.
           </p>
         </div>
 
