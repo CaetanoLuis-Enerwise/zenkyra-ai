@@ -35,7 +35,7 @@ export function MobileCtaBar() {
             Book Executive Demo
           </Button>
           <Button size="sm" variant="outline" asChild className="flex-1">
-            <Link href="/onboarding">Free pilot</Link>
+            <Link href="/onboarding">€149 pilot</Link>
           </Button>
         </div>
       </div>

@@ -57,18 +57,18 @@ export function FinalCTA() {
                 <ArrowRight className="h-4 w-4" />
               </Button>
               <Button size="xl" variant="outline" asChild>
-                <Link href="/onboarding">Start free pilot</Link>
+                <Link href="/onboarding">Start €149 pilot</Link>
               </Button>
             </div>
 
             <div className="mt-8 inline-flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-muted-foreground">
               <span className="inline-flex items-center gap-2">
                 <ShieldCheck className="h-3.5 w-3.5 text-brand" />
-                SOC 2 Type II · ISO 27001 · GDPR · HIPAA-ready
+                No SOC 2 yet. Data stays in your tenant.
               </span>
               <span className="hidden h-4 w-px bg-border sm:inline-block" aria-hidden />
               <span className="font-medium text-foreground/90">
-                Reply typically within one business day · EU-resident tenants
+                14-day paid technical pilot, €149, invoice. DPA before any customer PDF.
               </span>
             </div>
           </div>

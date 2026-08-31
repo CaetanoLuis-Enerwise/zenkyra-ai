@@ -47,12 +47,10 @@ const cols = [
 ];
 
 const compliance = [
-  "SOC 2 Type II",
-  "ISO 27001",
-  "ISO 27701",
+  "No SOC 2 yet",
+  "EU-first",
   "GDPR",
-  "HIPAA-ready",
-  "EU AI Act-aligned",
+  "Private tenant",
 ];
 
 export function Footer() {
@@ -83,7 +81,7 @@ export function Footer() {
               </span>
               <span className="inline-flex items-center gap-2">
                 <ShieldCheck className="h-3.5 w-3.5" />
-                Trust report available on request
+                DPA before any customer PDF
               </span>
             </div>
           </div>

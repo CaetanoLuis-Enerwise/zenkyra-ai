@@ -4,7 +4,7 @@ const steps = [
   {
     day: "Day 1",
     title: "NDA signed, tenant provisioned",
-    desc: "Private workspace live in Frankfurt or Lisbon. Trust pack and DPA delivered to your inbox.",
+    desc: "Private workspace live in Frankfurt or Lisbon. DPA before any customer PDF.",
   },
   {
     day: "Day 2",
