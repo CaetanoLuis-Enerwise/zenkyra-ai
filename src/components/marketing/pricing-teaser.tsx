@@ -28,7 +28,7 @@ const plans = [
       "Up to 5 agents · custom workflows",
       "Up to 200 users",
       "200 GB Knowledge Hub",
-      "Live ROI dashboard",
+      "Outcomes dashboard",
       "Priority support",
     ],
     highlight: true,
@@ -55,10 +55,10 @@ export function PricingTeaser() {
         <div className="mx-auto max-w-3xl text-center">
           <p className="marketing-eyebrow">Pricing</p>
           <h2 className="marketing-headline">
-            Transparent pricing. ROI from week one.
+            Transparent pricing. Paid technical pilot.
           </h2>
           <p className="marketing-sub">
-            Most customers reach 5×+ ROI within their first quarter — and we put that in writing on Enterprise.
+            No claimed ROI. Model labour arbitrage on the Executive Demo — we do not publish a customer return.
           </p>
         </div>
 
