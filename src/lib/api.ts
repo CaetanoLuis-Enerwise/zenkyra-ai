@@ -5,6 +5,9 @@
  * latency so the UI behaves like a real product (Suspense + loading.tsx
  * skeletons fire). Tomorrow you swap the body of any helper for a
  * `fetch`, tRPC call or Server Action — the call sites stay identical.
+ *
+ * Not wired to FastAPI. Money / ROI / uptime figures are empty until a
+ * live tenant produces them — never invented euros.
  */
 
 import {
@@ -67,6 +70,8 @@ export interface AnalyticsData {
   agents: Agent[];
 }
 
+const NO_LIVE_VALUE = "—";
+
 export const api = {
   overview: async (): Promise<OverviewData> =>
     withLatency({
@@ -75,7 +80,7 @@ export const api = {
       adoption: departmentAdoption,
       activity: recentActivity,
       agents,
-      monthlySaved: { value: "€384,210", deltaPct: "+24% MoM" },
+      monthlySaved: { value: NO_LIVE_VALUE, deltaPct: NO_LIVE_VALUE },
     }),
 
   // Backwards-compat alias for any cached imports.
@@ -95,40 +100,40 @@ export const api = {
       kpis: [
         {
           label: "Estimated cost saved",
-          value: "€1.84M",
-          delta: "+32.4%",
-          trend: "up",
-          hint: "annualized",
-          spark: [110, 130, 145, 160, 178, 195, 220, 240, 268, 290, 312, 340],
+          value: NO_LIVE_VALUE,
+          delta: NO_LIVE_VALUE,
+          trend: "flat",
+          hint: "No live tenant data",
+          spark: [],
         },
         {
           label: "Hours reclaimed",
-          value: "42,180",
-          delta: "+18.2%",
-          trend: "up",
-          hint: "across all agents",
-          spark: [180, 220, 260, 290, 320, 360, 410, 460, 510, 560, 620, 680],
+          value: NO_LIVE_VALUE,
+          delta: NO_LIVE_VALUE,
+          trend: "flat",
+          hint: "No live tenant data",
+          spark: [],
         },
         {
           label: "Department efficiency",
-          value: "+38%",
-          delta: "+4.1pts",
-          trend: "up",
-          hint: "weighted avg.",
-          spark: [22, 24, 26, 27, 29, 30, 32, 33, 34, 36, 37, 38],
+          value: NO_LIVE_VALUE,
+          delta: NO_LIVE_VALUE,
+          trend: "flat",
+          hint: "No live tenant data",
+          spark: [],
         },
         {
           label: "Avg agent uptime",
-          value: "99.94%",
-          delta: "+0.18pts",
-          trend: "up",
-          hint: "rolling 90d",
-          spark: [99.6, 99.7, 99.7, 99.8, 99.8, 99.8, 99.9, 99.9, 99.9, 99.94, 99.94, 99.94],
+          value: NO_LIVE_VALUE,
+          delta: NO_LIVE_VALUE,
+          trend: "flat",
+          hint: "No live tenant data",
+          spark: [],
         },
       ],
-      roi: roiData,
-      byDept: usageByDept,
-      agentPerformance: agentPerformanceData,
+      roi: roiData.map(({ month }) => ({ month, saved: 0, invested: 0 })),
+      byDept: usageByDept.map((row) => ({ ...row, value: 0 })),
+      agentPerformance: agentPerformanceData.map((row) => ({ ...row, value: 0 })),
       agents,
     }),
 
