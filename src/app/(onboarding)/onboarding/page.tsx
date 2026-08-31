@@ -207,7 +207,7 @@ export default function OnboardingPage() {
       </Card>
 
       <p className="mt-6 text-center text-xs text-muted-foreground">
-        Your data never leaves your tenant. Zenkyra is SOC 2 Type II, ISO 27001, GDPR compliant.
+        No SOC 2 yet. Data stays in your tenant.
       </p>
     </div>
   );
