@@ -34,8 +34,8 @@ const rows: {
     values: ["yes", "no", "no", "yes"],
   },
   {
-    label: "EU-resident · SOC 2 · ISO 27001",
-    desc: "Compliance evidence ready for procurement.",
+    label: "EU-first. Private knowledge, your tenant.",
+    desc: "No SOC 2 yet. Data stays in your tenant.",
     values: ["yes", "partial", "partial", "partial"],
   },
   {
