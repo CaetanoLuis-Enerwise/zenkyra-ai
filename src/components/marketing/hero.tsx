@@ -9,7 +9,6 @@ import {
   CheckCircle2,
   ShieldCheck,
   Sparkles,
-  Star,
   Zap,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -29,12 +28,7 @@ export function Hero() {
             transition={{ duration: 0.4 }}
             className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-3 py-1 text-xs font-medium text-muted-foreground shadow-sm"
           >
-            <span className="flex items-center gap-0.5 text-brand">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className="h-3 w-3 fill-current" />
-              ))}
-            </span>
-            <span>Trusted by COOs &amp; CIOs at 140+ enterprises</span>
+            <span>EU-first. Private knowledge, your tenant.</span>
           </motion.div>
 
           <motion.h1
@@ -78,7 +72,7 @@ export function Hero() {
               />
             </Button>
             <Button size="xl" variant="outline" asChild>
-              <Link href="/onboarding">Start free pilot</Link>
+              <Link href="/onboarding">Start €149 pilot</Link>
             </Button>
           </motion.div>
 
@@ -92,7 +86,7 @@ export function Hero() {
               Advisory reply · typically same business day
             </span>
             <p className="text-xs text-muted-foreground">
-              No credit card · Pilot without procurement · Exit anytime
+              14-day paid technical pilot, €149, invoice. DPA before any customer PDF.
             </p>
           </motion.div>
 
@@ -104,7 +98,7 @@ export function Hero() {
           >
             <li className="flex items-center gap-1.5">
               <ShieldCheck className="h-4 w-4 text-brand" />
-              SOC 2 Type II · ISO 27001 · GDPR
+              No SOC 2 yet. Data stays in your tenant.
             </li>
             <li className="flex items-center gap-1.5">
               <Zap className="h-4 w-4 text-brand" />
