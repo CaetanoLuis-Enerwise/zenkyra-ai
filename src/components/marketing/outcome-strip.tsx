@@ -1,26 +1,26 @@
-import { Banknote, MessageSquare, Timer, TrendingUp } from "lucide-react";
+import { Banknote, ShieldCheck, FileCheck, Timer } from "lucide-react";
 import { CountUp } from "@/components/app/count-up";
 
 const outcomes = [
   {
-    icon: Banknote,
-    value: "€84.2M",
-    label: "Customer cost savings to date",
-  },
-  {
-    icon: MessageSquare,
-    value: "1,217,402",
-    label: "Tasks completed by Zenkyra agents",
-  },
-  {
-    icon: TrendingUp,
-    value: "7.4×",
-    label: "Average ROI in first quarter",
+    icon: ShieldCheck,
+    value: "EU-first",
+    label: "Private knowledge, your tenant",
   },
   {
     icon: Timer,
-    value: "9 weeks",
-    label: "Average payback period",
+    value: "7 days",
+    label: "Target for first agent live",
+  },
+  {
+    icon: Banknote,
+    value: "€149",
+    label: "14-day paid technical pilot",
+  },
+  {
+    icon: FileCheck,
+    value: "DPA first",
+    label: "Before any customer PDF",
   },
 ];
 
