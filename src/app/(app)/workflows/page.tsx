@@ -39,7 +39,7 @@ export default function WorkflowsPage() {
             <span className="hidden md:inline">·</span>
             <span>4,217 runs today</span>
             <span className="hidden md:inline">·</span>
-            <span>99.94% success rate</span>
+            <span>Success rate from your runs</span>
           </>
         }
         actions={

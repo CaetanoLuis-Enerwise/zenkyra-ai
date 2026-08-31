@@ -73,7 +73,7 @@ export function Footer() {
                   All systems operational
                 </Link>
                 <span>·</span>
-                <span>No published uptime SLA</span>
+                <span>No published SLA yet</span>
               </span>
               <span className="inline-flex items-center gap-2">
                 <Globe2 className="h-3.5 w-3.5" />

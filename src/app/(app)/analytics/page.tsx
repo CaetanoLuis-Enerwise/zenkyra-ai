@@ -84,7 +84,7 @@ export default async function AnalyticsPage() {
           action={
             <span className="inline-flex items-center gap-1 rounded-md bg-success/10 px-2 py-1 text-xs font-medium text-success">
               <TrendingUp className="h-3 w-3" />
-              7.4× ROI
+              From your tenant
             </span>
           }
         >
@@ -138,10 +138,10 @@ export default async function AnalyticsPage() {
             Your workforce at a glance.
           </h3>
           <ul className="relative mt-4 space-y-3 text-sm">
-            <SummaryRow label="Money saved (annualized)" value="€1.84M" delta="+32%" />
-            <SummaryRow label="Hours reclaimed" value="42,180 hrs" delta="+18%" />
-            <SummaryRow label="Avg. agent uptime" value="99.94%" delta="+0.18pts" />
-            <SummaryRow label="Median tasks / agent / day" value="612" delta="+24%" />
+            <SummaryRow label="Money saved (annualized)" value="—" delta="Your tenant" />
+            <SummaryRow label="Hours reclaimed" value="—" delta="Your tenant" />
+            <SummaryRow label="Avg. agent uptime" value="—" delta="Your tenant" />
+            <SummaryRow label="Median tasks / agent / day" value="—" delta="Your tenant" />
           </ul>
           <p className="relative mt-5 text-xs text-muted-foreground">
             Export the full pack with reproducible methodology, audit trail and per-team breakdowns — formatted for finance and the board.

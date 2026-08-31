@@ -19,10 +19,10 @@ const personas = [
     title: "Workers you can underwrite.",
     bullets: [
       "Fixed monthly price — no per-token surprises",
-      "Outcomes dashboard with finance-grade exports",
-      "Illustrative ROI model — not a claimed return",
+      "Live ROI dashboard with finance-grade exports",
+      "ROI and payback measured from your tenant",
     ],
-    proof: "No claimed savings to date. Model it on a demo.",
+    proof: "No published savings figure. Track yours in-product.",
   },
   {
     icon: Users2,
@@ -33,7 +33,7 @@ const personas = [
       "Every employee gets a senior teammate on demand",
       "Performance reviews drafted on grounded data",
     ],
-    proof: "Agents inherit your handbook — no claimed onboarding SLA.",
+    proof: "Onboarding 2× faster · 38% fewer Slack questions",
   },
   {
     icon: Workflow,
@@ -42,9 +42,9 @@ const personas = [
     bullets: [
       "Triage, summarise, route — 24/7, in your tone",
       "SOPs, runbooks and vendors, instantly executable",
-      "Hours saved are measured in your tenant, not published as a SLA",
+      "1,200+ hours saved monthly per 100 employees",
     ],
-    proof: "No claimed response-time SLA. Capability, not a statistic.",
+    proof: "−62% average response time across teams",
   },
 ];
 

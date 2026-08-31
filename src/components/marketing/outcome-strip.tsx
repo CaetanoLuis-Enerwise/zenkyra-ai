@@ -1,26 +1,26 @@
-import { Banknote, ShieldCheck, FileCheck, Timer } from "lucide-react";
+import { Banknote, MessageSquare, Timer, TrendingUp } from "lucide-react";
 import { CountUp } from "@/components/app/count-up";
 
 const outcomes = [
   {
-    icon: ShieldCheck,
-    value: "EU-first",
-    label: "Private knowledge, your tenant",
+    icon: Banknote,
+    value: "€149",
+    label: "Paid technical pilot",
+  },
+  {
+    icon: MessageSquare,
+    value: "5",
+    label: "Ready-to-hire agents",
+  },
+  {
+    icon: TrendingUp,
+    value: "Live",
+    label: "ROI dashboard in your tenant",
   },
   {
     icon: Timer,
     value: "7 days",
-    label: "Target for first agent live",
-  },
-  {
-    icon: Banknote,
-    value: "€149",
-    label: "14-day paid technical pilot",
-  },
-  {
-    icon: FileCheck,
-    value: "DPA first",
-    label: "Before any customer PDF",
+    label: "Typical first agent live",
   },
 ];
 

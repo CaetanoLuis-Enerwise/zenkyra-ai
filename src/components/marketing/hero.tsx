@@ -49,7 +49,7 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="mt-6 max-w-xl text-balance text-base leading-relaxed text-muted-foreground sm:text-lg"
           >
-            Zenkyra AI gives companies autonomous AI agents that reduce workload, increase speed and scale operations — privately, in your tenant. Ship the first agent in 7 days. Average payback in 9 weeks.
+            Zenkyra AI gives companies autonomous AI agents that reduce workload, increase speed and scale operations — privately, in your tenant. Ship the first agent in 7 days.
           </motion.p>
 
           <motion.div
@@ -116,9 +116,9 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.35 }}
             className="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-border pt-8"
           >
-            <Stat value="7.4×" label="Avg. ROI" />
-            <Stat value="9 wks" label="Payback" />
-            <Stat value="99.94%" label="Agent uptime" />
+            <Stat value="5" label="Ready agents" />
+            <Stat value="7 days" label="First agent live" />
+            <Stat value="EU" label="Your tenant" />
           </motion.div>
         </div>
 

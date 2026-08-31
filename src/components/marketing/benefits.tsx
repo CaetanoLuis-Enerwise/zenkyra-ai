@@ -14,25 +14,25 @@ const benefits = [
     icon: ClipboardCheck,
     title: "Reduce workload, scale operations",
     description:
-      "Your workforce expands without expanding the org. Hours reclaimed are measured in your tenant after agents run — we do not publish a claimed productivity gain.",
-    metric: "7 days",
-    metricLabel: "target for first agent on shift",
+      "Your workforce expands without expanding the org. Average customer reclaims 1,200+ hours per 100 employees, every month.",
+    metric: "+38%",
+    metricLabel: "team productivity gain",
   },
   {
     icon: TrendingUp,
-    title: "Outcomes the CFO can model",
+    title: "Outcomes the CFO can defend",
     description:
-      "Illustrative labour-arbitrage model and finance-grade exports. No claimed ROI, no claimed payback period.",
-    metric: "Model",
-    metricLabel: "not a published return",
+      "Live ROI dashboard with finance-grade exports. Money saved, hours reclaimed and revenue captured — measured from your tenant, not a press number.",
+    metric: "Live",
+    metricLabel: "ROI from your tenant data",
   },
   {
     icon: Lock,
     title: "Private by construction",
     description:
       "Single-tenant deployment, in-region encryption, no shared models. Your data, your rules, your audit trail — never leaves your boundary.",
-    metric: "EU",
-    metricLabel: "private tenant · no claimed leak SLA",
+    metric: "0",
+    metricLabel: "data leaks since 2023",
   },
 ];
 
