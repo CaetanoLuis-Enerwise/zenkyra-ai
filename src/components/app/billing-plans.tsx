@@ -53,7 +53,7 @@ const plans: {
       "Private deployment",
       "EU data residency",
       "SSO + SCIM",
-      "SOC 2 / ISO 27001 evidence",
+      "No SOC 2 yet. Data stays in your tenant.",
       "Dedicated CSM",
     ],
   },
