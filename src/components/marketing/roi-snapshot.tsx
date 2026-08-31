@@ -12,7 +12,7 @@ import { formatCurrency } from "@/lib/utils";
 /**
  * Conservative ROI model:
  *   - Each knowledge worker spends ~5 hours/week on tasks Zenkyra automates.
- *   - Zenkyra reclaims ~62% of that time (validated across 140+ deployments).
+ *   - Zenkyra reclaims ~62% of that time (illustrative model assumption, not a validated deployment statistic).
  *   - Annual savings = users × hourly cost × 5 × 0.62 × 48 weeks.
  */
 export function RoiSnapshot() {
@@ -47,18 +47,18 @@ export function RoiSnapshot() {
               Model enterprise ROI before Legal finishes redlining.
             </h2>
             <p className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Two sliders — conservative benchmarks from 140+ deployments. Same math your CFO runs in diligence; we validate inputs live.
+              Two sliders — an illustrative labour-arbitrage model, not a validated 140+ deployment statistic. Same math your CFO can run in diligence.
             </p>
 
             <div className="mt-9 space-y-3 text-sm text-muted-foreground">
               <Row icon={<Calculator className="h-4 w-4 text-brand" />}>
-                Sourced from validated benchmarks across SaaS, finance, manufacturing and healthcare.
+                Illustrative model — not sourced from a validated 140+ deployment sample.
               </Row>
               <Row icon={<Clock className="h-4 w-4 text-brand" />}>
                 Assumes 5 hours/week of automatable work per knowledge worker.
               </Row>
               <Row icon={<TrendingUp className="h-4 w-4 text-brand" />}>
-                Time reclaimed: ~62% — verified by post-pilot audits.
+                Time reclaimed: ~62% — a modelling assumption, not a post-pilot audit result.
               </Row>
             </div>
 
@@ -124,8 +124,8 @@ export function RoiSnapshot() {
               </div>
 
               <p className="mt-6 text-[11px] leading-relaxed text-muted-foreground">
-                Conservative baseline — median deployments outperform within two quarters.
-                Executive Demo ships model workbook + security pack.
+                Conservative baseline — illustrative only; not a validated deployment statistic.
+                Executive Demo walks the model. DPA before any customer PDF.
               </p>
             </div>
           </Card>
