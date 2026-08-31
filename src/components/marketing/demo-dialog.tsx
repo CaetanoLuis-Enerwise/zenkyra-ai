@@ -190,17 +190,17 @@ export function DemoDialog() {
                 Live agent demo on your industry
               </Bullet>
               <Bullet icon={<ShieldCheck className="h-4 w-4 text-brand" />}>
-                Trust pack &amp; sample DPA shared
+                DPA before any customer PDF
               </Bullet>
               <Bullet icon={<Globe2 className="h-4 w-4 text-brand" />}>
-                EU-resident · SOC 2 Type II
+                No SOC 2 yet. Data stays in your tenant.
               </Bullet>
               <Bullet icon={<Lock className="h-4 w-4 text-brand" />}>
                 NDA available before the call
               </Bullet>
             </ul>
             <div className="mt-5 rounded-lg border border-border bg-card p-3 text-xs text-muted-foreground">
-              Most companies book a pilot within 48 hours of the demo. No procurement needed for pilot — paid plans only after value is proven.
+              14-day paid technical pilot, €149, invoice. DPA before any customer PDF.
             </div>
           </aside>
         </div>
