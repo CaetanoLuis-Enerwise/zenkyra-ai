@@ -141,7 +141,7 @@ export default async function AgentsPage() {
           <ul className="relative mt-4 space-y-2 text-sm">
             <Bullet>Trained on your private knowledge</Bullet>
             <Bullet>Plugged into your CRM, ERP, helpdesk</Bullet>
-            <Bullet>SOC 2 audited · approval rules · BYO LLM</Bullet>
+            <Bullet>Approval rules · BYO LLM · private tenant</Bullet>
           </ul>
           <Button className="relative mt-5 w-full">
             <Briefcase className="h-4 w-4" />
