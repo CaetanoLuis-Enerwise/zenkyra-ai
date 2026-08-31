@@ -90,7 +90,7 @@ export function DemoDialog() {
               Book your Executive Demo
             </DialogTitle>
             <DialogDescription className="text-sm">
-              30 minutes. See a Zenkyra workforce running on a tenant like yours, with a tailored ROI projection for your team.
+              30 minutes. See a Zenkyra workforce running on a tenant like yours, with an illustrative labour-arbitrage model — not a claimed ROI.
             </DialogDescription>
 
             <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
