@@ -22,23 +22,21 @@ export function Faq() {
               Everything Security &amp; Procurement asks first.
             </h2>
             <p className="mt-6 text-base leading-relaxed text-muted-foreground sm:text-[15px]">
-              Our trust report covers everything in detail. If a question is
-              missing, ask it on your demo — we'll send a written answer the
-              same day.
+              If a question is missing, ask it on your demo — we'll send a written
+              answer the same day.
             </p>
 
             <div className="mt-7 rounded-xl border border-border bg-card p-5 shadow-sm">
               <div className="flex items-center gap-2 text-sm font-medium">
                 <ShieldCheck className="h-4 w-4 text-brand" />
-                Need the full Trust Pack now?
+                Need a DPA before any customer PDF?
               </div>
               <p className="mt-1.5 text-sm text-muted-foreground">
-                SOC 2, ISO 27001, sample DPA, pen-test summary, sub-processor
-                list — all in one PDF.
+                No SOC 2 yet. Data stays in your tenant. DPA before any customer PDF.
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 <Button size="sm" onClick={() => openDemo("faq-trust")}>
-                  Request Trust Pack
+                  Request DPA
                   <ArrowRight className="h-4 w-4" />
                 </Button>
                 <Button size="sm" variant="outline" asChild>

@@ -41,7 +41,7 @@ const plans = [
       "Unlimited agents · custom-built roles",
       "EU data residency · BYO LLM",
       "SSO + SCIM",
-      "SOC 2 / ISO evidence",
+      "No SOC 2 yet. Data stays in your tenant.",
       "Dedicated CSM + Solutions Engineer",
     ],
   },
@@ -117,7 +117,7 @@ export function PricingTeaser() {
         </div>
 
         <p className="mt-8 text-center text-xs text-muted-foreground">
-          Free 14-day pilot available on every plan · No credit card · Procurement-ready paperwork
+          14-day paid technical pilot, €149, invoice. DPA before any customer PDF.
         </p>
       </div>
     </section>

@@ -8,10 +8,10 @@ const personas = [
     title: "Defensible by default.",
     bullets: [
       "Single-tenant deployment in your VPC or ours",
-      "SOC 2 Type II, ISO 27001, HIPAA-ready, EU-resident",
+      "EU-first. Private knowledge, your tenant.",
       "SSO/SCIM, full audit trail, BYO-LLM",
     ],
-    proof: "Average IT review cleared in 11 days",
+    proof: "No SOC 2 yet. Data stays in your tenant.",
   },
   {
     icon: CircleDollarSign,
