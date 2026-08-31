@@ -99,36 +99,36 @@ function sparkSeries(base: number, drift: number, len = 14): number[] {
 
 export const overviewStats: Stat[] = [
   {
-    label: "Tasks completed this month",
-    value: "18,420",
-    delta: "+24.6%",
-    trend: "up",
-    hint: "across all agents",
-    spark: sparkSeries(1200, 480),
+    label: "Ready-to-hire agents",
+    value: "5",
+    delta: "Preview",
+    trend: "flat",
+    hint: "Product preview — not a live tenant",
+    spark: sparkSeries(5, 0),
   },
   {
-    label: "Hours saved",
-    value: "4,217",
-    delta: "+18.2%",
-    trend: "up",
-    hint: "vs last month",
-    spark: sparkSeries(280, 110),
+    label: "First agent target",
+    value: "7 days",
+    delta: "From NDA",
+    trend: "flat",
+    hint: "Deployment path, not a live SLA",
+    spark: sparkSeries(7, 0),
   },
   {
-    label: "Revenue opportunities captured",
-    value: "€2.4M",
-    delta: "+31.0%",
-    trend: "up",
-    hint: "qualified by Sales Agent",
-    spark: sparkSeries(160, 80),
+    label: "Knowledge boundary",
+    value: "Your tenant",
+    delta: "EU-first",
+    trend: "flat",
+    hint: "Data stays in your tenant",
+    spark: sparkSeries(1, 0),
   },
   {
-    label: "Team productivity gain",
-    value: "+38%",
-    delta: "+4.1pts",
-    trend: "up",
-    hint: "across 6 departments",
-    spark: sparkSeries(28, 12),
+    label: "Technical pilot",
+    value: "14 days",
+    delta: "Invoiced",
+    trend: "flat",
+    hint: "Paid pilot · no invented savings total",
+    spark: sparkSeries(14, 0),
   },
 ];
 
@@ -241,7 +241,7 @@ export const agents: Agent[] = [
     capabilities: [
       "Weekly executive briefings",
       "Anomaly + trend detection",
-      "Cross-functional ROI rollups",
+      "Cross-functional outcomes rollups",
       "Plain-language commentary",
     ],
     accent: "rose",
@@ -513,7 +513,7 @@ export const testimonials: MarketingTestimonial[] = [
     role: "Chief Operating Officer",
     company: "Northwind Logistics AG",
     badge: "Operations",
-    metric: "612 demos booked · pipeline +€14M attributed",
+    metric: "Placeholder — no published customer result",
   },
   {
     quote:
@@ -522,7 +522,7 @@ export const testimonials: MarketingTestimonial[] = [
     role: "Chief Information Security Officer",
     company: "Constella Financial",
     badge: "Security & risk",
-    metric: "71% autonomous resolution · zero export incidents",
+    metric: "Placeholder — no published customer result",
   },
   {
     quote:
@@ -531,7 +531,7 @@ export const testimonials: MarketingTestimonial[] = [
     role: "Chief Financial Officer",
     company: "Vertex Precision Manufacturing",
     badge: "Finance",
-    metric: "€2.1M labour arbitrage · YoY",
+    metric: "Placeholder — no published customer result",
   },
 ];
 
@@ -552,7 +552,7 @@ export const howItWorks = [
     step: "03",
     title: "Watch the workforce work",
     description:
-      "Live ROI dashboard for every executive. Hours saved, revenue captured and productivity gains — measurable from day one.",
+      "Outcomes and activity in your tenant after agents run. We do not seed invented euro totals or a claimed ROI on day one.",
   },
 ];
 
@@ -579,7 +579,7 @@ export const faqs = [
   },
   {
     q: "What if it doesn't work for us?",
-    a: "Exit anytime in the first 90 days with a full data export (zero lock-in) and we hand back any unused fees pro-rata. We track adoption weekly and publicly publish customer ROI — we only succeed when you do.",
+    a: "Exit anytime in the first 90 days with a full data export (zero lock-in) and we hand back any unused fees pro-rata. We track adoption with you. We do not publish a claimed customer ROI.",
   },
 ];
 
