@@ -81,7 +81,7 @@ export function Sidebar() {
           <span aria-hidden>·</span>
           <span className="inline-flex items-center gap-1">
             <ShieldCheck className="h-3 w-3" />
-            SOC 2
+            EU-first
           </span>
           <span aria-hidden>·</span>
           <span className="inline-flex items-center gap-1">

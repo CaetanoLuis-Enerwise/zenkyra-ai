@@ -163,10 +163,10 @@ function TrustStrip() {
         <TooltipTrigger asChild>
           <span className="flex items-center gap-1.5 px-1.5 text-muted-foreground">
             <ShieldCheck className="h-3.5 w-3.5" />
-            <span className="hidden font-medium xl:inline">SOC 2</span>
+            <span className="hidden font-medium xl:inline">EU-first</span>
           </span>
         </TooltipTrigger>
-        <TooltipContent>SOC 2 Type II · ISO 27001 · GDPR</TooltipContent>
+        <TooltipContent>No SOC 2 yet. Data stays in your tenant.</TooltipContent>
       </Tooltip>
     </div>
   );
