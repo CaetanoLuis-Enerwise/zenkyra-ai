@@ -571,11 +571,11 @@ export const faqs = [
   },
   {
     q: "How long does it take to deploy our first agent?",
-    a: "Most pilots have an agent live in under 7 days. Enterprise deployments with SSO, SCIM and private VPC peering typically take 2–4 weeks. The 14-day pilot is free, no credit card and no procurement required — you only pay once value is proven.",
+    a: "Most pilots have an agent live in under 7 days. Enterprise deployments with SSO, SCIM and private VPC peering typically take 2–4 weeks. The 14-day paid technical pilot is €149, invoiced. DPA before any customer PDF.",
   },
   {
     q: "What does our security and compliance team need to review?",
-    a: "We share a full Trust Pack pre-call: SOC 2 Type II, ISO 27001 reports, GDPR & sub-processor list, sample DPA, pen-test summary, BCP/DR docs and SIG Lite. Our average IT review cleared in 11 days last quarter.",
+    a: "No SOC 2 yet. Data stays in your tenant. DPA before any customer PDF. GDPR and sub-processor list on request — we do not ship ISO 27001 reports, a Trust Pack, or a pen-test summary.",
   },
   {
     q: "What if it doesn't work for us?",
@@ -619,8 +619,8 @@ export const auditEvents = [
   {
     id: "ae5",
     actor: "Compliance",
-    event: "SOC 2 evidence updated",
-    detail: "Vendor risk register synced from Vanta.",
+    event: "Tenant isolation check",
+    detail: "Data residency confirmed in customer tenant. No SOC 2 yet.",
     time: "2d ago",
     severity: "info" as const,
   },
