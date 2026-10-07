@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import uuid
 from datetime import datetime
+from typing import Literal
 
 from pydantic import BaseModel, EmailStr, Field
 
@@ -99,3 +100,28 @@ class BillingPlan(BaseModel):
 class TenantBillingOut(BaseModel):
     plan_slug: str
     stripe_customer_id: str | None = None
+    pilot_ends_at: datetime | None = None
+
+
+class AdminTenantCreate(BaseModel):
+    email: EmailStr
+    company_name: str = Field(min_length=2, max_length=255)
+    full_name: str | None = Field(default=None, max_length=255)
+    plan_slug: Literal["pilot", "starter"]
+    external_order_id: str = Field(min_length=1, max_length=128)
+
+
+class AdminTenantOut(BaseModel):
+    tenant_id: uuid.UUID
+    user_id: uuid.UUID
+    plan_slug: str
+    external_order_id: str
+    created: bool
+    # Single-use, 72h. None when the owner has already set a password.
+    password_set_url: str | None
+    password_set_expires_at: datetime | None
+
+
+class SetPasswordRequest(BaseModel):
+    token: str = Field(min_length=16, max_length=256)
+    password: str = Field(min_length=8)

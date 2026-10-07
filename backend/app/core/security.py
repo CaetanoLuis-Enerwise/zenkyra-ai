@@ -1,5 +1,7 @@
 """Password hashing & JWT helpers."""
 
+import hashlib
+import secrets
 from datetime import datetime, timedelta, timezone
 from typing import Any
 
@@ -19,6 +21,21 @@ def hash_password(password: str) -> str:
 
 def verify_password(plain: str, hashed: str) -> bool:
     return pwd_context.verify(plain, hashed)
+
+
+def unusable_password_hash() -> str:
+    """bcrypt hash of a random secret nobody knows: login fails cleanly until set-password."""
+    return pwd_context.hash(secrets.token_urlsafe(32))
+
+
+def hash_token(raw: str) -> str:
+    return hashlib.sha256(raw.encode("utf-8")).hexdigest()
+
+
+def new_password_set_token() -> tuple[str, str]:
+    """Return (raw_token, sha256_hex). Only the hash is stored."""
+    raw = secrets.token_urlsafe(32)
+    return raw, hash_token(raw)
 
 
 def create_access_token(subject: str, extra_claims: dict[str, Any] | None = None) -> str:

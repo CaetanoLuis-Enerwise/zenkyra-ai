@@ -1,0 +1,4 @@
+# Test-only extras (tests run on SQLite via aiosqlite; production stays on Postgres)
+pytest==8.3.4
+pytest-asyncio==0.24.0
+aiosqlite==0.22.1

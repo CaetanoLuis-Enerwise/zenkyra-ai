@@ -13,6 +13,16 @@ router = APIRouter(prefix="/billing", tags=["billing"])
 
 _PLANS: list[BillingPlan] = [
     BillingPlan(
+        slug="pilot",
+        name="Pilot",
+        price_display="€149 / 14 days",
+        highlights=[
+            "14-day paid pilot · 1 workspace",
+            "Upload your PDFs · chat answers from them",
+            "Converts to Starter manually",
+        ],
+    ),
+    BillingPlan(
         slug="starter",
         name="Starter",
         price_display="€299 / mo",
@@ -64,4 +74,5 @@ async def current_plan(
     return TenantBillingOut(
         plan_slug=row.plan_slug,
         stripe_customer_id=row.stripe_customer_id,
+        pilot_ends_at=row.pilot_ends_at,
     )

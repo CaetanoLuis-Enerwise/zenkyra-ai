@@ -52,6 +52,18 @@ class Settings(BaseSettings):
 
     DATABASE_BOOTSTRAP: bool = False
 
+    # Service-to-service provisioning (Aegis paid checkout -> POST /api/v1/admin/tenants).
+    # Unset or shorter than 32 chars = admin API disabled (503, fail closed).
+    ZENKYRA_SERVICE_TOKEN: str | None = None
+    # Frontend page that consumes ?token=... and calls POST /api/v1/auth/set-password
+    PASSWORD_SET_URL_BASE: str = "http://localhost:3000/set-password"
+    PASSWORD_SET_TOKEN_TTL_HOURS: int = 72
+    # Pilot plan length; sets TenantBilling.pilot_ends_at (cutoff is manual for now)
+    PILOT_DURATION_DAYS: int = 14
+    # Public self-serve POST /api/v1/auth/signup. Off by default: tenants are created by
+    # paid checkout via POST /api/v1/admin/tenants. Set true only for local development.
+    PUBLIC_SIGNUP_ENABLED: bool = False
+
     @model_validator(mode="after")
     def derive_sync_database_url(self) -> "Settings":
         if self.DATABASE_URL_SYNC is None:
