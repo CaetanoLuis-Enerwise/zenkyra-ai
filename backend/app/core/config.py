@@ -63,6 +63,10 @@ class Settings(BaseSettings):
     # Public self-serve POST /api/v1/auth/signup. Off by default: tenants are created by
     # paid checkout via POST /api/v1/admin/tenants. Set true only for local development.
     PUBLIC_SIGNUP_ENABLED: bool = False
+    # POST /api/v1/leads rate limit: per client IP, IN-PROCESS memory only (each worker /
+    # replica keeps its own counters; resets on restart). Not a substitute for an edge limit.
+    LEADS_RATE_LIMIT_MAX: int = 5
+    LEADS_RATE_LIMIT_WINDOW_SECONDS: int = 600
 
     @model_validator(mode="after")
     def derive_sync_database_url(self) -> "Settings":

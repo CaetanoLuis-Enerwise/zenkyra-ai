@@ -57,6 +57,7 @@ Run from the `backend` directory so `app` imports resolve (`PYTHONPATH` defaults
 | `/api/v1/agents` | sales / support / ops runners |
 | `/api/v1/analytics` | tasks, hours saved, LLM calls |
 | `/api/v1/billing` | plan catalog (pilot €149/14 days, starter, growth, enterprise) + current plan (`pilot_ends_at`) |
+| `/api/v1/leads` | public `POST` lead capture from the marketing site (`source`: `demo`/`pilot`); honeypot `website`; per-IP rate limit (in-process) |
 | `/api/v1/admin` | service-to-service tenant provisioning (`X-Service-Token`; 503 if `ZENKYRA_SERVICE_TOKEN` unset) |
 
 ## LLM service
@@ -77,10 +78,16 @@ TEST_DATABASE_URL=postgresql+asyncpg://user:pass@localhost:5432/zenkyra_test pyt
 
 ## Production notes
 
-- Set `DATABASE_BOOTSTRAP=false` and run **Alembic** migrations (add your revision). New tables: `tenant_provisioning`, `password_set_tokens`
+- Set `DATABASE_BOOTSTRAP=false` and run **Alembic** migrations (add your revision). New tables: `tenant_provisioning`, `password_set_tokens`, `leads`
   (a fresh DB gets them from `create_all`). New nullable column `tenant_billing.pilot_ends_at`. `create_all`
   does **not** add columns to an existing table, so an existing database needs
   `ALTER TABLE tenant_billing ADD COLUMN pilot_ends_at TIMESTAMPTZ NULL;`.
+- `POST /api/v1/leads` is public. Its rate limit (`LEADS_RATE_LIMIT_MAX` per
+  `LEADS_RATE_LIMIT_WINDOW_SECONDS`, keyed on `request.client.host`) lives in **process memory**: each
+  worker/replica counts separately and counters reset on restart. Behind a proxy run uvicorn with
+  `--proxy-headers --forwarded-allow-ips=<proxy>` or every lead shares the proxy IP. Add an edge/WAF limit
+  for real abuse protection. The endpoint stores leads only; it sends no email or webhook. Leads are
+  personal data: cover them in the privacy notice before the form goes live.
 - Restrict CORS origins in `app/main.py`.
 - Use managed Postgres / Redis / Qdrant and rotate `SECRET_KEY` / `GEMINI_API_KEY`.
 - Store uploads on S3-compatible storage instead of `./storage` when scaling.

@@ -1,4 +1,4 @@
-"""Test harness: minimal app (auth + admin + billing) on SQLite by default.
+"""Test harness: minimal app (auth + admin + billing + leads) on SQLite by default.
 
 The repo has no test suite and its models use Postgres JSONB; JSONB is rendered as
 JSON on SQLite for tests only. Set TEST_DATABASE_URL=postgresql+asyncpg://... to run the
@@ -28,7 +28,7 @@ def _jsonb_sqlite(type_, compiler, **kw):  # pragma: no cover - DDL hook
     return "JSON"
 
 
-from app.api.v1 import admin, auth, billing  # noqa: E402
+from app.api.v1 import admin, auth, billing, leads  # noqa: E402
 from app.core.config import get_settings  # noqa: E402
 from app.core.database import Base, get_db  # noqa: E402
 import app.models  # noqa: E402,F401
@@ -81,6 +81,8 @@ async def client(session_factory):
     app.include_router(auth.router, prefix="/api/v1")
     app.include_router(admin.router, prefix="/api/v1")
     app.include_router(billing.router, prefix="/api/v1")
+    app.include_router(leads.router, prefix="/api/v1")
+    leads.rate_limiter.reset()
     app.dependency_overrides[get_db] = _get_db
     get_settings.cache_clear()
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as c:

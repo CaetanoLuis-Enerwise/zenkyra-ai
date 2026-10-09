@@ -279,3 +279,22 @@ class PasswordSetToken(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=utcnow
     )
+
+
+class Lead(Base):
+    """Inbound lead from the public marketing site (demo request / €149 pilot request)."""
+
+    __tablename__ = "leads"
+
+    id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
+    )
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=utcnow, index=True
+    )
+    name: Mapped[str] = mapped_column(String(120))
+    email: Mapped[str] = mapped_column(String(320), index=True)
+    company: Mapped[str] = mapped_column(String(200))
+    message: Mapped[str | None] = mapped_column(Text, nullable=True)
+    source: Mapped[str] = mapped_column(String(16))
+    user_agent: Mapped[str | None] = mapped_column(String(512), nullable=True)

@@ -2,7 +2,7 @@
 
 from fastapi import APIRouter
 
-from app.api.v1 import admin, agents, analytics, auth, billing, chat, documents, tenants
+from app.api.v1 import admin, agents, analytics, auth, billing, chat, documents, leads, tenants
 
 api_router = APIRouter()
 api_router.include_router(auth.router)
@@ -13,3 +13,4 @@ api_router.include_router(agents.router)
 api_router.include_router(analytics.router)
 api_router.include_router(billing.router)
 api_router.include_router(admin.router)
+api_router.include_router(leads.router)

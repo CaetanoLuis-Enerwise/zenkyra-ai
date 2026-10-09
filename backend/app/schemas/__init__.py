@@ -125,3 +125,17 @@ class AdminTenantOut(BaseModel):
 class SetPasswordRequest(BaseModel):
     token: str = Field(min_length=16, max_length=256)
     password: str = Field(min_length=8)
+
+
+class LeadCreate(BaseModel):
+    name: str = Field(min_length=1, max_length=120)
+    email: EmailStr
+    company: str = Field(min_length=1, max_length=200)
+    message: str | None = Field(default=None, max_length=2000)
+    source: Literal["demo", "pilot"]
+    # Honeypot: hidden in the form; humans leave it empty. Non-empty -> 201, not stored.
+    website: str | None = Field(default=None, max_length=500)
+
+
+class LeadOut(BaseModel):
+    id: uuid.UUID
