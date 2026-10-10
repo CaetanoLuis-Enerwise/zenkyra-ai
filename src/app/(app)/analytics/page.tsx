@@ -43,7 +43,7 @@ export default async function AnalyticsPage() {
             <span className="hidden md:inline">·</span>
             <span>Source: Zenkyra Insights</span>
             <span className="hidden md:inline">·</span>
-            <span>EU · Frankfurt</span>
+            <span>Demo data</span>
           </>
         }
         actions={

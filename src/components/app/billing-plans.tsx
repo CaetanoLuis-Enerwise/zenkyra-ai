@@ -50,9 +50,9 @@ const plans: {
     description: "For regulated industries and larger deployments.",
     features: [
       "Unlimited users",
-      "Private deployment",
-      "EU data residency",
-      "SSO + SCIM",
+      "Private deployment (roadmap)",
+      "Hosting region agreed in writing",
+      "SSO + SCIM (roadmap)",
       "No SOC 2 yet. Data stays in your tenant.",
       "Dedicated CSM",
     ],

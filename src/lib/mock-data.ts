@@ -99,7 +99,7 @@ function sparkSeries(base: number, drift: number, len = 14): number[] {
 
 export const overviewStats: Stat[] = [
   {
-    label: "Ready-to-hire agents",
+    label: "Agent roles",
     value: "5",
     delta: "Preview",
     trend: "flat",
@@ -107,12 +107,12 @@ export const overviewStats: Stat[] = [
     spark: sparkSeries(5, 0),
   },
   {
-    label: "First agent target",
-    value: "7 days",
-    delta: "From NDA",
+    label: "Paid pilot length",
+    value: "14 days",
+    delta: "€149 + VAT",
     trend: "flat",
-    hint: "Deployment path, not a live SLA",
-    spark: sparkSeries(7, 0),
+    hint: "Technical pilot, not a live SLA",
+    spark: sparkSeries(14, 0),
   },
   {
     label: "Knowledge boundary",
@@ -271,7 +271,7 @@ export const recentActivity: ActivityItem[] = [
     id: "a1",
     type: "lead",
     title: "Lead qualified",
-    description: "Northwind Logistics scored 87/100 · meeting booked for Thu 14:00.",
+    description: "Example Logistics (demo) scored 87/100 · meeting booked for Thu 14:00.",
     time: "2m ago",
     agent: "Sales Agent",
     agentId: "sales",
@@ -280,7 +280,7 @@ export const recentActivity: ActivityItem[] = [
     id: "a2",
     type: "ticket",
     title: "Ticket resolved",
-    description: "Refund inquiry #4821 closed with policy ref · CSAT 4.9.",
+    description: "Refund inquiry #4821 closed with policy ref · customer notified.",
     time: "12m ago",
     agent: "Support Agent",
     agentId: "support",
@@ -482,13 +482,13 @@ export const usageByDept = [
 
 export const companies = [
   { id: "c1", name: "Acme Inc.", plan: "Growth", logo: "A" },
-  { id: "c2", name: "Northwind", plan: "Enterprise", logo: "N" },
+  { id: "c2", name: "Example Logistics", plan: "Enterprise", logo: "N" },
   { id: "c3", name: "Globex Labs", plan: "Starter", logo: "G" },
 ];
 
 export const promptSuggestions = [
   "Brief me on this week's pipeline",
-  "Draft a follow-up to Northwind",
+  "Draft a follow-up to Example Logistics",
   "Why did refund tickets spike?",
   "Summarize Q2 vendor invoices",
 ];
@@ -501,46 +501,20 @@ export interface MarketingTestimonial {
   company: string;
   /** Short exec function tag for cards */
   badge: string;
-  /** Quantified outcome — reads like board-ready proof */
+  /** Outcome text, only from a signed customer release */
   metric: string;
 }
 
-export const testimonials: MarketingTestimonial[] = [
-  {
-    quote:
-      "We deployed the Sales Agent across EMEA in nine weeks. It qualified inbound at SLA, drafted proposals from closed-won patterns and booked discovery calls — without adding quota capacity. Finance signed off after week seven.",
-    author: "Dr. Helena Vogel",
-    role: "Chief Operating Officer",
-    company: "Northwind Logistics AG",
-    badge: "Operations",
-    metric: "Placeholder — no published customer result",
-  },
-  {
-    quote:
-      "Our tier-one tickets now resolve with citations tied to policy pages — auditors love the traceability. Nothing leaves eu-central-1. That cleared Legal faster than any vendor we've onboarded in five years.",
-    author: "David Reyes",
-    role: "Chief Information Security Officer",
-    company: "Constella Financial",
-    badge: "Security & risk",
-    metric: "Placeholder — no published customer result",
-  },
-  {
-    quote:
-      "Close shrank by four working days. The Finance Agent matches invoices before my team wakes up; the Executive Analyst drafts my CFO briefing pack every Monday morning. Board asks fewer spreadsheet questions.",
-    author: "Marta Oliveira",
-    role: "Chief Financial Officer",
-    company: "Vertex Precision Manufacturing",
-    badge: "Finance",
-    metric: "Placeholder — no published customer result",
-  },
-];
+// Removed: no signed customer references exist yet. Do not add named people or
+// companies here until there is a written release from a real customer.
+export const testimonials: MarketingTestimonial[] = [];
 
 export const howItWorks = [
   {
     step: "01",
     title: "Connect your knowledge",
     description:
-      "Drop documents or sync Drive, Notion, Slack, SharePoint and your ERP. Indexed inside your tenant — never shared.",
+      "Upload the documents you choose. Indexed inside your tenant. Further integrations are scoped per pilot.",
   },
   {
     step: "02",
@@ -559,19 +533,19 @@ export const howItWorks = [
 export const faqs = [
   {
     q: "What exactly does a Zenkyra agent do?",
-    a: "A Zenkyra agent is an autonomous worker that performs a specific business job — qualifying leads, resolving tickets, processing invoices, drafting executive reports. It reads your knowledge, follows your rules, takes action across your tools (CRM, ERP, helpdesk, Slack), and asks a human only when policy requires.",
+    a: "A Zenkyra agent is an autonomous worker that performs a specific business job — qualifying leads, resolving tickets, processing invoices, drafting executive reports. It reads your knowledge, follows your rules, drafts actions for your tools (integrations are scoped per pilot), and asks a human when policy requires.",
   },
   {
-    q: "How is this different from ChatGPT Enterprise or Microsoft Copilot?",
-    a: "Chat tools answer questions. Zenkyra agents do the work. They run on your private tenant, are grounded on your documents, act inside your CRM/ERP/helpdesk, and ship with audit trails, approval rules and SLAs. You can also bring your own LLM (Azure, Bedrock, Anthropic, Mistral, self-hosted Llama 3) and switch any time.",
+    q: "How is this different from a chat tool?",
+    a: "Chat tools answer questions. Zenkyra agents do the work. They run on your private tenant and are grounded on your documents. LLM processing today is Google Gemini; bring-your-own LLM is on the roadmap, not shipped. We do not publish an SLA yet.",
   },
   {
-    q: "Where is my data stored, and will any of it train a model?",
-    a: "Your data lives in eu-central-1 (Frankfurt) or eu-west-1 (Lisbon) by default — never the US. On Enterprise you bring your own cloud account with VPC isolation. Your knowledge, queries and documents are tenant-isolated and never used to train shared or public models. Ever.",
+    q: "Where is my data stored, and who processes it?",
+    a: "The hosting region is confirmed in writing before you upload anything, and a DPA is signed before any customer PDF. LLM processing is done by Google Gemini (a sub-processor). Your documents are indexed in your own tenant's vector collection.",
   },
   {
     q: "How long does it take to deploy our first agent?",
-    a: "Most pilots have an agent live in under 7 days. Enterprise deployments with SSO, SCIM and private VPC peering typically take 2–4 weeks. The 14-day paid technical pilot is €149, invoiced. DPA before any customer PDF.",
+    a: "We start with the 14-day paid technical pilot: €149 plus VAT, invoiced. DPA before any customer PDF. SSO, SCIM and private VPC deployment are on the roadmap, not shipped.",
   },
   {
     q: "What does our security and compliance team need to review?",
@@ -579,7 +553,7 @@ export const faqs = [
   },
   {
     q: "What if it doesn't work for us?",
-    a: "Exit anytime in the first 90 days with a full data export (zero lock-in) and we hand back any unused fees pro-rata. We track adoption with you. We do not publish a claimed customer ROI.",
+    a: "Then you don't continue past the 14-day pilot. We review the results with you on your own data. We do not publish a claimed customer ROI.",
   },
 ];
 
@@ -604,7 +578,7 @@ export const auditEvents = [
     id: "ae3",
     actor: "Sales Agent",
     event: "CRM action",
-    detail: "Updated 12 deals in HubSpot · Northwind opportunity.",
+    detail: "Updated 12 deals in HubSpot · Example Logistics opportunity.",
     time: "3h ago",
     severity: "info" as const,
   },
@@ -630,13 +604,13 @@ export const notifications = [
   {
     id: "n1",
     title: "Sales Agent booked 4 meetings",
-    description: "Northwind, Globex, Vertex and Acme Logistics confirmed for next week.",
+    description: "Three demo prospects confirmed for next week.",
     time: "2m ago",
     unread: true,
   },
   {
     id: "n2",
-    title: "Support Agent SLA hit · 99.4%",
+    title: "Support Agent queue check · demo",
     description: "Median first response time held at 38 seconds across 1,217 tickets.",
     time: "12m ago",
     unread: true,

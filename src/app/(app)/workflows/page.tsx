@@ -37,7 +37,7 @@ export default function WorkflowsPage() {
           <>
             <span>14 workflows live</span>
             <span className="hidden md:inline">·</span>
-            <span>4,217 runs today</span>
+            <span>Demo data</span>
             <span className="hidden md:inline">·</span>
             <span>Success rate from your runs</span>
           </>
@@ -65,7 +65,7 @@ export default function WorkflowsPage() {
             tag="Sales · Active"
             badgeVariant="success"
             description="Triggered the moment an inbound lead lands in HubSpot, your form, or via webhook."
-            metric="2,184 runs · 612 hrs saved"
+            metric="Demo workflow · sample data"
           >
             <WorkflowNode icon={<Inbox />} title="Lead arrives" subtitle="Webhook · HubSpot · Form" tone="brand" index={0} />
             <WorkflowConnector />
@@ -88,7 +88,7 @@ export default function WorkflowsPage() {
             tag="Finance · Active"
             badgeVariant="success"
             description="Reads incoming invoices, validates against POs and routes for the right approver."
-            metric="612 runs · 274 hrs saved"
+            metric="Demo workflow · sample data"
           >
             <WorkflowNode icon={<Receipt />} title="Invoice uploaded" subtitle="Email · Drive · Drop" tone="brand" index={0} />
             <WorkflowConnector />
@@ -111,7 +111,7 @@ export default function WorkflowsPage() {
             tag="Support · Active"
             badgeVariant="success"
             description="Triages every incoming ticket, drafts a grounded answer and escalates only what truly needs a human."
-            metric="9,420 runs · 1,184 hrs saved"
+            metric="Demo workflow · sample data"
           >
             <WorkflowNode icon={<Headphones />} title="Ticket arrives" subtitle="Zendesk · Inbox · Chat" tone="brand" index={0} />
             <WorkflowConnector />
@@ -134,7 +134,7 @@ export default function WorkflowsPage() {
             tag="Ops · Active"
             badgeVariant="success"
             description="A teammate asks a question or files an internal request. The Ops Agent runs the SOP end-to-end."
-            metric="2,104 runs · 318 hrs saved"
+            metric="Demo workflow · sample data"
           >
             <WorkflowNode icon={<Users2 />} title="Request" subtitle="Slack · Teams · Form" tone="brand" index={0} />
             <WorkflowConnector />
@@ -157,7 +157,7 @@ export default function WorkflowsPage() {
             tag="Analyst · Training"
             badgeVariant="muted"
             description="Every Monday, the Executive Analyst drafts a board-ready briefing with anomalies, trends and next-action recommendations."
-            metric="312 runs · 96 hrs saved"
+            metric="Demo workflow · sample data"
           >
             <WorkflowNode icon={<TrendingUp />} title="Weekly trigger" subtitle="Mon 07:00 UTC" tone="brand" index={0} />
             <WorkflowConnector />

@@ -47,12 +47,12 @@ export function RoiSnapshot() {
               Model enterprise ROI before Legal finishes redlining.
             </h2>
             <p className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Two sliders — an illustrative labour-arbitrage model, not a validated 140+ deployment statistic. Same math your CFO can run in diligence.
+              Two sliders — an illustrative labour-arbitrage model, not a validated deployment statistic. Same math your CFO can run in diligence.
             </p>
 
             <div className="mt-9 space-y-3 text-sm text-muted-foreground">
               <Row icon={<Calculator className="h-4 w-4 text-brand" />}>
-                Illustrative model — not sourced from a validated 140+ deployment sample.
+                Illustrative model — not sourced from customer deployments.
               </Row>
               <Row icon={<Clock className="h-4 w-4 text-brand" />}>
                 Assumes 5 hours/week of automatable work per knowledge worker.

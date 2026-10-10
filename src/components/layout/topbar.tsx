@@ -133,30 +133,30 @@ function TrustStrip() {
               <span className="absolute inset-0 animate-ping rounded-full bg-success/60" />
               <span className="relative h-1.5 w-1.5 rounded-full bg-success" />
             </span>
-            <span className="font-medium">Operational</span>
+            <span className="font-medium">Demo</span>
           </span>
         </TooltipTrigger>
-        <TooltipContent>All systems operational. No published uptime SLA.</TooltipContent>
+        <TooltipContent>Demo workspace. No published uptime SLA.</TooltipContent>
       </Tooltip>
       <span className="h-3 w-px bg-border" aria-hidden />
       <Tooltip>
         <TooltipTrigger asChild>
           <span className="flex items-center gap-1.5 px-1.5 text-muted-foreground">
             <Globe2 className="h-3.5 w-3.5" />
-            <span className="hidden font-medium xl:inline">EU · Frankfurt</span>
+            <span className="hidden font-medium xl:inline">Region: to confirm</span>
           </span>
         </TooltipTrigger>
-        <TooltipContent>Region eu-central-1 · GDPR resident</TooltipContent>
+        <TooltipContent>Hosting region is confirmed in writing before any upload</TooltipContent>
       </Tooltip>
       <span className="h-3 w-px bg-border" aria-hidden />
       <Tooltip>
         <TooltipTrigger asChild>
           <span className="flex items-center gap-1.5 px-1.5 text-muted-foreground">
             <Lock className="h-3.5 w-3.5" />
-            <span className="hidden font-medium xl:inline">Encrypted</span>
+            <span className="hidden font-medium xl:inline">Encryption: to confirm</span>
           </span>
         </TooltipTrigger>
-        <TooltipContent>AES-256 at rest · TLS 1.3 in transit</TooltipContent>
+        <TooltipContent>Encryption depends on the hosting provider; confirmed in writing before any upload</TooltipContent>
       </Tooltip>
       <span className="h-3 w-px bg-border" aria-hidden />
       <Tooltip>

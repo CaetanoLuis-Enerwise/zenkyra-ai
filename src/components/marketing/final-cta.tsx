@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -35,19 +34,18 @@ export function FinalCTA() {
               className="gap-2 border border-brand/25 bg-brand/10 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-brand"
             >
               <Clock className="h-3.5 w-3.5" />
-              Limited quarterly onboarding cohort · advisory slots fill first
+              Paid technical pilot · €149 · 14 days
             </Badge>
 
-            <p className="marketing-eyebrow mt-2">Decision window</p>
+            <p className="marketing-eyebrow mt-2">Next step</p>
 
             <h2 className="marketing-headline">
-              Hire your digital workforce — advisory cohort closes quarterly.
+              Hire your digital workforce — start with a paid pilot.
             </h2>
 
             <p className="mx-auto mt-5 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
               Thirty minutes — illustrative labour-arbitrage model (not a claimed ROI), security walk-through,
-              and a deployment path that lands your first agent on shift inside seven days.
-              Most pilots provision within forty-eight hours of the call.
+              and a scoped plan for a 14-day technical pilot on your own documents.
             </p>
 
             <div className="mt-10 flex flex-wrap justify-center gap-3">
@@ -56,8 +54,8 @@ export function FinalCTA() {
                 Book Executive Demo
                 <ArrowRight className="h-4 w-4" />
               </Button>
-              <Button size="xl" variant="outline" asChild>
-                <Link href="/onboarding">Start €149 pilot</Link>
+              <Button size="xl" variant="outline" onClick={() => open("final-cta", "pilot")}>
+                Start €149 pilot
               </Button>
             </div>
 

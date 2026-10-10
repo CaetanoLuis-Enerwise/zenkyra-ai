@@ -1,96 +1,83 @@
-import { Check, Minus } from "lucide-react";
+import { Check, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type Cell = "yes" | "partial" | "no";
+/**
+ * Zenkyra-only capability list. "shipped" means implemented in the backend repo
+ * (not independently audited); every "shipped" row has a code reference in
+ * CHANGES.md. No competitor comparison: we only state what we can verify.
+ */
+type Status = "shipped" | "roadmap";
 
-const rows: {
-  label: string;
-  desc: string;
-  values: [Cell, Cell, Cell, Cell];
-}[] = [
+const rows: { label: string; desc: string; status: Status }[] = [
   {
-    label: "Performs work, not just chat",
-    desc: "Autonomous agents that take action across your tools.",
-    values: ["yes", "no", "partial", "partial"],
+    label: "Agent roles: Sales, Support, Ops",
+    desc: "Agent runners per role, scoped to your tenant.",
+    status: "shipped",
   },
   {
-    label: "Pre-trained for business roles",
-    desc: "Sales, Support, Ops, Finance, Executive Analyst.",
-    values: ["yes", "no", "no", "no"],
+    label: "Answers grounded on your uploaded documents",
+    desc: "PDFs are chunked, embedded and retrieved for each chat message.",
+    status: "shipped",
   },
   {
-    label: "Single-tenant deployment",
-    desc: "Your data, your VPC, your encryption keys.",
-    values: ["yes", "no", "no", "partial"],
+    label: "Separate vector collection per tenant",
+    desc: "Each company's documents are indexed in its own collection.",
+    status: "shipped",
   },
   {
-    label: "Grounded on your knowledge",
-    desc: "Every action cited with page-level sources.",
-    values: ["yes", "partial", "partial", "partial"],
+    label: "Finance and Executive Analyst agents",
+    desc: "Shown in the product preview; not implemented in the backend yet.",
+    status: "roadmap",
   },
   {
-    label: "Bring-your-own LLM (Azure / AWS / OSS)",
-    desc: "Full control of model, region and cost routing.",
-    values: ["yes", "no", "no", "yes"],
+    label: "Page-level source citations",
+    desc: "Showing which page each answer came from.",
+    status: "roadmap",
   },
   {
-    label: "EU-first. Private knowledge, your tenant.",
-    desc: "No SOC 2 yet. Data stays in your tenant.",
-    values: ["yes", "partial", "partial", "partial"],
+    label: "Actions inside your CRM, ERP and helpdesk",
+    desc: "Integrations are scoped per pilot.",
+    status: "roadmap",
   },
   {
-    label: "First agent live in 7 days",
-    desc: "Pilot in 24 hours. No engineering team needed.",
-    values: ["yes", "yes", "partial", "no"],
+    label: "SSO / SCIM",
+    desc: "Single sign-on and user provisioning via your IdP.",
+    status: "roadmap",
   },
   {
-    label: "Predictable, fixed pricing",
-    desc: "No per-token surprises. Finance-friendly.",
-    values: ["yes", "partial", "partial", "no"],
+    label: "Single-tenant VPC deployment",
+    desc: "Running Zenkyra inside your own cloud account.",
+    status: "roadmap",
+  },
+  {
+    label: "Bring-your-own LLM",
+    desc: "LLM processing today is Google Gemini.",
+    status: "roadmap",
   },
 ];
-
-const cols = ["Zenkyra", "ChatGPT Enterprise", "Microsoft Copilot", "DIY agents"];
 
 export function Comparison() {
   return (
     <section className="section-marketing border-border bg-secondary/35">
       <div className="container">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="marketing-eyebrow">
-            Why Zenkyra, not the alternatives
-          </p>
-          <h2 className="marketing-headline">
-            Chat tools answer. Zenkyra agents work.
-          </h2>
+          <p className="marketing-eyebrow">What is built today</p>
+          <h2 className="marketing-headline">Shipped vs roadmap — no surprises.</h2>
           <p className="marketing-sub">
-            Most AI tools stop at the chat box. Zenkyra ships a digital workforce — autonomous agents engineered for the controls and evidence your enterprise actually requires.
+            A plain list of what exists in the product code today and what is still planned.
           </p>
         </div>
 
         <div className="mt-16 overflow-hidden rounded-2xl border border-border bg-card shadow-elev">
-          <div className="grid grid-cols-[1.6fr_repeat(4,1fr)] border-b border-border bg-secondary/40 text-xs font-medium">
+          <div className="grid grid-cols-[1fr_auto] border-b border-border bg-secondary/40 text-xs font-medium">
             <div className="px-5 py-4 text-muted-foreground">Capability</div>
-            {cols.map((c, i) => (
-              <div
-                key={c}
-                className={cn(
-                  "px-3 py-4 text-center",
-                  i === 0
-                    ? "bg-brand/10 font-semibold text-brand"
-                    : "text-muted-foreground"
-                )}
-              >
-                {c}
-              </div>
-            ))}
+            <div className="px-5 py-4 text-muted-foreground">Status</div>
           </div>
-
           {rows.map((r, i) => (
             <div
               key={r.label}
               className={cn(
-                "grid grid-cols-[1.6fr_repeat(4,1fr)] items-stretch text-sm",
+                "grid grid-cols-[1fr_auto] items-center text-sm",
                 i !== rows.length - 1 && "border-b border-border"
               )}
             >
@@ -98,49 +85,30 @@ export function Comparison() {
                 <p className="font-medium">{r.label}</p>
                 <p className="text-xs text-muted-foreground">{r.desc}</p>
               </div>
-              {r.values.map((v, idx) => (
-                <div
-                  key={idx}
-                  className={cn(
-                    "flex items-center justify-center px-3 py-4",
-                    idx === 0 && "bg-brand/[0.04]"
-                  )}
-                >
-                  <Pip value={v} highlight={idx === 0} />
-                </div>
-              ))}
+              <div className="px-5 py-4">
+                <StatusPill status={r.status} />
+              </div>
             </div>
           ))}
         </div>
         <p className="mt-3 text-center text-[11px] text-muted-foreground">
-          Comparisons based on publicly available documentation as of Q1 2026. We're happy to walk through specifics on request.
+          &quot;Shipped&quot; means implemented in our code, not independently audited. No SOC 2 yet.
         </p>
       </div>
     </section>
   );
 }
 
-function Pip({ value, highlight }: { value: Cell; highlight?: boolean }) {
-  if (value === "yes")
-    return (
-      <span
-        className={cn(
-          "flex h-6 w-6 items-center justify-center rounded-full",
-          highlight ? "bg-brand text-white" : "bg-success/15 text-success"
-        )}
-      >
-        <Check className="h-3.5 w-3.5" strokeWidth={3} />
-      </span>
-    );
-  if (value === "partial")
-    return (
-      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-warning/15 text-warning">
-        <Minus className="h-3.5 w-3.5" strokeWidth={3} />
-      </span>
-    );
-  return (
-    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-muted text-muted-foreground/60">
-      <Minus className="h-3.5 w-3.5" strokeWidth={2.5} />
+function StatusPill({ status }: { status: Status }) {
+  return status === "shipped" ? (
+    <span className="inline-flex items-center gap-1 rounded-full bg-success/15 px-2.5 py-1 text-xs font-medium text-success">
+      <Check className="h-3.5 w-3.5" strokeWidth={3} />
+      Shipped (in code)
+    </span>
+  ) : (
+    <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground">
+      <Clock className="h-3.5 w-3.5" />
+      Roadmap
     </span>
   );
 }

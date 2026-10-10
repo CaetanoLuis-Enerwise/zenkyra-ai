@@ -59,7 +59,7 @@ export function Sidebar() {
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-medium">{c.name}</p>
                   <p className="truncate text-[11px] text-muted-foreground">
-                    {c.plan} · eu-central-1
+                    {c.plan} · demo
                   </p>
                 </div>
                 {i === 0 && <Check className="h-4 w-4 text-brand" />}
@@ -76,7 +76,7 @@ export function Sidebar() {
         <div className="mt-2 flex items-center gap-1.5 px-1 text-[11px] text-muted-foreground">
           <span className="inline-flex items-center gap-1">
             <Globe2 className="h-3 w-3" />
-            EU · Frankfurt
+            Demo workspace
           </span>
           <span aria-hidden>·</span>
           <span className="inline-flex items-center gap-1">
@@ -161,7 +161,7 @@ export function Sidebar() {
           <p className="text-sm font-semibold">Upgrade to Enterprise</p>
         </div>
         <p className="mt-2 text-xs text-muted-foreground">
-          Private deployment, SSO and EU data residency.
+          Private deployment and SSO are on the roadmap. Hosting region agreed in writing.
         </p>
         <Button size="sm" className="mt-3 w-full">
           Talk to sales

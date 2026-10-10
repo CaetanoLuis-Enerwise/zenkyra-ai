@@ -1,30 +1,28 @@
-import { CheckCircle2 } from "lucide-react";
-
 const steps = [
   {
     day: "Day 1",
     title: "NDA signed, tenant provisioned",
-    desc: "Private workspace live in Frankfurt or Lisbon. DPA before any customer PDF.",
+    desc: "Private workspace provisioned. Hosting region confirmed in writing. DPA before any customer PDF.",
   },
   {
     day: "Day 2",
     title: "Knowledge Hub connected",
-    desc: "Drop documents or sync Drive, Notion, Slack, SharePoint, ERP. Embeddings finish overnight inside your tenant.",
+    desc: "Upload the documents you choose. Integrations (Drive, Notion, Slack, SharePoint) are scoped per pilot.",
   },
   {
     day: "Day 3",
     title: "First agent hired",
-    desc: "Pick Sales, Support, Ops or Finance. We co-tune voice, rules and integrations against your real workflows.",
+    desc: "Pick Sales, Support, Ops or Finance. We tune voice and rules against your real workflows.",
   },
   {
-    day: "Day 5",
-    title: "Workforce on duty",
-    desc: "10 named users · SSO live · audit trail flowing. The agent ships its first measurable hours saved.",
+    day: "Week 1",
+    title: "Team trial",
+    desc: "Your named users test the agent on real questions. We agree what to measure.",
   },
   {
-    day: "Day 7",
-    title: "Production handoff",
-    desc: "Executive ROI dashboard, rollback runbook and CSM sync — your workforce from here.",
+    day: "Day 14",
+    title: "Pilot review",
+    desc: "We review the results with you on your data. You decide whether to continue on a plan.",
   },
 ];
 
@@ -33,12 +31,12 @@ export function WeekTimeline() {
     <section className="section-marketing border-border bg-secondary/25">
       <div className="container">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="marketing-eyebrow">From signed NDA to working agent</p>
+          <p className="marketing-eyebrow">The 14-day paid pilot</p>
           <h2 className="marketing-headline">
-            Hire your first agent in 7 days.
+            What happens in the €149 pilot.
           </h2>
           <p className="marketing-sub">
-            No 6-month implementation. No army of consultants. Zenkyra is engineered to put a working agent on shift before your next board meeting.
+            No 6-month implementation. A short, paid technical pilot on your own documents, then a decision.
           </p>
         </div>
 
@@ -70,10 +68,6 @@ export function WeekTimeline() {
             ))}
           </ol>
 
-          <div className="mx-auto mt-12 inline-flex w-full items-center justify-center gap-2 text-sm text-muted-foreground">
-            <CheckCircle2 className="h-4 w-4 text-success" />
-            Most pilots extend to a second agent within 14 days.
-          </div>
         </div>
       </div>
     </section>

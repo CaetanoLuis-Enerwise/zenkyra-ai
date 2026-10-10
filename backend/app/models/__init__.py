@@ -195,6 +195,8 @@ class TenantBilling(Base):
     stripe_customer_id: Mapped[str | None] = mapped_column(String(255))
     stripe_subscription_id: Mapped[str | None] = mapped_column(String(255))
     seats_limit: Mapped[int | None] = mapped_column(Integer)
+    # Set for plan_slug="pilot" (created_at + PILOT_DURATION_DAYS); cutoff is manual for now.
+    pilot_ends_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=utcnow, onupdate=utcnow
     )
@@ -239,3 +241,60 @@ class AnalyticsDaily(Base):
     tasks_completed: Mapped[int] = mapped_column(Integer, default=0)
     hours_saved: Mapped[float] = mapped_column(Float, default=0.0)
     llm_calls: Mapped[int] = mapped_column(Integer, default=0)
+
+
+class TenantProvisioning(Base):
+    """Server-to-server provisioning record; external_order_id is the idempotency key."""
+
+    __tablename__ = "tenant_provisioning"
+
+    external_order_id: Mapped[str] = mapped_column(String(128), primary_key=True)
+    tenant_id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("tenants.id", ondelete="CASCADE"), index=True
+    )
+    user_id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), index=True
+    )
+    email: Mapped[str] = mapped_column(String(320))
+    plan_slug: Mapped[str] = mapped_column(String(64))
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=utcnow
+    )
+
+
+class PasswordSetToken(Base):
+    """Single-use password-set token. Only the sha256 of the token is stored."""
+
+    __tablename__ = "password_set_tokens"
+
+    id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
+    )
+    user_id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), index=True
+    )
+    token_hash: Mapped[str] = mapped_column(String(64), unique=True, index=True)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    used_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=utcnow
+    )
+
+
+class Lead(Base):
+    """Inbound lead from the public marketing site (demo request / €149 pilot request)."""
+
+    __tablename__ = "leads"
+
+    id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
+    )
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=utcnow, index=True
+    )
+    name: Mapped[str] = mapped_column(String(120))
+    email: Mapped[str] = mapped_column(String(320), index=True)
+    company: Mapped[str] = mapped_column(String(200))
+    message: Mapped[str | None] = mapped_column(Text, nullable=True)
+    source: Mapped[str] = mapped_column(String(16))
+    user_agent: Mapped[str | None] = mapped_column(String(512), nullable=True)

@@ -26,7 +26,10 @@ docker compose up --build
 - Docs: http://localhost:8000/docs  
 - Health: http://localhost:8000/health  
 
-First request: `POST /api/v1/auth/signup` then use `Authorization: Bearer <token>`.
+Tenants are created by paid checkout via `POST /api/v1/admin/tenants` (`X-Service-Token`), and the owner
+sets a password with `POST /api/v1/auth/set-password`. Public `POST /api/v1/auth/signup` is **disabled by
+default** (403); set `PUBLIC_SIGNUP_ENABLED=true` in `.env` for local development only. Then use
+`Authorization: Bearer <token>`.
 
 ## Local development (no Docker)
 
@@ -47,13 +50,15 @@ Run from the `backend` directory so `app` imports resolve (`PYTHONPATH` defaults
 
 | Prefix | Purpose |
 |--------|---------|
-| `/api/v1/auth` | signup, login, me |
+| `/api/v1/auth` | signup (only if `PUBLIC_SIGNUP_ENABLED=true`), login, me, set-password (single-use token) |
 | `/api/v1/tenants` | current tenant |
 | `/api/v1/documents` | upload / list / delete + async indexing |
 | `/api/v1/chat` | RAG + conversation history |
 | `/api/v1/agents` | sales / support / ops runners |
 | `/api/v1/analytics` | tasks, hours saved, LLM calls |
-| `/api/v1/billing` | plan placeholders |
+| `/api/v1/billing` | plan catalog (pilot €149/14 days, starter, growth, enterprise) + current plan (`pilot_ends_at`) |
+| `/api/v1/leads` | public `POST` lead capture from the marketing site (`source`: `demo`/`pilot`); honeypot `website`; per-IP rate limit (in-process) |
+| `/api/v1/admin` | service-to-service tenant provisioning (`X-Service-Token`; 503 if `ZENKYRA_SERVICE_TOKEN` unset) |
 
 ## LLM service
 
@@ -62,9 +67,27 @@ Run from the `backend` directory so `app` imports resolve (`PYTHONPATH` defaults
 - Facade: `generate_response`, `summarize_document`, `classify_lead`, `embed_text`
 - Retries via `tenacity` on chat; token usage persisted in `llm_usage_logs`.
 
+## Tests
+
+```bash
+pip install -r requirements.txt -r requirements-test.txt
+pytest -q   # SQLite via aiosqlite; no Postgres/Redis/Qdrant needed
+# same suite against a real (throwaway!) Postgres database; tables are dropped/created per test:
+TEST_DATABASE_URL=postgresql+asyncpg://user:pass@localhost:5432/zenkyra_test pytest -q
+```
+
 ## Production notes
 
-- Set `DATABASE_BOOTSTRAP=false` and run **Alembic** migrations (add your revision).
+- Set `DATABASE_BOOTSTRAP=false` and run **Alembic** migrations (add your revision). New tables: `tenant_provisioning`, `password_set_tokens`, `leads`
+  (a fresh DB gets them from `create_all`). New nullable column `tenant_billing.pilot_ends_at`. `create_all`
+  does **not** add columns to an existing table, so an existing database needs
+  `ALTER TABLE tenant_billing ADD COLUMN pilot_ends_at TIMESTAMPTZ NULL;`.
+- `POST /api/v1/leads` is public. Its rate limit (`LEADS_RATE_LIMIT_MAX` per
+  `LEADS_RATE_LIMIT_WINDOW_SECONDS`, keyed on `request.client.host`) lives in **process memory**: each
+  worker/replica counts separately and counters reset on restart. Behind a proxy run uvicorn with
+  `--proxy-headers --forwarded-allow-ips=<proxy>` or every lead shares the proxy IP. Add an edge/WAF limit
+  for real abuse protection. The endpoint stores leads only; it sends no email or webhook. Leads are
+  personal data: cover them in the privacy notice before the form goes live.
 - Restrict CORS origins in `app/main.py`.
 - Use managed Postgres / Redis / Qdrant and rotate `SECRET_KEY` / `GEMINI_API_KEY`.
 - Store uploads on S3-compatible storage instead of `./storage` when scaling.

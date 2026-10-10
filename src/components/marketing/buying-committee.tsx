@@ -7,9 +7,9 @@ const personas = [
     role: "For the CIO",
     title: "Defensible by default.",
     bullets: [
-      "Single-tenant deployment in your VPC or ours",
+      "Private tenant per company",
       "EU-first. Private knowledge, your tenant.",
-      "SSO/SCIM, full audit trail, BYO-LLM",
+      "SSO/SCIM, single-tenant VPC and BYO-LLM are on the roadmap, not shipped",
     ],
     proof: "No SOC 2 yet. Data stays in your tenant.",
   },
@@ -19,8 +19,8 @@ const personas = [
     title: "Workers you can underwrite.",
     bullets: [
       "Fixed monthly price — no per-token surprises",
-      "Live ROI dashboard with finance-grade exports",
-      "ROI and payback measured from your tenant",
+      "14-day paid technical pilot, €149, invoice",
+      "Success criteria agreed with you before the pilot",
     ],
     proof: "No published savings figure. Track yours in-product.",
   },
@@ -33,7 +33,7 @@ const personas = [
       "Every employee gets a senior teammate on demand",
       "Performance reviews drafted on grounded data",
     ],
-    proof: "Onboarding 2× faster · 38% fewer Slack questions",
+    proof: "No published productivity figure. Measure it in the pilot.",
   },
   {
     icon: Workflow,
@@ -42,9 +42,9 @@ const personas = [
     bullets: [
       "Triage, summarise, route — 24/7, in your tone",
       "SOPs, runbooks and vendors, instantly executable",
-      "1,200+ hours saved monthly per 100 employees",
+      "Answers grounded in your own documents",
     ],
-    proof: "−62% average response time across teams",
+    proof: "No published response-time figure. Measure it in the pilot.",
   },
 ];
 
@@ -60,7 +60,7 @@ export function BuyingCommittee() {
             One workforce. Every executive sees their case.
           </h2>
           <p className="marketing-sub">
-            Most enterprise AI projects stall in committee. Zenkyra arrives pre-cleared by Security, pre-budgeted for Finance and pre-owned by the team that hires the agent.
+            Most enterprise AI projects stall in committee. Zenkyra starts with a small paid pilot, a DPA before any customer PDF, and a team that owns the agent.
           </p>
         </div>
 
