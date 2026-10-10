@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -49,7 +48,7 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="mt-6 max-w-xl text-balance text-base leading-relaxed text-muted-foreground sm:text-lg"
           >
-            Zenkyra AI gives companies autonomous AI agents that reduce workload, increase speed and scale operations — privately, in your tenant. Ship the first agent in 7 days. We do not publish a claimed ROI or uptime SLA.
+            Zenkyra AI gives companies autonomous AI agents that reduce workload, increase speed and scale operations — privately, in your tenant. We do not publish a claimed ROI or uptime SLA.
           </motion.p>
 
           <motion.div
@@ -71,8 +70,8 @@ export function Hero() {
                 className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 transition-all duration-700 group-hover:left-[120%] group-hover:opacity-100"
               />
             </Button>
-            <Button size="xl" variant="outline" asChild>
-              <Link href="/onboarding">Start €149 pilot</Link>
+            <Button size="xl" variant="outline" onClick={() => open("hero", "pilot")}>
+              Start €149 pilot
             </Button>
           </motion.div>
 
@@ -83,7 +82,7 @@ export function Hero() {
             className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4"
           >
             <span className="inline-flex w-fit items-center rounded-full border border-brand/25 bg-brand/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-brand">
-              Advisory reply · typically same business day
+              Paid pilot · invoice · VAT extra
             </span>
             <p className="text-xs text-muted-foreground">
               14-day paid technical pilot, €149, invoice. DPA before any customer PDF.
@@ -102,11 +101,11 @@ export function Hero() {
             </li>
             <li className="flex items-center gap-1.5">
               <Zap className="h-4 w-4 text-brand" />
-              First agent live in 7 days
+              14-day paid technical pilot
             </li>
             <li className="flex items-center gap-1.5">
               <Sparkles className="h-4 w-4 text-brand" />
-              Private tenant · EU-resident
+              Private tenant per company
             </li>
           </motion.ul>
 
@@ -116,9 +115,9 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.35 }}
             className="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-border pt-8"
           >
-            <Stat value="7 days" label="First agent live" />
+            <Stat value="14 days" label="Pilot length" />
             <Stat value="€149" label="14-day pilot" />
-            <Stat value="EU" label="Private tenant" />
+            <Stat value="DPA" label="Before any PDF" />
           </motion.div>
         </div>
 
@@ -130,11 +129,11 @@ export function Hero() {
 
 function HeroPreview() {
   const agents = [
-    { name: "Sales Agent", status: "active", tasks: "4,812 tasks", color: "from-brand/30 to-brand/0", dot: "bg-brand" },
-    { name: "Support Agent", status: "active", tasks: "9,420 tasks", color: "from-emerald-500/30 to-emerald-500/0", dot: "bg-emerald-500" },
-    { name: "Ops Agent", status: "active", tasks: "2,104 tasks", color: "from-amber-500/30 to-amber-500/0", dot: "bg-amber-500" },
-    { name: "Finance Agent", status: "active", tasks: "1,864 tasks", color: "from-violet-500/30 to-violet-500/0", dot: "bg-violet-500" },
-    { name: "Executive Analyst", status: "training", tasks: "312 tasks", color: "from-rose-500/30 to-rose-500/0", dot: "bg-rose-500" },
+    { name: "Sales Agent", status: "active", tasks: "Qualifies leads · drafts follow-ups", color: "from-brand/30 to-brand/0", dot: "bg-brand" },
+    { name: "Support Agent", status: "active", tasks: "Answers from your documents", color: "from-emerald-500/30 to-emerald-500/0", dot: "bg-emerald-500" },
+    { name: "Ops Agent", status: "active", tasks: "Routes internal requests", color: "from-amber-500/30 to-amber-500/0", dot: "bg-amber-500" },
+    { name: "Finance Agent", status: "active", tasks: "Matches invoices for review", color: "from-violet-500/30 to-violet-500/0", dot: "bg-violet-500" },
+    { name: "Executive Analyst", status: "training", tasks: "Summarises reports", color: "from-rose-500/30 to-rose-500/0", dot: "bg-rose-500" },
   ];
   return (
     <motion.div
@@ -152,7 +151,7 @@ function HeroPreview() {
           <span className="ml-3 text-xs text-muted-foreground">preview · Zenkyra workforce</span>
           <span className="ml-auto inline-flex items-center gap-1 text-[10px] text-muted-foreground">
             <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse-slow" />
-            Preview · EU-Frankfurt
+            Product preview · demo data
           </span>
         </div>
         <div className="space-y-3 p-4">
@@ -185,7 +184,7 @@ function HeroPreview() {
                 </div>
                 <span className="relative inline-flex items-center gap-1 text-[10px] text-muted-foreground">
                   <span className={`h-1.5 w-1.5 rounded-full ${a.dot} ${a.status === "active" ? "animate-pulse-slow" : ""}`} />
-                  {a.status === "active" ? "On shift" : "Training"}
+                  {a.status === "active" ? "Demo" : "Planned"}
                 </span>
               </motion.li>
             ))}
@@ -198,7 +197,7 @@ function HeroPreview() {
             <p className="mt-1 flex items-start gap-2 text-xs leading-5">
               <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-success" />
               <span>
-                <b>Sales Agent</b> qualified <b>Northwind Logistics</b> · scored 87/100 and booked a 30-min discovery call for Thursday 14:00.
+                <b>Sales Agent</b> qualified a sample inbound lead and drafted a follow-up email for human approval.
               </span>
             </p>
           </div>

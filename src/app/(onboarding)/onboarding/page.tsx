@@ -63,10 +63,8 @@ const SOURCES = [
 ];
 
 const REGIONS = [
-  { id: "eu-central-1", label: "EU · Frankfurt", desc: "Default · GDPR" },
-  { id: "eu-west-1", label: "EU · Lisbon", desc: "Low-latency for IBE" },
-  { id: "us-east-1", label: "US · N. Virginia", desc: "USD billing" },
-  { id: "ap-southeast-1", label: "APAC · Singapore", desc: "Asia residency" },
+  { id: "EU (preference)", label: "EU (preference)", desc: "Confirmed in writing before any upload" },
+  { id: "Other (to discuss)", label: "Other", desc: "We discuss options with you" },
 ];
 
 export default function OnboardingPage() {
@@ -77,7 +75,7 @@ export default function OnboardingPage() {
     domain: "acme.io",
     industry: "Technology",
     size: "51–200",
-    region: "eu-central-1",
+    region: "EU (preference)",
   });
 
   const [sources, setSources] = React.useState<string[]>(["drive", "notion"]);
@@ -367,13 +365,13 @@ function WorkspaceStep({
             Tenant-isolated vector store and storage
           </Bullet>
           <Bullet icon={<Lock className="h-4 w-4 text-brand" />}>
-            AES-256 at rest · TLS 1.3 in transit
+            Encryption confirmed in writing with the hosting provider
           </Bullet>
           <Bullet icon={<Globe2 className="h-4 w-4 text-brand" />}>
-            Resident in your selected region
+            Region preference only — confirmed in writing
           </Bullet>
           <Bullet icon={<Sparkles className="h-4 w-4 text-brand" />}>
-            27 automation templates ready to deploy
+            Demo flow — nothing here is saved
           </Bullet>
         </ul>
       </Card>
@@ -542,7 +540,7 @@ function TeamStep({
           Customers who invite at least one Sales, Support and Ops champion in week one see <span className="font-semibold text-foreground">3.2× faster</span> adoption.
         </p>
         <div className="mt-4 rounded-lg border border-border bg-secondary/40 p-3 text-xs text-muted-foreground">
-          You can promote anyone to <span className="font-medium text-foreground">Admin</span> later. SCIM provisioning is available on Enterprise.
+          You can promote anyone to <span className="font-medium text-foreground">Admin</span> later. SCIM provisioning is on the roadmap.
         </div>
       </Card>
     </div>
@@ -576,7 +574,7 @@ function ReadyStep({
           {workspace.company} is provisioning.
         </h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          Your private tenant is being provisioned in <span className="font-medium text-foreground">{workspace.region}</span>. Expect indexing to complete in the next few minutes — we’ll email you when it’s ready.
+          This is a demo onboarding flow: nothing was saved or provisioned, and no email will be sent (region preference: <span className="font-medium text-foreground">{workspace.region}</span>). To start a real pilot, use “Start €149 pilot” on the homepage.
         </p>
 
         <div className="mt-6 space-y-2 text-sm">

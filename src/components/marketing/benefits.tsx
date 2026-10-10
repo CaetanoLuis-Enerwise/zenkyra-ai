@@ -8,31 +8,31 @@ const benefits = [
     description:
       "Each Zenkyra agent owns a real job — qualifying leads, resolving tickets, processing invoices, drafting board memos. They take action, not just answer.",
     metric: "5",
-    metricLabel: "ready-to-hire agents",
+    metricLabel: "agent roles",
   },
   {
     icon: ClipboardCheck,
     title: "Reduce workload, scale operations",
     description:
-      "Your workforce expands without expanding the org. Average customer reclaims 1,200+ hours per 100 employees, every month.",
-    metric: "+38%",
-    metricLabel: "team productivity gain",
+      "Your workforce expands without expanding the org. Agents take repeatable work off your team; the pilot shows what that looks like on your own documents.",
+    metric: "14 days",
+    metricLabel: "paid technical pilot",
   },
   {
     icon: TrendingUp,
     title: "Outcomes the CFO can defend",
     description:
-      "Live ROI dashboard with finance-grade exports. Money saved, hours reclaimed and revenue captured — measured from your tenant, not a press number.",
-    metric: "Live",
-    metricLabel: "ROI from your tenant data",
+      "No published savings figure. During the pilot we agree what to measure, and you judge the result on your own data — not a press number.",
+    metric: "€149",
+    metricLabel: "pilot price, by invoice",
   },
   {
     icon: Lock,
     title: "Private by construction",
     description:
-      "Single-tenant deployment, in-region encryption, no shared models. Your data, your rules, your audit trail — never leaves your boundary.",
-    metric: "0",
-    metricLabel: "data leaks since 2023",
+      "Each company gets its own tenant. LLM processing is done by Google Gemini; the hosting region is confirmed in writing before any upload.",
+    metric: "DPA",
+    metricLabel: "before any customer PDF",
   },
 ];
 

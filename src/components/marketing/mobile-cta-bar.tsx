@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
 import { CalendarCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDemoDialog } from "@/components/marketing/demo-dialog";
@@ -34,8 +33,13 @@ export function MobileCtaBar() {
             <CalendarCheck className="h-4 w-4" />
             Book Executive Demo
           </Button>
-          <Button size="sm" variant="outline" asChild className="flex-1">
-            <Link href="/onboarding">€149 pilot</Link>
+          <Button
+            size="sm"
+            variant="outline"
+            className="flex-1"
+            onClick={() => open("mobile-bar", "pilot")}
+          >
+            €149 pilot
           </Button>
         </div>
       </div>

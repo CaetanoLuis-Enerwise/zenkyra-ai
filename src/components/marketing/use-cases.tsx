@@ -20,7 +20,7 @@ const cases = [
     title: "Sales Agent",
     headline: "Qualify, reply, follow up — 24/7, in your voice.",
     bullets: [
-      "Auto-score and reply to inbound leads under 90 seconds",
+      "Score inbound leads and draft replies for approval",
       "Draft proposals grounded on past closed-won deals",
       "Update your CRM and book the meeting",
     ],
@@ -35,10 +35,10 @@ const cases = [
     headline: "Resolve tier-1, escalate only what matters.",
     bullets: [
       "Triage tickets by priority, sentiment and SLA",
-      "Draft grounded answers with page-level citations",
+      "Draft answers grounded in your documents",
       "Escalate intelligently — not when the queue is long",
     ],
-    proof: "Capability: grounded tier-1 drafts with citations",
+    proof: "Capability: grounded tier-1 drafts",
     accent:
       "hover:border-emerald-500/40 hover:shadow-emerald-500/10 hover:ring-emerald-500/15",
     glow: "from-emerald-500/35",
@@ -46,7 +46,7 @@ const cases = [
   {
     icon: Settings2,
     title: "Ops Agent",
-    headline: "Run the boring 30% — automatically.",
+    headline: "Take the repetitive requests off your team.",
     bullets: [
       "Internal requests routed and resolved on-policy",
       "SOPs and runbooks executed end-to-end",

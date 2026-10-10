@@ -43,10 +43,10 @@ export function MarketingNav() {
           <Button
             variant="outline"
             size="sm"
-            asChild
             className="hidden md:inline-flex"
+            onClick={() => openDemo("nav", "pilot")}
           >
-            <Link href="/onboarding">Start €149 pilot</Link>
+            Start €149 pilot
           </Button>
           <Button size="sm" onClick={() => openDemo("nav")}>
             <CalendarCheck className="h-4 w-4" />
@@ -76,13 +76,16 @@ export function MarketingNav() {
                 {l.label}
               </Link>
             ))}
-            <Link
-              href="/onboarding"
-              onClick={() => setOpen(false)}
-              className="rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground"
+            <button
+              type="button"
+              onClick={() => {
+                setOpen(false);
+                openDemo("nav-mobile", "pilot");
+              }}
+              className="rounded-md px-3 py-2 text-left text-sm text-muted-foreground hover:bg-accent hover:text-foreground"
             >
               Start €149 pilot
-            </Link>
+            </button>
           </div>
         </div>
       )}

@@ -1,3 +1,4 @@
+import type * as React from "react";
 import {
   ShieldCheck,
   Lock,
@@ -14,48 +15,57 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { api } from "@/lib/api";
 
-const cards = [
+// Status is what is true today, not a target. "In code" = implemented in the backend
+// repo, not independently audited. Update only with evidence.
+type CardStatus = "In code" | "To confirm" | "Roadmap";
+
+const cards: {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  status: CardStatus;
+}[] = [
   {
     icon: <ShieldCheck className="h-5 w-5" />,
     title: "Tenant Isolation",
     description:
-      "Every workspace runs on dedicated vector indexes and storage. No data is ever shared between tenants.",
-    status: "Active",
+      "Each company is its own tenant, with a separate vector collection per tenant. No independent audit yet.",
+    status: "In code",
   },
   {
     icon: <Lock className="h-5 w-5" />,
     title: "Encryption",
     description:
-      "AES-256 at rest, TLS 1.3 in transit, customer-managed keys available on Enterprise.",
-    status: "Active",
+      "Encryption in transit and at rest depends on the hosting provider and is confirmed in writing before any upload. Customer-managed keys are not offered.",
+    status: "To confirm",
   },
   {
     icon: <ScrollText className="h-5 w-5" />,
     title: "Audit Logs",
     description:
-      "Every query, document access and model call is recorded with user attribution.",
-    status: "Streaming",
+      "LLM calls are logged per tenant. A full, exportable audit trail of every query and document access is planned.",
+    status: "Roadmap",
   },
   {
     icon: <KeyRound className="h-5 w-5" />,
     title: "Role-based access",
     description:
-      "Granular roles, permissions and SCIM provisioning via your IdP (Okta, Azure AD, Google).",
-    status: "Configured",
+      "Owner, admin and member roles. SSO and SCIM provisioning via your IdP are on the roadmap, not shipped.",
+    status: "In code",
   },
   {
     icon: <Globe2 className="h-5 w-5" />,
-    title: "EU Data Residency",
+    title: "Hosting region & sub-processors",
     description:
-      "Run Zenkyra in eu-west-1 (Lisbon) or eu-central-1 (Frankfurt). No cross-border transfers.",
-    status: "Frankfurt",
+      "Hosting region confirmed in writing before any upload. LLM processing by Google Gemini. Sub-processor list and DPA before any customer PDF.",
+    status: "To confirm",
   },
 ];
 
 const compliance = [
   "No SOC 2 yet",
   "EU-first",
-  "GDPR",
+  "DPA before any customer PDF",
   "Private tenant",
 ];
 
@@ -67,12 +77,12 @@ export default async function SecurityPage() {
       <PageHeader
         eyebrow="Trust posture"
         title="Security & Trust"
-        description="Built for the world's most regulated companies. Private deployment, encryption everywhere, audit everything."
+        description="What is in place today, what we confirm in writing before you upload, and what is still roadmap."
         meta={
           <>
-            <span>Last evidence sync · 14 minutes ago</span>
+            <span>No SOC 2 yet</span>
             <span className="hidden md:inline">·</span>
-            <span>Region: eu-central-1</span>
+            <span>Hosting region: confirmed in writing before any upload</span>
           </>
         }
         actions={
@@ -87,15 +97,12 @@ export default async function SecurityPage() {
         <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-brand/10 blur-3xl" />
         <div className="relative grid grid-cols-1 gap-6 md:grid-cols-[1fr_auto] md:items-end">
           <div>
-            <Badge variant="success">
-              <CheckCircle2 className="h-3 w-3" />
-              Trust posture: Excellent
-            </Badge>
+            <Badge variant="muted">Honest status · early-stage product</Badge>
             <h2 className="mt-3 text-2xl font-semibold tracking-tight">
-              Your private intelligence, fortified.
+              Your private knowledge, in your own tenant.
             </h2>
             <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-              Zenkyra AI is designed from day one for enterprises that handle sensitive data. Private deployment, in-region storage and continuous compliance evidence.
+              Zenkyra AI is early-stage. We do not hold certifications yet. Before any customer PDF we sign a DPA, confirm the hosting region in writing and list our sub-processors, including Google Gemini for LLM processing.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -119,10 +126,7 @@ export default async function SecurityPage() {
               <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand/10 text-brand">
                 {c.icon}
               </span>
-              <Badge variant="success">
-                <span className="mr-0.5 inline-block h-1.5 w-1.5 rounded-full bg-success animate-pulse-slow" />
-                {c.status}
-              </Badge>
+              <Badge variant={c.status === "In code" ? "success" : "muted"}>{c.status}</Badge>
             </div>
             <h3 className="mt-4 text-base font-semibold">{c.title}</h3>
             <p className="mt-1 text-sm text-muted-foreground">{c.description}</p>
@@ -138,7 +142,7 @@ export default async function SecurityPage() {
               Recent audit events
             </h3>
             <p className="text-sm text-muted-foreground">
-              Streamed in real time. Exportable to your SIEM.
+              Sample events on demo data — not a live log.
             </p>
           </div>
           <Button variant="outline" size="sm">

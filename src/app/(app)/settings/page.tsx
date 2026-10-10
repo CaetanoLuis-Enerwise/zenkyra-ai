@@ -60,9 +60,8 @@ export default function SettingsPage() {
               </Field>
               <Field label="Default region">
                 <select className="h-9 w-full rounded-md border border-input bg-background px-3 text-sm">
-                  <option>EU — Frankfurt (eu-central-1)</option>
-                  <option>EU — Lisbon (eu-west-1)</option>
-                  <option>US — Virginia (us-east-1)</option>
+                  <option>EU (preference — confirmed in writing before any upload)</option>
+                  <option>Other (to discuss)</option>
                 </select>
               </Field>
               <Field label="Domain" hint="Used for SSO and email allow-list">

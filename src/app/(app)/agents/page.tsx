@@ -21,11 +21,6 @@ export default async function AgentsPage() {
 
   const active = agents.filter((a) => a.status === "active").length;
   const totalTasks = agents.reduce((acc, a) => acc + a.tasksCompleted, 0);
-  const totalHours = agents.reduce((acc, a) => acc + a.hoursSaved, 0);
-  const avgAcc =
-    Math.round(
-      agents.reduce((acc, a) => acc + a.accuracy, 0) / agents.length
-    );
 
   // Top contributor for the leaderboard.
   const ranking = [...agents].sort((a, b) => b.hoursSaved - a.hoursSaved);
@@ -48,7 +43,7 @@ export default async function AgentsPage() {
             <span className="hidden md:inline">·</span>
             <span>{formatNumber(totalTasks)} tasks completed this month</span>
             <span className="hidden md:inline">·</span>
-            <span>{formatNumber(totalHours)} hrs saved · {avgAcc}% avg accuracy</span>
+            <span>Demo data · no measured customer results</span>
           </>
         }
         actions={
@@ -131,24 +126,24 @@ export default async function AgentsPage() {
             <div>
               <h3 className="text-base font-semibold">Hire a custom agent</h3>
               <p className="text-xs text-muted-foreground">
-                We co-design with you in 7 days
+                Scoped with you during the pilot
               </p>
             </div>
           </div>
           <p className="relative mt-4 text-sm text-muted-foreground">
-            Need an agent for a specific job? Procurement, partner ops, legal review — we ship a tailored, governed agent in your tenant within a week.
+            Need an agent for a specific job? Procurement, partner ops, legal review — we scope a tailored, governed agent in your tenant with you.
           </p>
           <ul className="relative mt-4 space-y-2 text-sm">
             <Bullet>Trained on your private knowledge</Bullet>
-            <Bullet>Plugged into your CRM, ERP, helpdesk</Bullet>
-            <Bullet>Approval rules · BYO LLM · private tenant</Bullet>
+            <Bullet>Integrations scoped per pilot</Bullet>
+            <Bullet>Approval rules · private tenant · BYO LLM (roadmap)</Bullet>
           </ul>
           <Button className="relative mt-5 w-full">
             <Briefcase className="h-4 w-4" />
             Talk to a solutions engineer
           </Button>
           <Badge variant="muted" className="relative mt-3 w-full justify-center">
-            Avg. agent live in 7 days · pilot in 24h
+            14-day paid pilot · €149 + VAT
           </Badge>
         </Card>
       </section>

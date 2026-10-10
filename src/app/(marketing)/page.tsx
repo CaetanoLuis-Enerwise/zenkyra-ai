@@ -3,7 +3,6 @@ import { Logos } from "@/components/marketing/logos";
 import { OutcomeStrip } from "@/components/marketing/outcome-strip";
 import { WorkflowSpotlight } from "@/components/marketing/workflow-spotlight";
 import { AgentsShowcase } from "@/components/marketing/agents-showcase";
-import { Testimonial } from "@/components/marketing/testimonial";
 import { Benefits } from "@/components/marketing/benefits";
 import { HowItWorks } from "@/components/marketing/how-it-works";
 import { BuyingCommittee } from "@/components/marketing/buying-committee";
@@ -23,7 +22,6 @@ export default function HomePage() {
       <OutcomeStrip />
       <WorkflowSpotlight />
       <AgentsShowcase />
-      <Testimonial />
       <Benefits />
       <BuyingCommittee />
       <HowItWorks />

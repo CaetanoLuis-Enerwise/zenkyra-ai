@@ -17,9 +17,9 @@ export default function BillingPage() {
           <>
             <span>Workspace: Acme Inc.</span>
             <span className="hidden md:inline">·</span>
-            <span>Billing currency: EUR</span>
+            <span>Billing currency: EUR · prices excl. VAT</span>
             <span className="hidden md:inline">·</span>
-            <span>VAT ID: PT 510 123 456</span>
+            <span>Demo data</span>
           </>
         }
         actions={
@@ -40,7 +40,7 @@ export default function BillingPage() {
               <Badge variant="default">€799 / mo</Badge>
             </h2>
             <p className="mt-1 text-sm text-muted-foreground">
-              Renews on May 14, 2026 · paid by SEPA Direct Debit
+              Demo workspace · invoiced monthly, VAT extra
             </p>
           </div>
           <Button>

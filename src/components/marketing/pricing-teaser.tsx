@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { Check } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -39,8 +38,8 @@ const plans = [
     description: "Private deployment with unlimited agents and full controls.",
     features: [
       "Unlimited agents · custom-built roles",
-      "EU data residency · BYO LLM",
-      "SSO + SCIM",
+      "Hosting region agreed in writing",
+      "SSO + SCIM · BYO LLM (roadmap)",
       "No SOC 2 yet. Data stays in your tenant.",
       "Dedicated CSM + Solutions Engineer",
     ],
@@ -76,12 +75,12 @@ export function PricingTeaser() {
               )}
               <div className="relative flex items-center justify-between">
                 <h3 className="text-lg font-semibold">{p.name}</h3>
-                {p.highlight && <Badge variant="default">Most popular</Badge>}
+                {p.highlight && <Badge variant="default">Recommended</Badge>}
               </div>
               <div className="relative mt-3 flex items-baseline gap-1">
                 <span className="text-3xl font-semibold tracking-tight">{p.price}</span>
                 {p.price !== "Custom" && (
-                  <span className="text-sm text-muted-foreground">/ month</span>
+                  <span className="text-sm text-muted-foreground">/ month + VAT</span>
                 )}
               </div>
               <p className="relative mt-1 text-sm text-muted-foreground">{p.description}</p>
@@ -106,9 +105,9 @@ export function PricingTeaser() {
                   <Button
                     variant={p.highlight ? "default" : "outline"}
                     className="w-full"
-                    asChild
+                    onClick={() => open(`pricing-${p.name.toLowerCase()}`, "pilot")}
                   >
-                    <Link href="/onboarding">Start with {p.name}</Link>
+                    Start with the €149 pilot
                   </Button>
                 )}
               </div>

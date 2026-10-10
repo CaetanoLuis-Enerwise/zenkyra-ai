@@ -49,7 +49,7 @@ const cols = [
 const compliance = [
   "No SOC 2 yet",
   "EU-first",
-  "GDPR",
+  "DPA before any PDF",
   "Private tenant",
 ];
 
@@ -65,19 +65,11 @@ export function Footer() {
             </p>
             <div className="mt-5 flex flex-col gap-2 text-xs text-muted-foreground">
               <span className="inline-flex items-center gap-2">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inset-0 animate-ping rounded-full bg-success/60" />
-                  <span className="relative h-1.5 w-1.5 rounded-full bg-success" />
-                </span>
-                <Link href="#" className="font-medium hover:text-foreground">
-                  All systems operational
-                </Link>
-                <span>·</span>
                 <span>No published SLA yet</span>
               </span>
               <span className="inline-flex items-center gap-2">
                 <Globe2 className="h-3.5 w-3.5" />
-                Hosted in eu-central-1 · Frankfurt
+                Hosting region confirmed in writing before any upload
               </span>
               <span className="inline-flex items-center gap-2">
                 <ShieldCheck className="h-3.5 w-3.5" />

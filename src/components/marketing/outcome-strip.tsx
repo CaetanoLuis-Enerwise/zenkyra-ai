@@ -10,17 +10,17 @@ const outcomes = [
   {
     icon: MessageSquare,
     value: "5",
-    label: "Ready-to-hire agents",
+    label: "Agent roles",
   },
   {
     icon: TrendingUp,
-    value: "Live",
-    label: "ROI dashboard in your tenant",
+    value: "14 days",
+    label: "Pilot length",
   },
   {
     icon: Timer,
-    value: "7 days",
-    label: "Typical first agent live",
+    value: "DPA",
+    label: "Before any customer PDF",
   },
 ];
 
