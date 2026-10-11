@@ -14,7 +14,7 @@ export default async function KnowledgePage() {
       <PageHeader
         eyebrow="Train your workforce"
         title="Knowledge Hub"
-        description="Upload documents once. Every Zenkyra agent inherits the same private, grounded knowledge — with page-level citations and tenant-only storage."
+        description="Upload documents once. Every Zenkyra agent inherits the same private, grounded knowledge, stored in your tenant's own vector collection."
         meta={
           <>
             <span>{files.length.toLocaleString()} documents indexed</span>
