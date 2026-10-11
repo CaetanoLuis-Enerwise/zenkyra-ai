@@ -48,9 +48,10 @@ export function MarketingNav() {
           >
             Start €149 pilot
           </Button>
-          <Button size="sm" onClick={() => openDemo("nav")}>
+          <Button size="sm" onClick={() => openDemo("nav")} aria-label="Book Executive Demo">
             <CalendarCheck className="h-4 w-4" />
-            Book Executive Demo
+            <span className="hidden sm:inline">Book Executive Demo</span>
+            <span className="sm:hidden">Book demo</span>
           </Button>
           <Button
             variant="ghost"
