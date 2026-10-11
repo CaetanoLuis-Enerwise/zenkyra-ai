@@ -13,10 +13,6 @@ export default function OnboardingLayout({
       <header className="flex items-center justify-between border-b border-border/60 px-6 py-4">
         <Logo />
         <div className="flex items-center gap-3 text-xs text-muted-foreground">
-          <span className="hidden sm:inline">Need help?</span>
-          <a className="hidden font-medium text-foreground hover:underline sm:inline" href="#">
-            hello@zenkyra.ai
-          </a>
           <ThemeToggle />
         </div>
       </header>
