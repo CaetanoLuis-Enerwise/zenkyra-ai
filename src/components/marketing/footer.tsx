@@ -17,31 +17,12 @@ const cols = [
   {
     title: "Company",
     links: [
-      { label: "About", href: "#" },
-      { label: "Customers", href: "#" },
-      { label: "Careers", href: "#" },
-      { label: "Press", href: "#" },
-      { label: "Contact", href: "#" },
     ],
   },
   {
     title: "Resources",
     links: [
-      { label: "Documentation", href: "#" },
-      { label: "Changelog", href: "#" },
       { label: "Trust center", href: "/security" },
-      { label: "API reference", href: "#" },
-      { label: "Status", href: "#" },
-    ],
-  },
-  {
-    title: "Legal",
-    links: [
-      { label: "Privacy", href: "#" },
-      { label: "Terms", href: "#" },
-      { label: "DPA", href: "#" },
-      { label: "Sub-processors", href: "#" },
-      { label: "Acceptable use", href: "#" },
     ],
   },
 ];
@@ -77,7 +58,7 @@ export function Footer() {
               </span>
             </div>
           </div>
-          {cols.map((c) => (
+          {cols.filter((c) => c.links.length > 0).map((c) => (
             <div key={c.title}>
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                 {c.title}
