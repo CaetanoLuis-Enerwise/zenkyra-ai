@@ -1,3 +1,5 @@
+import { LiveKnowledge } from "@/components/live/live-knowledge";
+import { LIVE_MODE } from "@/lib/config";
 import { Bot, RefreshCw, Sparkles } from "lucide-react";
 import { PageHeader } from "@/components/layout/page-header";
 import { Button } from "@/components/ui/button";
@@ -6,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { KnowledgeTable } from "@/components/app/knowledge-table";
 import { api } from "@/lib/api";
 
-export default async function KnowledgePage() {
+async function MockKnowledgePage() {
   const [files, agents] = await Promise.all([api.knowledge(), api.agents()]);
 
   return (
@@ -78,4 +80,9 @@ export default async function KnowledgePage() {
       <KnowledgeTable files={files} />
     </div>
   );
+}
+
+// NEXT_PUBLIC_API_URL set → live tenant data (or an honest "not connected" state); unset → demo data.
+export default function KnowledgePage() {
+  return LIVE_MODE ? <LiveKnowledge /> : <MockKnowledgePage />;
 }

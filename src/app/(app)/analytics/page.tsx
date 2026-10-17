@@ -1,3 +1,5 @@
+import { LiveNotConnected } from "@/components/live/live-not-connected";
+import { LIVE_MODE } from "@/lib/config";
 import {
   Calendar,
   Clock,
@@ -28,7 +30,7 @@ const KPI_ICONS = [
   <Users key="u" className="h-4 w-4" />,
 ];
 
-export default async function AnalyticsPage() {
+async function MockAnalyticsPage() {
   const data = await api.analytics();
 
   return (
@@ -176,4 +178,9 @@ function SummaryRow({
       </span>
     </li>
   );
+}
+
+// NEXT_PUBLIC_API_URL set → live tenant data (or an honest "not connected" state); unset → demo data.
+export default function AnalyticsPage() {
+  return LIVE_MODE ? <LiveNotConnected title="Analytics" /> : <MockAnalyticsPage />;
 }

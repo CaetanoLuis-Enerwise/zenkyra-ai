@@ -1,3 +1,5 @@
+import { LiveNotConnected } from "@/components/live/live-not-connected";
+import { LIVE_MODE } from "@/lib/config";
 import type * as React from "react";
 import {
   ShieldCheck,
@@ -69,7 +71,7 @@ const compliance = [
   "Private tenant",
 ];
 
-export default async function SecurityPage() {
+async function MockSecurityPage() {
   const events = await api.audit();
 
   return (
@@ -177,4 +179,9 @@ export default async function SecurityPage() {
       </Card>
     </div>
   );
+}
+
+// NEXT_PUBLIC_API_URL set → live tenant data (or an honest "not connected" state); unset → demo data.
+export default function SecurityPage() {
+  return LIVE_MODE ? <LiveNotConnected title="Security" /> : <MockSecurityPage />;
 }

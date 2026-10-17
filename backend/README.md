@@ -10,7 +10,7 @@ Multi-tenant API for **1–3 paying companies**: JWT auth, Postgres, Redis, Qdra
 | DB | PostgreSQL + SQLAlchemy 2 async |
 | Cache | Redis |
 | Vectors | Qdrant |
-| LLM | Gemini (`GEMINI_API_KEY`) |
+| LLM | Gemini (`GEMINI_API_KEY`; models via `GEMINI_CHAT_MODEL` / `GEMINI_EMBEDDING_MODEL`) |
 
 ## Quick start (Docker)
 
@@ -52,7 +52,7 @@ Run from the `backend` directory so `app` imports resolve (`PYTHONPATH` defaults
 |--------|---------|
 | `/api/v1/auth` | signup (only if `PUBLIC_SIGNUP_ENABLED=true`), login, me, set-password (single-use token) |
 | `/api/v1/tenants` | current tenant |
-| `/api/v1/documents` | upload / list / delete + async indexing |
+| `/api/v1/documents` | upload (max 25MB; PDF via pypdf, other files read as UTF-8 text) / list / delete (also erases the document's Qdrant points; 503 and row kept if Qdrant fails) + async indexing |
 | `/api/v1/chat` | RAG + conversation history |
 | `/api/v1/agents` | sales / support / ops runners |
 | `/api/v1/analytics` | tasks, hours saved, LLM calls |
@@ -66,6 +66,12 @@ Run from the `backend` directory so `app` imports resolve (`PYTHONPATH` defaults
 - Gemini: `app/services/llm/providers/gemini.py`
 - Facade: `generate_response`, `summarize_document`, `classify_lead`, `embed_text`
 - Retries via `tenacity` on chat; token usage persisted in `llm_usage_logs`.
+- Models are env-configurable. Defaults (checked 2026-10-17 against
+  https://ai.google.dev/gemini-api/docs/models and https://ai.google.dev/gemini-api/docs/deprecations):
+  `GEMINI_CHAT_MODEL=gemini-3.5-flash-lite`, `GEMINI_EMBEDDING_MODEL=models/gemini-embedding-2`.
+- `GEMINI_EMBEDDING_DIM` (default 768) is sent as `output_dimensionality` **and** is the Qdrant collection
+  vector size; embeddings of any other length are rejected. Changing the model or the dimension needs a
+  re-index: embedding spaces are not compatible across models, and existing collections keep their old size.
 
 ## Tests
 
@@ -88,6 +94,8 @@ TEST_DATABASE_URL=postgresql+asyncpg://user:pass@localhost:5432/zenkyra_test pyt
   `--proxy-headers --forwarded-allow-ips=<proxy>` or every lead shares the proxy IP. Add an edge/WAF limit
   for real abuse protection. The endpoint stores leads only; it sends no email or webhook. Leads are
   personal data: cover them in the privacy notice before the form goes live.
-- Restrict CORS origins in `app/main.py`.
+- Set `CORS_ALLOW_ORIGINS` to the frontend origin(s), comma-separated (default `http://localhost:3000`).
+  Credentials are disabled: the frontend sends the JWT as `Authorization: Bearer`, not as a cookie.
+- Set `PASSWORD_SET_URL_BASE` to `https://<frontend>/set-password` (the Next.js page that consumes `?token=`).
 - Use managed Postgres / Redis / Qdrant and rotate `SECRET_KEY` / `GEMINI_API_KEY`.
 - Store uploads on S3-compatible storage instead of `./storage` when scaling.

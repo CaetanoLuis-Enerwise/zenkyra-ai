@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
+import logging
 import uuid
 
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException, status
 from sqlalchemy import select
 
 from app.api.deps import CurrentUser, DbSession
@@ -12,6 +13,8 @@ from app.models import Conversation, Message
 from app.schemas import ChatMessageRequest, ChatMessageResponse
 from app.services.llm import LLMService
 from app.services.rag import retrieve_context
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 
@@ -32,8 +35,6 @@ async def chat_message(
         )
         conv = r.scalar_one_or_none()
         if not conv:
-            from fastapi import HTTPException
-
             raise HTTPException(404, "Conversation not found")
     else:
         conv = Conversation(
@@ -71,20 +72,28 @@ async def chat_message(
         lines.append(f"{m.role}: {m.content[:600]}")
     history_snippet = "\n".join(lines[-10:])
 
-    context = await retrieve_context(str(user.tenant_id), body.message)
+    try:
+        context = await retrieve_context(str(user.tenant_id), body.message)
 
-    llm = LLMService()
-    assembled = (
-        f"Conversation memory (truncated):\n{history_snippet}\n\n"
-        f"Current user message:\n{body.message}"
-    )
-    reply = await llm.generate_response(
-        assembled,
-        context if context else None,
-        db=db,
-        tenant_id=str(user.tenant_id),
-        user_id=str(user.id),
-    )
+        llm = LLMService()
+        assembled = (
+            f"Conversation memory (truncated):\n{history_snippet}\n\n"
+            f"Current user message:\n{body.message}"
+        )
+        reply = await llm.generate_response(
+            assembled,
+            context if context else None,
+            db=db,
+            tenant_id=str(user.tenant_id),
+            user_id=str(user.id),
+        )
+    except Exception:
+        # An unhandled 500 skips the CORS headers, so browsers only see a network error.
+        # Return a clean 503; the request rolls back (user message not stored).
+        logger.exception("chat LLM/RAG failure")
+        raise HTTPException(
+            status.HTTP_503_SERVICE_UNAVAILABLE, "AI provider unavailable, try again later"
+        )
 
     db.add(
         Message(
@@ -113,8 +122,6 @@ async def list_messages(
         )
     )
     if not r.scalar_one_or_none():
-        from fastapi import HTTPException
-
         raise HTTPException(404, "Conversation not found")
 
     msgs = (

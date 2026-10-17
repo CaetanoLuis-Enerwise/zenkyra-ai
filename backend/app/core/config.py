@@ -42,13 +42,24 @@ class Settings(BaseSettings):
     QDRANT_COLLECTION_PREFIX: str = "zenkyra_tenant_"
 
     GEMINI_API_KEY: str = Field(..., description="Google AI Gemini API key")
-    GEMINI_CHAT_MODEL: str = "gemini-1.5-flash"
-    GEMINI_EMBEDDING_MODEL: str = "models/text-embedding-004"
+    # Defaults verified 2026-10-17 on ai.google.dev/gemini-api/docs/models + /deprecations:
+    # gemini-1.5-flash and text-embedding-004 (shut down 2026-01-14) are retired.
+    GEMINI_CHAT_MODEL: str = "gemini-3.5-flash-lite"
+    GEMINI_EMBEDDING_MODEL: str = "models/gemini-embedding-2"
+    # Requested embedding size (output_dimensionality). It is also the Qdrant collection vector
+    # size, so changing it requires re-creating tenant collections and re-indexing.
+    # gemini-embedding-2 supports 128-3072 (recommended 768 / 1536 / 3072).
+    GEMINI_EMBEDDING_DIM: int = Field(default=768, ge=128, le=3072)
     LLM_PROVIDER: str = "gemini"
     LLM_MAX_RETRIES: int = 3
     LLM_REQUEST_TIMEOUT_SECONDS: int = 120
 
     STORAGE_PATH: str = "./storage"
+
+    # Comma-separated browser origins allowed to call the API (the Next.js app), e.g.
+    # "https://zenkyra-ai.vercel.app". "*" allows any origin (never with credentials).
+    # The frontend sends the JWT in the Authorization header, not cookies.
+    CORS_ALLOW_ORIGINS: str = "http://localhost:3000"
 
     DATABASE_BOOTSTRAP: bool = False
 

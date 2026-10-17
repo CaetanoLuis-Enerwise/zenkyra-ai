@@ -33,6 +33,7 @@ Then open [http://localhost:3000](http://localhost:3000).
 | `npm run build` | Build for production         |
 | `npm run start` | Run the production server    |
 | `npm run lint`  | Lint the project             |
+| `npm test`      | Unit tests (vitest)          |
 
 ## Project structure
 
@@ -50,9 +51,35 @@ src/
 └─ lib/                # Mock data, types, utilities
 ```
 
-## Connecting a real backend
+## Mock mode vs live mode
 
-Mock data lives in `src/lib/mock-data.ts` and is consumed by the UI through small typed helpers. Swap any helper for a `fetch` / `tRPC` / `Server Action` call without touching the components.
+The mode is fixed at **build time** by `NEXT_PUBLIC_API_URL` (`src/lib/config.ts`).
+
+| | `NEXT_PUBLIC_API_URL` unset (default) | `NEXT_PUBLIC_API_URL=https://api.example.com` |
+|---|---|---|
+| App pages | `src/lib/mock-data.ts` behind the "Demo data" banner | Data from the FastAPI backend in `backend/` |
+| `/login`, `/set-password` | 404 | Live |
+| App shell | Open | Redirects to `/login` without a valid JWT |
+
+Live mode wires: login (`POST /api/v1/auth/login`), `/set-password?token=…` (`POST /api/v1/auth/set-password`,
+the page `PASSWORD_SET_URL_BASE` must point to), topbar/sidebar (`/auth/me`, `/tenants/me`), Overview KPIs
+(`/analytics/summary`, `/documents`, `/billing/current`), Knowledge Hub (list / upload ≤25MB / delete on
+`/documents`, chat on `POST /chat/messages` + `/chat/conversations/{id}/messages`) and Billing
+(`/billing/current`, `/billing/plans`). Agents, Workflows, Analytics, Team, Security and Settings have no
+backend data yet, so live mode shows a "not connected yet" state instead of sample numbers.
+
+Backend settings that must match: `CORS_ALLOW_ORIGINS=<this site's origin>` and
+`PASSWORD_SET_URL_BASE=<this site>/set-password`.
+
+### Token storage and the XSS trade-off
+
+The JWT is stored in `localStorage` (`zenkyra.jwt`) and sent as `Authorization: Bearer`. That keeps the
+backend cookie-free and CSRF-free, but **any script running on this origin (an XSS bug or a compromised
+dependency) can read the token** and use it until it expires (`ACCESS_TOKEN_EXPIRE_MINUTES`, 7 days by
+default). Mitigations in place: React escaping, no `dangerouslySetInnerHTML` in the live components, logout
+and any 401 clear the token. Before handling sensitive customer data consider: a shorter token lifetime, a
+strict Content-Security-Policy, or moving to an `HttpOnly; Secure; SameSite` cookie set by the API (needs
+backend changes + CSRF protection).
 
 ## License
 

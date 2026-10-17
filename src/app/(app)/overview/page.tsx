@@ -1,3 +1,5 @@
+import { LiveOverview } from "@/components/live/live-overview";
+import { LIVE_MODE } from "@/lib/config";
 import {
   ArrowRight,
   Bot,
@@ -26,7 +28,7 @@ const STAT_ICONS = [
   <TrendingUp key="t" className="h-4 w-4" />,
 ];
 
-export default async function OverviewPage() {
+async function MockOverviewPage() {
   const data = await api.overview();
   const stats = data.stats.map((s) =>
     /€|\$/.test(s.value)
@@ -304,4 +306,9 @@ function QuickAction({
       <span className="text-sm font-medium">{label}</span>
     </Link>
   );
+}
+
+// NEXT_PUBLIC_API_URL set → live tenant data (or an honest "not connected" state); unset → demo data.
+export default function OverviewPage() {
+  return LIVE_MODE ? <LiveOverview /> : <MockOverviewPage />;
 }
