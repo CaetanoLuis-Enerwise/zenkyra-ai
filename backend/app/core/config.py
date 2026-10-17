@@ -50,6 +50,11 @@ class Settings(BaseSettings):
 
     STORAGE_PATH: str = "./storage"
 
+    # Comma-separated browser origins allowed to call the API (the Next.js app), e.g.
+    # "https://zenkyra-ai.vercel.app". "*" allows any origin (never with credentials).
+    # The frontend sends the JWT in the Authorization header, not cookies.
+    CORS_ALLOW_ORIGINS: str = "http://localhost:3000"
+
     DATABASE_BOOTSTRAP: bool = False
 
     # Service-to-service provisioning (Aegis paid checkout -> POST /api/v1/admin/tenants).

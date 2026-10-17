@@ -88,6 +88,8 @@ TEST_DATABASE_URL=postgresql+asyncpg://user:pass@localhost:5432/zenkyra_test pyt
   `--proxy-headers --forwarded-allow-ips=<proxy>` or every lead shares the proxy IP. Add an edge/WAF limit
   for real abuse protection. The endpoint stores leads only; it sends no email or webhook. Leads are
   personal data: cover them in the privacy notice before the form goes live.
-- Restrict CORS origins in `app/main.py`.
+- Set `CORS_ALLOW_ORIGINS` to the frontend origin(s), comma-separated (default `http://localhost:3000`).
+  Credentials are disabled: the frontend sends the JWT as `Authorization: Bearer`, not as a cookie.
+- Set `PASSWORD_SET_URL_BASE` to `https://<frontend>/set-password` (the Next.js page that consumes `?token=`).
 - Use managed Postgres / Redis / Qdrant and rotate `SECRET_KEY` / `GEMINI_API_KEY`.
 - Store uploads on S3-compatible storage instead of `./storage` when scaling.
