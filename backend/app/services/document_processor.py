@@ -115,6 +115,22 @@ async def process_document_background(doc_id: str) -> None:
     """Separate DB session for FastAPI BackgroundTasks."""
     from app.core.database import async_session_factory
 
+    did = uuid.UUID(doc_id)
     async with async_session_factory() as session:
-        await process_document_async(session, uuid.UUID(doc_id))
-        await session.commit()
+        try:
+            await process_document_async(session, did)
+            await session.commit()
+        except Exception as e:
+            # Embedding / Qdrant failures must not leave the document "pending" forever.
+            logger.exception("indexing failed %s", doc_id)
+            await session.rollback()
+            await mark_document_failed(session, did, f"Indexing failed ({type(e).__name__})")
+
+
+async def mark_document_failed(db: AsyncSession, document_id: uuid.UUID, message: str) -> None:
+    doc = await db.get(Document, document_id)
+    if doc is None:
+        return
+    doc.status = DocumentStatus.failed
+    doc.error_message = message[:500]
+    await db.commit()
