@@ -47,7 +47,7 @@ export function UploadZone({ onFiles }: UploadZoneProps) {
           id="upload-input"
           type="file"
           multiple
-          accept=".pdf,.docx,.xlsx,.txt,.md,.csv"
+          accept=".pdf,.txt,.md,.csv"
           onChange={(e) => handleFiles(e.target.files)}
           className="hidden"
         />
@@ -56,7 +56,7 @@ export function UploadZone({ onFiles }: UploadZoneProps) {
         </span>
         <h3 className="text-base font-semibold">Drop your files to ingest</h3>
         <p className="mt-1 max-w-md text-sm text-muted-foreground">
-          We automatically chunk, embed and index. Supports PDF, DOCX, XLSX, MD, CSV — up to 200MB per file.
+          We automatically chunk, embed and index. Supports PDF, TXT, MD and CSV — up to 25MB per file.
         </p>
         <Button
           type="button"
