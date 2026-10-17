@@ -44,6 +44,34 @@ async def ensure_tenant_collection(tenant_id: str, vector_size: int = 768) -> st
     return name
 
 
+async def delete_document_points(tenant_id: str, document_id: str) -> None:
+    """Remove every vector point of one document from the tenant's collection.
+
+    Points are upserted with payload ``document_id`` (see document_processor). A missing
+    collection means nothing was ever indexed for this tenant, so there is nothing to
+    delete. Any other Qdrant error propagates: the caller must not report the document
+    as deleted while its vectors may still be retrievable.
+    """
+    client = get_qdrant()
+    name = tenant_collection_name(tenant_id)
+    if not await client.collection_exists(collection_name=name):
+        return
+    await client.delete(
+        collection_name=name,
+        points_selector=qmodels.FilterSelector(
+            filter=qmodels.Filter(
+                must=[
+                    qmodels.FieldCondition(
+                        key="document_id",
+                        match=qmodels.MatchValue(value=str(document_id)),
+                    )
+                ]
+            )
+        ),
+        wait=True,
+    )
+
+
 async def qdrant_health() -> bool:
     try:
         client = get_qdrant()

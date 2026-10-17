@@ -52,7 +52,7 @@ Run from the `backend` directory so `app` imports resolve (`PYTHONPATH` defaults
 |--------|---------|
 | `/api/v1/auth` | signup (only if `PUBLIC_SIGNUP_ENABLED=true`), login, me, set-password (single-use token) |
 | `/api/v1/tenants` | current tenant |
-| `/api/v1/documents` | upload / list / delete + async indexing |
+| `/api/v1/documents` | upload (max 25MB; PDF via pypdf, other files read as UTF-8 text) / list / delete (also erases the document's Qdrant points; 503 and row kept if Qdrant fails) + async indexing |
 | `/api/v1/chat` | RAG + conversation history |
 | `/api/v1/agents` | sales / support / ops runners |
 | `/api/v1/analytics` | tasks, hours saved, LLM calls |

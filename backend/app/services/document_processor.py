@@ -101,6 +101,10 @@ async def process_document_async(db: AsyncSession, document_id: uuid.UUID) -> No
             )
         )
 
+    # The document may have been deleted while it was being embedded; do not index it.
+    still_there = await db.scalar(select(Document.id).where(Document.id == document_id))
+    if still_there is None:
+        return
     await client.upsert(collection_name=collection, points=points)
     doc.status = DocumentStatus.ready
     doc.chunk_count = len(chunks)

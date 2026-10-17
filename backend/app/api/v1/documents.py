@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 import uuid
 from pathlib import Path
 
@@ -10,9 +11,12 @@ from sqlalchemy import delete, select
 
 from app.api.deps import CurrentUser, DbSession
 from app.core.config import get_settings
+from app.core.qdrant_client import delete_document_points
 from app.models import Document, DocumentStatus
 from app.schemas import DocumentOut
 from app.services.document_processor import process_document_background
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/documents", tags=["documents"])
 
@@ -81,6 +85,16 @@ async def delete_document(
     doc = r.scalar_one_or_none()
     if not doc:
         raise HTTPException(404, "Document not found")
+    # GDPR erasure: vectors first. If Qdrant fails, keep the row so the delete can be
+    # retried, instead of orphaning retrievable chunks of a "deleted" document.
+    try:
+        await delete_document_points(str(user.tenant_id), str(doc.id))
+    except Exception:
+        logger.exception("qdrant delete failed for document %s", doc.id)
+        raise HTTPException(
+            status.HTTP_503_SERVICE_UNAVAILABLE,
+            "Vector store unavailable; document not deleted, retry later",
+        )
     try:
         Path(doc.storage_path).unlink(missing_ok=True)
     except OSError:
