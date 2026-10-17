@@ -129,6 +129,7 @@ class GeminiProvider(LLMProvider):
             result = genai.embed_content(
                 model=settings.GEMINI_EMBEDDING_MODEL,
                 content=text[:8_000],
+                output_dimensionality=settings.GEMINI_EMBEDDING_DIM,
             )
             emb: list[float]
             if isinstance(result, dict):
@@ -137,6 +138,11 @@ class GeminiProvider(LLMProvider):
                 emb = list(getattr(result, "embedding", []) or [])
             if not emb:
                 raise RuntimeError("Empty embedding from Gemini")
+            if len(emb) != settings.GEMINI_EMBEDDING_DIM:
+                raise RuntimeError(
+                    f"Gemini returned {len(emb)}-d embedding, expected GEMINI_EMBEDDING_DIM="
+                    f"{settings.GEMINI_EMBEDDING_DIM}"
+                )
             usage = TokenUsage(total_tokens=len(text) // 4)
             return emb, usage
 

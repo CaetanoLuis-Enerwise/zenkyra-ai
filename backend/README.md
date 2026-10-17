@@ -10,7 +10,7 @@ Multi-tenant API for **1–3 paying companies**: JWT auth, Postgres, Redis, Qdra
 | DB | PostgreSQL + SQLAlchemy 2 async |
 | Cache | Redis |
 | Vectors | Qdrant |
-| LLM | Gemini (`GEMINI_API_KEY`) |
+| LLM | Gemini (`GEMINI_API_KEY`; models via `GEMINI_CHAT_MODEL` / `GEMINI_EMBEDDING_MODEL`) |
 
 ## Quick start (Docker)
 
@@ -66,6 +66,12 @@ Run from the `backend` directory so `app` imports resolve (`PYTHONPATH` defaults
 - Gemini: `app/services/llm/providers/gemini.py`
 - Facade: `generate_response`, `summarize_document`, `classify_lead`, `embed_text`
 - Retries via `tenacity` on chat; token usage persisted in `llm_usage_logs`.
+- Models are env-configurable. Defaults (checked 2026-10-17 against
+  https://ai.google.dev/gemini-api/docs/models and https://ai.google.dev/gemini-api/docs/deprecations):
+  `GEMINI_CHAT_MODEL=gemini-3.5-flash-lite`, `GEMINI_EMBEDDING_MODEL=models/gemini-embedding-2`.
+- `GEMINI_EMBEDDING_DIM` (default 768) is sent as `output_dimensionality` **and** is the Qdrant collection
+  vector size; embeddings of any other length are rejected. Changing the model or the dimension needs a
+  re-index: embedding spaces are not compatible across models, and existing collections keep their old size.
 
 ## Tests
 

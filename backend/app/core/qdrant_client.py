@@ -27,8 +27,14 @@ def tenant_collection_name(tenant_id: str) -> str:
     return f"{settings.QDRANT_COLLECTION_PREFIX}{safe}"
 
 
-async def ensure_tenant_collection(tenant_id: str, vector_size: int = 768) -> str:
-    """Create collection if missing (Gemini text-embedding-004 → 768 dims)."""
+def embedding_vector_size() -> int:
+    """Single source of truth for vector size: GEMINI_EMBEDDING_DIM."""
+    return get_settings().GEMINI_EMBEDDING_DIM
+
+
+async def ensure_tenant_collection(tenant_id: str) -> str:
+    """Create the tenant collection if missing, sized to GEMINI_EMBEDDING_DIM."""
+    vector_size = embedding_vector_size()
     client = get_qdrant()
     name = tenant_collection_name(tenant_id)
     cols = await client.get_collections()

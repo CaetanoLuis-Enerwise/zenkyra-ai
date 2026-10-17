@@ -174,7 +174,7 @@ async def test_processor_does_not_index_document_deleted_mid_embedding(
             async def embed_text(self, text):
                 # Simulate a concurrent DELETE committing while we embed.
                 await s.execute(delete(Document).where(Document.id == doc_id))
-                return [0.1, 0.2, 0.3], None
+                return [0.1] * qc.embedding_vector_size(), None
 
         monkeypatch.setattr(document_processor, "LLMService", FakeLLM)
         await document_processor.process_document_async(s, doc_id)

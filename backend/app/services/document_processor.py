@@ -12,7 +12,7 @@ from qdrant_client.http import models as qmodels
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.qdrant_client import ensure_tenant_collection, get_qdrant
+from app.core.qdrant_client import embedding_vector_size, ensure_tenant_collection, get_qdrant
 from app.models import Document, DocumentStatus
 from app.services.llm import LLMService
 
@@ -80,8 +80,10 @@ async def process_document_async(db: AsyncSession, document_id: uuid.UUID) -> No
         vec, _ = await llm.embed_text(chunk)
         embeddings.append(vec)
 
-    vec_size = len(embeddings[0])
-    collection = await ensure_tenant_collection(tenant_key, vector_size=vec_size)
+    expected = embedding_vector_size()
+    if any(len(v) != expected for v in embeddings):
+        raise RuntimeError(f"embedding size mismatch, expected {expected}")
+    collection = await ensure_tenant_collection(tenant_key)
     client = get_qdrant()
     points: list[qmodels.PointStruct] = []
 
