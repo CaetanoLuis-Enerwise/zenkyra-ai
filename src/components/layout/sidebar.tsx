@@ -10,6 +10,8 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { companies } from "@/lib/mock-data";
+import { LIVE_MODE } from "@/lib/config";
+import { LiveWorkspaceCard } from "@/components/live/live-user-menu";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,6 +30,9 @@ export function Sidebar() {
         <Logo />
       </div>
 
+      {LIVE_MODE ? (
+        <LiveWorkspaceCard />
+      ) : (
       <div className="px-3 pt-4">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -90,6 +95,7 @@ export function Sidebar() {
           </span>
         </div>
       </div>
+      )}
 
       <nav className="mt-4 flex-1 overflow-y-auto px-3 scrollbar-thin">
         <SectionLabel>Platform</SectionLabel>
@@ -116,7 +122,7 @@ export function Sidebar() {
                     )}
                   />
                   <span className="flex-1 truncate">{item.label}</span>
-                  {item.badge && (
+                  {item.badge && !LIVE_MODE && (
                     <Badge variant="default" className="h-5 px-1.5 text-[10px]">
                       {item.badge}
                     </Badge>
