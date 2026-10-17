@@ -1,9 +1,11 @@
+import { LiveNotConnected } from "@/components/live/live-not-connected";
+import { LIVE_MODE } from "@/lib/config";
 import { PageHeader } from "@/components/layout/page-header";
 import { TeamTable } from "@/components/app/team-table";
 import { InviteDialog } from "@/components/app/invite-dialog";
 import { api } from "@/lib/api";
 
-export default async function TeamPage() {
+async function MockTeamPage() {
   const members = await api.team();
 
   const roleCount = members.reduce<Record<string, number>>((acc, m) => {
@@ -58,4 +60,9 @@ function Pill({
       <p className="mt-0.5 text-xl font-semibold tracking-tight">{value}</p>
     </div>
   );
+}
+
+// NEXT_PUBLIC_API_URL set → live tenant data (or an honest "not connected" state); unset → demo data.
+export default function TeamPage() {
+  return LIVE_MODE ? <LiveNotConnected title="Team" /> : <MockTeamPage />;
 }

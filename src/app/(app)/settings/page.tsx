@@ -1,5 +1,8 @@
 "use client";
 
+import { LiveNotConnected } from "@/components/live/live-not-connected";
+import { LIVE_MODE } from "@/lib/config";
+
 import * as React from "react";
 import { toast } from "sonner";
 import {
@@ -30,7 +33,7 @@ const integrations = [
   { name: "Jira", desc: "Triage tickets with AI assistance.", connected: false },
 ];
 
-export default function SettingsPage() {
+function MockSettingsPage() {
   return (
     <div className="space-y-6">
       <PageHeader
@@ -307,4 +310,9 @@ function NotifRow({
       <Switch defaultChecked={defaultChecked} />
     </div>
   );
+}
+
+// NEXT_PUBLIC_API_URL set → live tenant data (or an honest "not connected" state); unset → demo data.
+export default function SettingsPage() {
+  return LIVE_MODE ? <LiveNotConnected title="Settings" /> : <MockSettingsPage />;
 }

@@ -1,3 +1,5 @@
+import { LiveNotConnected } from "@/components/live/live-not-connected";
+import { LIVE_MODE } from "@/lib/config";
 import {
   ArrowRight,
   Bot,
@@ -15,7 +17,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { initials, formatNumber } from "@/lib/utils";
 import { api } from "@/lib/api";
 
-export default async function AgentsPage() {
+async function MockAgentsPage() {
   const data = await api.overview();
   const agents = data.agents;
 
@@ -158,4 +160,9 @@ function Bullet({ children }: { children: React.ReactNode }) {
       <span>{children}</span>
     </li>
   );
+}
+
+// NEXT_PUBLIC_API_URL set → live tenant data (or an honest "not connected" state); unset → demo data.
+export default function AgentsPage() {
+  return LIVE_MODE ? <LiveNotConnected title="Agents" /> : <MockAgentsPage />;
 }
