@@ -12,7 +12,7 @@ from qdrant_client.http import models as qmodels
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.qdrant_client import ensure_tenant_collection, get_qdrant
+from app.core.qdrant_client import embedding_vector_size, ensure_tenant_collection, get_qdrant
 from app.models import Document, DocumentStatus
 from app.services.llm import LLMService
 
@@ -80,8 +80,10 @@ async def process_document_async(db: AsyncSession, document_id: uuid.UUID) -> No
         vec, _ = await llm.embed_text(chunk)
         embeddings.append(vec)
 
-    vec_size = len(embeddings[0])
-    collection = await ensure_tenant_collection(tenant_key, vector_size=vec_size)
+    expected = embedding_vector_size()
+    if any(len(v) != expected for v in embeddings):
+        raise RuntimeError(f"embedding size mismatch, expected {expected}")
+    collection = await ensure_tenant_collection(tenant_key)
     client = get_qdrant()
     points: list[qmodels.PointStruct] = []
 
@@ -101,6 +103,10 @@ async def process_document_async(db: AsyncSession, document_id: uuid.UUID) -> No
             )
         )
 
+    # The document may have been deleted while it was being embedded; do not index it.
+    still_there = await db.scalar(select(Document.id).where(Document.id == document_id))
+    if still_there is None:
+        return
     await client.upsert(collection_name=collection, points=points)
     doc.status = DocumentStatus.ready
     doc.chunk_count = len(chunks)
@@ -111,6 +117,22 @@ async def process_document_background(doc_id: str) -> None:
     """Separate DB session for FastAPI BackgroundTasks."""
     from app.core.database import async_session_factory
 
+    did = uuid.UUID(doc_id)
     async with async_session_factory() as session:
-        await process_document_async(session, uuid.UUID(doc_id))
-        await session.commit()
+        try:
+            await process_document_async(session, did)
+            await session.commit()
+        except Exception as e:
+            # Embedding / Qdrant failures must not leave the document "pending" forever.
+            logger.exception("indexing failed %s", doc_id)
+            await session.rollback()
+            await mark_document_failed(session, did, f"Indexing failed ({type(e).__name__})")
+
+
+async def mark_document_failed(db: AsyncSession, document_id: uuid.UUID, message: str) -> None:
+    doc = await db.get(Document, document_id)
+    if doc is None:
+        return
+    doc.status = DocumentStatus.failed
+    doc.error_message = message[:500]
+    await db.commit()

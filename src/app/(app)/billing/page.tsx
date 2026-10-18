@@ -1,3 +1,5 @@
+import { LiveBilling } from "@/components/live/live-billing";
+import { LIVE_MODE } from "@/lib/config";
 import { Sparkles } from "lucide-react";
 import { PageHeader } from "@/components/layout/page-header";
 import { Card } from "@/components/ui/card";
@@ -6,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { BillingPlans } from "@/components/app/billing-plans";
 
-export default function BillingPage() {
+function MockBillingPage() {
   return (
     <div className="space-y-8">
       <PageHeader
@@ -90,4 +92,9 @@ function UsageMeter({
       <p className={`mt-1.5 text-[11px] ${color}`}>{pct}% used</p>
     </div>
   );
+}
+
+// NEXT_PUBLIC_API_URL set → live tenant data (or an honest "not connected" state); unset → demo data.
+export default function BillingPage() {
+  return LIVE_MODE ? <LiveBilling /> : <MockBillingPage />;
 }

@@ -35,12 +35,14 @@ def create_application() -> FastAPI:
         redoc_url="/redoc",
         openapi_url="/openapi.json",
     )
+    origins = [o.strip().rstrip("/") for o in settings.CORS_ALLOW_ORIGINS.split(",") if o.strip()]
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["*"],
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
+        allow_origins=origins,
+        # Bearer tokens in headers; no cookies. Credentials + "*" is invalid anyway.
+        allow_credentials=False,
+        allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+        allow_headers=["Authorization", "Content-Type", "X-Service-Token"],
     )
     app.include_router(api_router, prefix=settings.API_V1_PREFIX)
 

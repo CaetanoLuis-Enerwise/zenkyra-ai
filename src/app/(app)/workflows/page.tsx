@@ -1,3 +1,5 @@
+import { LiveNotConnected } from "@/components/live/live-not-connected";
+import { LIVE_MODE } from "@/lib/config";
 import {
   AlertTriangle,
   ArrowRight,
@@ -26,7 +28,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { WorkflowNode, WorkflowConnector } from "@/components/app/workflow-node";
 
-export default function WorkflowsPage() {
+function MockWorkflowsPage() {
   return (
     <div className="space-y-6">
       <PageHeader
@@ -246,4 +248,9 @@ function WorkflowExample({
       </div>
     </div>
   );
+}
+
+// NEXT_PUBLIC_API_URL set → live tenant data (or an honest "not connected" state); unset → demo data.
+export default function WorkflowsPage() {
+  return LIVE_MODE ? <LiveNotConnected title="Workflows" /> : <MockWorkflowsPage />;
 }

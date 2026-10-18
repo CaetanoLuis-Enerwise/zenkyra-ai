@@ -22,6 +22,8 @@ import { CommandK } from "@/components/layout/command-k";
 import { MobileSidebar } from "@/components/layout/mobile-sidebar";
 import { Badge } from "@/components/ui/badge";
 import { notifications } from "@/lib/mock-data";
+import { LIVE_MODE } from "@/lib/config";
+import { LiveUserMenu } from "@/components/live/live-user-menu";
 
 export function Topbar() {
   const [openK, setOpenK] = React.useState(false);
@@ -65,6 +67,10 @@ export function Topbar() {
       <div className="ml-auto flex items-center gap-1.5">
         <TrustStrip />
         <ThemeToggle />
+        {LIVE_MODE ? (
+          <LiveUserMenu />
+        ) : (
+        <>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="relative h-8 w-8" aria-label="Notifications">
@@ -115,6 +121,8 @@ export function Topbar() {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+        </>
+        )}
       </div>
 
       <CommandK open={openK} onOpenChange={setOpenK} />
@@ -133,10 +141,12 @@ function TrustStrip() {
               <span className="absolute inset-0 animate-ping rounded-full bg-success/60" />
               <span className="relative h-1.5 w-1.5 rounded-full bg-success" />
             </span>
-            <span className="font-medium">Demo</span>
+            <span className="font-medium">{LIVE_MODE ? "Live" : "Demo"}</span>
           </span>
         </TooltipTrigger>
-        <TooltipContent>Demo workspace. No published uptime SLA.</TooltipContent>
+        <TooltipContent>
+          {LIVE_MODE ? "Live workspace" : "Demo workspace"}. No published uptime SLA.
+        </TooltipContent>
       </Tooltip>
       <span className="h-3 w-px bg-border" aria-hidden />
       <Tooltip>
