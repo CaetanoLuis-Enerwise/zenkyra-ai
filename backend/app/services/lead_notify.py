@@ -207,9 +207,54 @@ def send_email_sync(message: EmailMessage, settings: Settings) -> str | None:
                 smtp.login(settings.SMTP_USER or "", settings.SMTP_PASSWORD or "")
             smtp.send_message(message)
     except Exception as exc:
-        logger.warning("lead email notification failed: %s", type(exc).__name__)
+        logger.warning("smtp send failed: %s", type(exc).__name__)
         return type(exc).__name__
     return None
+
+
+def smtp_configured(settings: Settings | None = None) -> bool:
+    settings = settings or get_settings()
+    return bool((settings.SMTP_HOST or "").strip() and (settings.SMTP_FROM or "").strip())
+
+
+def build_password_set_email(*, to: str, url: str, hours: int, settings: Settings) -> EmailMessage:
+    """Portuguese notice with the single-use link. The raw link is not logged here."""
+    msg = EmailMessage()
+    msg["From"] = _header_safe(settings.SMTP_FROM or "")
+    msg["To"] = _header_safe(to)
+    msg["Subject"] = "[Zenkyra] Defina a sua palavra-passe"
+    msg.set_content(
+        "Foi criado um espaço Zenkyra e uma conta de proprietário para este email.\n"
+        "\n"
+        "Defina a palavra-passe neste link de uso único:\n"
+        f"{url}\n"
+        "\n"
+        f"O link expira dentro de {hours} horas e só pode ser usado uma vez.\n"
+        "Se não estava à espera desta mensagem, ignore-a.\n"
+        "\n"
+        "Este email não é uma fatura e não confirma um pagamento.\n"
+    )
+    return msg
+
+
+async def email_password_set_link(
+    *, to: str, url: str, settings: Settings | None = None
+) -> str | None:
+    """Send the set-password link. None means sent. An error string means it was not.
+
+    Does not raise. The error string is an exception type or a short config note,
+    never the link and never the SMTP password.
+    """
+    settings = settings or get_settings()
+    if not smtp_configured(settings):
+        return "smtp not configured"
+    message = build_password_set_email(
+        to=to,
+        url=url,
+        hours=settings.PASSWORD_SET_TOKEN_TTL_HOURS,
+        settings=settings,
+    )
+    return await asyncio.to_thread(send_email_sync, message, settings)
 
 
 async def post_webhook(lead: Lead, settings: Settings) -> str | None:

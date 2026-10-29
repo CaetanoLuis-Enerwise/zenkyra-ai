@@ -26,6 +26,7 @@ from app.core.config import get_settings
 from app.models import Lead, utcnow
 from app.schemas import LeadCreate, LeadOut
 from app.services.lead_notify import NotifyResult, notify_lead
+from app.services.lead_retention import purge_expired_leads
 
 logger = logging.getLogger(__name__)
 
@@ -67,6 +68,7 @@ async def create_lead(body: LeadCreate, request: Request, db: DbSession) -> Lead
             status_code=status.HTTP_429_TOO_MANY_REQUESTS,
             detail="Too many requests; try again later",
         )
+    await purge_expired_leads(db, settings)
     if body.website:  # honeypot tripped: look successful, store nothing
         return LeadOut(id=uuid.uuid4())
     ua = request.headers.get("user-agent")

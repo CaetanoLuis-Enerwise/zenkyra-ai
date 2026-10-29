@@ -1,10 +1,12 @@
 """POST /api/v1/leads (public lead capture)."""
 
 import uuid
+from datetime import timedelta
 
 from sqlalchemy import func, select
 
-from app.models import Lead
+from app.core.config import get_settings
+from app.models import Lead, utcnow
 
 URL = "/api/v1/leads"
 BODY = {
@@ -64,6 +66,23 @@ async def test_honeypot_returns_201_but_stores_nothing(client, session_factory):
     assert r.status_code == 201
     uuid.UUID(r.json()["id"])
     assert await _count(session_factory) == 0
+
+
+async def test_requests_older_than_retention_are_deleted(client, session_factory, monkeypatch):
+    monkeypatch.setenv("LEADS_RETENTION_DAYS", "30")
+    get_settings.cache_clear()
+    first = await client.post(URL, json=BODY)
+    assert first.status_code == 201
+    async with session_factory() as s:
+        lead = (await s.execute(select(Lead))).scalar_one()
+        lead.created_at = utcnow() - timedelta(days=31)
+        await s.commit()
+    second = await client.post(URL, json=BODY | {"email": "bia@example.com", "source": "demo"})
+    assert second.status_code == 201
+    async with session_factory() as s:
+        emails = set((await s.execute(select(Lead.email))).scalars().all())
+    assert emails == {"bia@example.com"}
+    get_settings.cache_clear()
 
 
 async def test_rate_limit_per_ip(client, session_factory, monkeypatch):

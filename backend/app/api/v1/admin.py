@@ -6,6 +6,7 @@ Not configured -> 503; missing/wrong token -> 401.
 
 from __future__ import annotations
 
+import logging
 from datetime import timedelta
 from typing import Annotated
 from urllib.parse import urlencode
@@ -29,7 +30,11 @@ from app.models import (
     utcnow,
 )
 from app.schemas import AdminTenantCreate, AdminTenantOut, LeadAdminOut
+from app.services.lead_notify import email_password_set_link, smtp_configured
+from app.services.lead_retention import purge_expired_leads
 from app.utils.slug import slugify_company
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(
     prefix="/admin",
@@ -137,14 +142,27 @@ async def provision_tenant(body: AdminTenantCreate, db: DbSession) -> AdminTenan
         await db.flush()
         url = f"{settings.PASSWORD_SET_URL_BASE}?{urlencode({'token': raw})}"
 
+    # SMTP configured: email the owner and omit the secret from this response.
+    # SMTP missing or the send failed: return the link so the caller can deliver it.
+    email_sent = False
+    returned_url = url
+    if url is not None and smtp_configured():
+        err = await email_password_set_link(to=prov.email, url=url)
+        if err is None:
+            email_sent = True
+            returned_url = None
+        else:
+            logger.error("password-set email failed: %s", err)
+
     return AdminTenantOut(
         tenant_id=prov.tenant_id,
         user_id=prov.user_id,
         plan_slug=prov.plan_slug,
         external_order_id=prov.external_order_id,
         created=created,
-        password_set_url=url,
+        password_set_url=returned_url,
         password_set_expires_at=expires_at,
+        password_set_email_sent=email_sent,
     )
 
 
@@ -158,7 +176,9 @@ async def list_leads(
 
     Same X-Service-Token as tenant provisioning. The public lead endpoint does not
     expose this list. Use it when email or the webhook did not fire.
+    Requests older than LEADS_RETENTION_DAYS are deleted in this same transaction.
     """
+    await purge_expired_leads(db)
     rows = (
         (
             await db.execute(

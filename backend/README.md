@@ -100,14 +100,20 @@ TEST_DATABASE_URL=postgresql+asyncpg://user:pass@localhost:5432/zenkyra_test pyt
   fails, the lead is still kept and `notify_status=failed` (the public response is only `{id}`). With
   neither destination set, `notify_status=skipped` and nobody is told — set one before the form is public.
   In `APP_ENV=production` the process logs a warning at startup when both are unset. Read the queue with
-  `GET /api/v1/admin/leads` (`X-Service-Token`). The password-set link from `POST /api/v1/admin/tenants`
-  is still only returned in that response; it is not emailed. Leads are personal data: cover them in the
-  privacy notice before the form goes live. An existing database needs:
+  `GET /api/v1/admin/leads` (`X-Service-Token`). Leads older than `LEADS_RETENTION_DAYS` (default 365,
+  the period stated on the public privacy page) are deleted when the process starts, when a new lead
+  is stored, or when that list is read. Leads are personal data: the marketing site links the form to
+  `/privacidade`. The controller name, NIF and contact on that page are placeholders until
+  `NEXT_PUBLIC_PRIVACY_CONTROLLER_NAME`, `NEXT_PUBLIC_PRIVACY_CONTROLLER_NIF` and
+  `NEXT_PUBLIC_PRIVACY_CONTROLLER_CONTACT` are set. Do not invent them. An existing database needs:
   `ALTER TABLE leads ADD COLUMN notify_status VARCHAR(16) NOT NULL DEFAULT 'skipped';`
   `ALTER TABLE leads ADD COLUMN notify_error VARCHAR(300) NULL;`
   `ALTER TABLE leads ADD COLUMN notified_at TIMESTAMPTZ NULL;`
 - Set `CORS_ALLOW_ORIGINS` to the frontend origin(s), comma-separated (default `http://localhost:3000`).
   Credentials are disabled: the frontend sends the JWT as `Authorization: Bearer`, not as a cookie.
 - Set `PASSWORD_SET_URL_BASE` to `https://<frontend>/set-password` (the Next.js page that consumes `?token=`).
+  When `SMTP_HOST` and `SMTP_FROM` are set, `POST /api/v1/admin/tenants` emails that link to the owner
+  and omits it from the response (`password_set_email_sent: true`). When SMTP is not set, or the send
+  fails, the response still includes `password_set_url` and `password_set_email_sent` is false.
 - Use managed Postgres / Redis / Qdrant and rotate `SECRET_KEY` / `GEMINI_API_KEY`.
 - Store uploads on S3-compatible storage instead of `./storage` when scaling.
