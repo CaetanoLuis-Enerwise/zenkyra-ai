@@ -23,6 +23,7 @@ const cols = [
     title: "Resources",
     links: [
       { label: "Trust center", href: "/security" },
+      { label: "Privacidade", href: "/privacidade" },
     ],
   },
 ];

@@ -14,8 +14,8 @@ const team = [
   {
     icon: Briefcase,
     name: "Sales Agent",
-    tagline: "Qualifies leads, drafts replies, follows up.",
-    metric: "Leads · replies · follow-ups",
+    tagline: "Classifies a lead. Does not send the email.",
+    metric: "In the API",
     accent: "border-brand/30 ring-brand/20",
     glow: "from-brand/30",
     chip: "bg-brand/10 text-brand",
@@ -23,8 +23,8 @@ const team = [
   {
     icon: Headphones,
     name: "Support Agent",
-    tagline: "Answers tickets, classifies issues, escalates.",
-    metric: "Answers from your documents",
+    tagline: "Summarises ticket text. Does not update a helpdesk.",
+    metric: "In the API",
     accent: "border-emerald-500/30 ring-emerald-500/20",
     glow: "from-emerald-500/30",
     chip: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
@@ -32,8 +32,8 @@ const team = [
   {
     icon: Settings2,
     name: "Ops Agent",
-    tagline: "Handles SOPs, internal requests, tasks.",
-    metric: "SOPs · internal requests",
+    tagline: "Drafts a checklist for an internal request.",
+    metric: "In the API",
     accent: "border-amber-500/30 ring-amber-500/20",
     glow: "from-amber-500/30",
     chip: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
@@ -41,8 +41,8 @@ const team = [
   {
     icon: CircleDollarSign,
     name: "Finance Agent",
-    tagline: "Processes invoices, summaries, reminders.",
-    metric: "Invoices flagged for human review",
+    tagline: "Not a separate runner. Invoice processing is not shipped.",
+    metric: "Roadmap",
     accent: "border-violet-500/30 ring-violet-500/20",
     glow: "from-violet-500/30",
     chip: "bg-violet-500/10 text-violet-600 dark:text-violet-400",
@@ -50,8 +50,8 @@ const team = [
   {
     icon: BarChart3,
     name: "Executive Analyst",
-    tagline: "Creates reports, detects trends, insights.",
-    metric: "Report drafts for review",
+    tagline: "Not in the API.",
+    metric: "Roadmap",
     accent: "border-rose-500/30 ring-rose-500/20",
     glow: "from-rose-500/30",
     chip: "bg-rose-500/10 text-rose-600 dark:text-rose-400",
@@ -65,10 +65,10 @@ export function AgentsShowcase() {
         <div className="mx-auto max-w-3xl text-center">
           <p className="marketing-eyebrow">Meet the workforce</p>
           <h2 className="marketing-headline">
-            Five agent roles to start from.
+            Three agent roles in the API. Two on the roadmap.
           </h2>
           <p className="marketing-sub">
-            Each agent is set up for a specific business job and runs on your tenant, grounded in your documents. Integrations are scoped per pilot.
+            Sales, Support and Ops run in your tenant today. Finance and Executive Analyst are not built yet. Nothing here writes into a CRM, ERP or helpdesk.
           </p>
         </div>
 

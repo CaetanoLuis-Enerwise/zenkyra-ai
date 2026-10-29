@@ -1,7 +1,8 @@
 """Public lead capture: POST /api/v1/leads (no auth).
 
 Used by the marketing site's "Book Executive Demo" (source=demo) and "Start €149 pilot"
-(source=pilot) dialogs. Stores the lead; sends nothing (no email, no webhook).
+(source=pilot) dialogs. Stores the lead, then notifies LEADS_NOTIFY_EMAIL and/or
+LEADS_WEBHOOK_URL when those are set. The public response is only the id.
 
 Abuse controls:
 - Honeypot field `website`: if filled, respond 201 with a throwaway id and store nothing.
@@ -12,6 +13,7 @@ Abuse controls:
 
 from __future__ import annotations
 
+import logging
 import time
 import uuid
 from collections import defaultdict, deque
@@ -21,8 +23,12 @@ from fastapi import APIRouter, HTTPException, Request, status
 
 from app.api.deps import DbSession
 from app.core.config import get_settings
-from app.models import Lead
+from app.models import Lead, utcnow
 from app.schemas import LeadCreate, LeadOut
+from app.services.lead_notify import NotifyResult, notify_lead
+from app.services.lead_retention import purge_expired_leads
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/leads", tags=["leads"])
 
@@ -62,6 +68,7 @@ async def create_lead(body: LeadCreate, request: Request, db: DbSession) -> Lead
             status_code=status.HTTP_429_TOO_MANY_REQUESTS,
             detail="Too many requests; try again later",
         )
+    await purge_expired_leads(db, settings)
     if body.website:  # honeypot tripped: look successful, store nothing
         return LeadOut(id=uuid.uuid4())
     ua = request.headers.get("user-agent")
@@ -74,5 +81,17 @@ async def create_lead(body: LeadCreate, request: Request, db: DbSession) -> Lead
         user_agent=ua[:512] if ua else None,
     )
     db.add(lead)
+    await db.flush()
+    try:
+        result = await notify_lead(lead, settings)
+    except Exception:
+        # The row must survive a notifier bug. get_db commits after this returns.
+        logger.exception("lead notification crashed")
+        result = NotifyResult("failed", "notification error")
+    lead.notify_status = result.status
+    lead.notify_error = result.error
+    lead.notified_at = utcnow() if result.status == "sent" else None
+    if result.status == "failed":
+        logger.error("lead %s notification failed: %s", lead.id, result.error)
     await db.flush()
     return LeadOut(id=lead.id)

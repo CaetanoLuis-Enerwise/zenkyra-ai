@@ -480,11 +480,8 @@ export const usageByDept = [
   { department: "Legal", value: 3 },
 ];
 
-export const companies = [
-  { id: "c1", name: "Acme Inc.", plan: "Growth", logo: "A" },
-  { id: "c2", name: "Example Logistics", plan: "Enterprise", logo: "N" },
-  { id: "c3", name: "Globex Labs", plan: "Starter", logo: "G" },
-];
+// No customer workspaces. Demo chrome must not list invented companies.
+export const companies: { id: string; name: string; plan: string; logo: string }[] = [];
 
 export const promptSuggestions = [
   "Brief me on this week's pipeline",
@@ -520,7 +517,7 @@ export const howItWorks = [
     step: "02",
     title: "Hire your agents",
     description:
-      "Activate Sales, Support, Ops, Finance or Executive Analyst. Each agent inherits your knowledge, voice and approval rules.",
+      "Sales, Support and Ops are in the API. Finance and Executive Analyst are on the roadmap. None of them write into your other systems.",
   },
   {
     step: "03",
@@ -533,7 +530,7 @@ export const howItWorks = [
 export const faqs = [
   {
     q: "What exactly does a Zenkyra agent do?",
-    a: "A Zenkyra agent is an autonomous worker that performs a specific business job — qualifying leads, resolving tickets, processing invoices, drafting executive reports. It reads your knowledge, follows your rules, drafts actions for your tools (integrations are scoped per pilot), and asks a human when policy requires.",
+    a: "Today a Zenkyra agent is one of three runners: Sales classifies a lead, Support summarises ticket text, Ops drafts a checklist. Answers in chat can be grounded on PDFs you upload. They do not write into a CRM, ERP or helpdesk — those integrations are not shipped.",
   },
   {
     q: "How is this different from a chat tool?",

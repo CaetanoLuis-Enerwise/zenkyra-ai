@@ -117,9 +117,12 @@ class AdminTenantOut(BaseModel):
     plan_slug: str
     external_order_id: str
     created: bool
-    # Single-use, 72h. None when the owner has already set a password.
+    # Single-use link. None when the owner already set a password, or when this
+    # response omitted it because the email to the owner was sent.
     password_set_url: str | None
     password_set_expires_at: datetime | None
+    # True only when SMTP accepted the message that contains the link.
+    password_set_email_sent: bool = False
 
 
 class SetPasswordRequest(BaseModel):
@@ -139,3 +142,20 @@ class LeadCreate(BaseModel):
 
 class LeadOut(BaseModel):
     id: uuid.UUID
+
+
+class LeadAdminOut(BaseModel):
+    """Operator view of a stored lead. Not a public response."""
+
+    id: uuid.UUID
+    created_at: datetime
+    name: str
+    email: str
+    company: str
+    message: str | None
+    source: str
+    notify_status: str
+    notify_error: str | None = None
+    notified_at: datetime | None = None
+
+    model_config = {"from_attributes": True}

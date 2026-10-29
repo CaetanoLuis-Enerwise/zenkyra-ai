@@ -12,6 +12,8 @@ from app.core.config import get_settings
 from app.core.database import init_db
 from app.core.qdrant_client import qdrant_health
 from app.core.redis_client import redis_ping
+from app.services.lead_notify import warn_if_leads_unnotified
+from app.services.lead_retention import purge_expired_leads_startup
 from app.services.llm.registry import register_defaults
 
 
@@ -19,6 +21,8 @@ from app.services.llm.registry import register_defaults
 async def lifespan(app: FastAPI):
     register_defaults()
     settings = get_settings()
+    warn_if_leads_unnotified(settings)
+    await purge_expired_leads_startup()
     if settings.DATABASE_BOOTSTRAP:
         await init_db()
     yield

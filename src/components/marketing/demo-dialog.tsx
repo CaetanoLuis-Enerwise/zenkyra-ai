@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { leadFormConsent } from "@/lib/privacy";
 
 /** What the visitor asked for. Matches the backend's LeadCreate.source. */
 export type LeadKind = "demo" | "pilot";
@@ -255,12 +256,20 @@ export function DemoDialog() {
               </p>
             )}
 
+            <p className="mt-4 text-xs leading-5 text-muted-foreground">
+              {leadFormConsent.before}{" "}
+              <a href={leadFormConsent.href} className="underline underline-offset-2">
+                {leadFormConsent.linkLabel}
+              </a>
+              {leadFormConsent.after}
+            </p>
+
             <DialogFooter className="mt-5 flex-row items-center justify-between gap-3 sm:justify-between">
               <p className="hidden text-xs text-muted-foreground sm:block">
                 {CHANNEL === "mailto"
                   ? "Opens your email app; nothing is sent until you send it."
                   : CHANNEL === "api"
-                    ? "Stored so we can reply. Not shared with third parties."
+                    ? "Stored so we can reply. Details are in the privacy notice."
                     : "Requests are not being accepted yet."}
               </p>
               <div className="flex items-center gap-2">

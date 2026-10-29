@@ -6,9 +6,9 @@ const benefits = [
     icon: Bot,
     title: "Workers, not chatbots",
     description:
-      "Each Zenkyra agent owns a real job — qualifying leads, resolving tickets, processing invoices, drafting board memos. They take action, not just answer.",
-    metric: "5",
-    metricLabel: "agent roles",
+      "Sales, Support and Ops runners are in the API. They draft a classification, a ticket summary, or a checklist for a person to review. They do not write into your CRM or ERP.",
+    metric: "3",
+    metricLabel: "agent roles in the API",
   },
   {
     icon: ClipboardCheck,

@@ -71,6 +71,19 @@ backend data yet, so live mode shows a "not connected yet" state instead of samp
 Backend settings that must match: `CORS_ALLOW_ORIGINS=<this site's origin>` and
 `PASSWORD_SET_URL_BASE=<this site>/set-password`.
 
+The homepage demo/pilot dialog POSTs to `${NEXT_PUBLIC_API_URL}/api/v1/leads`. The API stores
+the request and, when configured, emails `LEADS_NOTIFY_EMAIL` and/or POSTs `LEADS_WEBHOOK_URL`
+(see `backend/.env.example`). Set at least one of those on the API before the form is public.
+Otherwise the row sits in Postgres with `notify_status=skipped` and nobody is told. The same
+service token used for tenant provisioning can list them: `GET /api/v1/admin/leads`.
+Requests older than 365 days are deleted. The form links to `/privacidade` (Portuguese).
+The controller name, NIF and contact on that page stay placeholders until
+`NEXT_PUBLIC_PRIVACY_CONTROLLER_*` are set with the real details.
+
+When `SMTP_HOST` and `SMTP_FROM` are set, creating a tenant emails the owner a single-use
+password link and the admin response leaves `password_set_url` empty. Without SMTP, the
+response still includes the link.
+
 ### Token storage and the XSS trade-off
 
 The JWT is stored in `localStorage` (`zenkyra.jwt`) and sent as `Authorization: Bearer`. That keeps the

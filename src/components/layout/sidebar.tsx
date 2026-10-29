@@ -2,24 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Sparkles, Plus, ChevronsUpDown, Check, Globe2, ShieldCheck } from "lucide-react";
+import { Sparkles, Globe2, ShieldCheck } from "lucide-react";
 import { mainNav, secondaryNav } from "@/lib/nav";
 import { Logo } from "@/components/brand/logo";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { companies } from "@/lib/mock-data";
 import { LIVE_MODE } from "@/lib/config";
 import { LiveWorkspaceCard } from "@/components/live/live-user-menu";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 export function Sidebar() {
   const pathname = usePathname();
@@ -34,64 +25,29 @@ export function Sidebar() {
         <LiveWorkspaceCard />
       ) : (
       <div className="px-3 pt-4">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <button className="flex w-full items-center gap-2 rounded-lg border border-border bg-card/50 px-2.5 py-2 text-left transition hover:bg-accent">
-              <Avatar className="h-7 w-7 rounded-md">
-                <AvatarFallback className="rounded-md bg-brand/15 text-brand">
-                  A
-                </AvatarFallback>
-              </Avatar>
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-medium">Acme Inc.</p>
-                <p className="truncate text-[11px] text-muted-foreground">
-                  Growth · 142 seats
-                </p>
-              </div>
-              <ChevronsUpDown className="h-4 w-4 text-muted-foreground" />
-            </button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="start" className="w-72">
-            <DropdownMenuLabel className="flex items-center justify-between">
-              <span>Workspaces</span>
-              <span className="text-[10px] font-normal text-muted-foreground">⌘ K</span>
-            </DropdownMenuLabel>
-            {companies.map((c, i) => (
-              <DropdownMenuItem key={c.id} className="gap-2 py-2">
-                <span className="flex h-7 w-7 items-center justify-center rounded-md bg-brand/15 text-xs font-semibold text-brand">
-                  {c.logo}
-                </span>
-                <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-medium">{c.name}</p>
-                  <p className="truncate text-[11px] text-muted-foreground">
-                    {c.plan} · demo
-                  </p>
-                </div>
-                {i === 0 && <Check className="h-4 w-4 text-brand" />}
-              </DropdownMenuItem>
-            ))}
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Plus className="h-4 w-4" />
-              New workspace
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="flex w-full items-center gap-2 rounded-lg border border-border bg-card/50 px-2.5 py-2 text-left">
+          <Avatar className="h-7 w-7 rounded-md">
+            <AvatarFallback className="rounded-md bg-brand/15 text-brand">
+              D
+            </AvatarFallback>
+          </Avatar>
+          <div className="min-w-0 flex-1">
+            <p className="truncate text-sm font-medium">Demo workspace</p>
+            <p className="truncate text-[11px] text-muted-foreground">
+              Sample layout · not a customer
+            </p>
+          </div>
+        </div>
 
         <div className="mt-2 flex items-center gap-1.5 px-1 text-[11px] text-muted-foreground">
           <span className="inline-flex items-center gap-1">
             <Globe2 className="h-3 w-3" />
-            Demo workspace
+            Demo data
           </span>
           <span aria-hidden>·</span>
           <span className="inline-flex items-center gap-1">
             <ShieldCheck className="h-3 w-3" />
-            EU-first
-          </span>
-          <span aria-hidden>·</span>
-          <span className="inline-flex items-center gap-1">
-            <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse-slow" />
-            Live
+            No SOC 2 yet
           </span>
         </div>
       </div>
