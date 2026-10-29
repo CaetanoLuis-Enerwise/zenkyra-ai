@@ -132,8 +132,8 @@ function HeroPreview() {
     { name: "Sales Agent", status: "active", tasks: "Qualifies leads · drafts follow-ups", color: "from-brand/30 to-brand/0", dot: "bg-brand" },
     { name: "Support Agent", status: "active", tasks: "Answers from your documents", color: "from-emerald-500/30 to-emerald-500/0", dot: "bg-emerald-500" },
     { name: "Ops Agent", status: "active", tasks: "Routes internal requests", color: "from-amber-500/30 to-amber-500/0", dot: "bg-amber-500" },
-    { name: "Finance Agent", status: "active", tasks: "Matches invoices for review", color: "from-violet-500/30 to-violet-500/0", dot: "bg-violet-500" },
-    { name: "Executive Analyst", status: "training", tasks: "Summarises reports", color: "from-rose-500/30 to-rose-500/0", dot: "bg-rose-500" },
+    { name: "Finance Agent", status: "planned", tasks: "Not in the API yet", color: "from-violet-500/30 to-violet-500/0", dot: "bg-violet-500" },
+    { name: "Executive Analyst", status: "planned", tasks: "Not in the API yet", color: "from-rose-500/30 to-rose-500/0", dot: "bg-rose-500" },
   ];
   return (
     <motion.div
@@ -159,7 +159,7 @@ function HeroPreview() {
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
               Active workforce
             </p>
-            <span className="text-[10px] text-muted-foreground">5 roles · product preview</span>
+            <span className="text-[10px] text-muted-foreground">3 in the API · 2 planned</span>
           </div>
 
           <ul className="space-y-1.5">

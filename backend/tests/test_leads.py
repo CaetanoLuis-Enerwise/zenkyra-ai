@@ -32,6 +32,10 @@ async def test_create_lead_stores_row(client, session_factory):
     assert lead.company == "Silva Lda"
     assert lead.user_agent == "pytest-ua"
     assert lead.created_at is not None
+    assert lead.notify_status == "skipped"
+    assert lead.notify_error is None
+    assert lead.notified_at is None
+    assert set(r.json()) == {"id"}
 
 
 async def test_message_optional_and_demo_source(client, session_factory):

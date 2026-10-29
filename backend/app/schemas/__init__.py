@@ -139,3 +139,20 @@ class LeadCreate(BaseModel):
 
 class LeadOut(BaseModel):
     id: uuid.UUID
+
+
+class LeadAdminOut(BaseModel):
+    """Operator view of a stored lead. Not a public response."""
+
+    id: uuid.UUID
+    created_at: datetime
+    name: str
+    email: str
+    company: str
+    message: str | None
+    source: str
+    notify_status: str
+    notify_error: str | None = None
+    notified_at: datetime | None = None
+
+    model_config = {"from_attributes": True}

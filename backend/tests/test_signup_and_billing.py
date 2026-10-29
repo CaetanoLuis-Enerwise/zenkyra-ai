@@ -51,6 +51,16 @@ async def test_plan_catalog_lists_pilot(client):
     pilot = next(p for p in plans if p["slug"] == "pilot")
     assert pilot["price_display"] == "€149 / 14 days"
     assert [p["slug"] for p in plans][:2] == ["pilot", "starter"]
+    # Shown on the live billing page. Do not advertise unbuilt product.
+    blob = " ".join(h for p in plans for h in p["highlights"])
+    assert "Live ROI" not in blob
+    assert "Up to 25 seats" not in blob
+    assert "Up to 5 agents" not in blob
+    assert "VPC · BYO LLM" not in blob
+    growth = next(p for p in plans if p["slug"] == "growth")
+    assert any("not a claimed ROI" in h for h in growth["highlights"])
+    enterprise = next(p for p in plans if p["slug"] == "enterprise")
+    assert any("roadmap" in h for h in enterprise["highlights"])
 
 
 async def test_billing_current_for_pilot_tenant(client, service_token):

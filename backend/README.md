@@ -57,8 +57,8 @@ Run from the `backend` directory so `app` imports resolve (`PYTHONPATH` defaults
 | `/api/v1/agents` | sales / support / ops runners |
 | `/api/v1/analytics` | tasks, hours saved, LLM calls |
 | `/api/v1/billing` | plan catalog (pilot €149/14 days, starter, growth, enterprise) + current plan (`pilot_ends_at`) |
-| `/api/v1/leads` | public `POST` lead capture from the marketing site (`source`: `demo`/`pilot`); honeypot `website`; per-IP rate limit (in-process) |
-| `/api/v1/admin` | service-to-service tenant provisioning (`X-Service-Token`; 503 if `ZENKYRA_SERVICE_TOKEN` unset) |
+| `/api/v1/leads` | public `POST` lead capture from the marketing site (`source`: `demo`/`pilot`); honeypot `website`; per-IP rate limit (in-process); emails `LEADS_NOTIFY_EMAIL` and/or POSTs `LEADS_WEBHOOK_URL` when set |
+| `/api/v1/admin` | service-to-service tenant provisioning and `GET /leads` (`X-Service-Token`; 503 if `ZENKYRA_SERVICE_TOKEN` unset) |
 
 ## LLM service
 
@@ -92,8 +92,20 @@ TEST_DATABASE_URL=postgresql+asyncpg://user:pass@localhost:5432/zenkyra_test pyt
   `LEADS_RATE_LIMIT_WINDOW_SECONDS`, keyed on `request.client.host`) lives in **process memory**: each
   worker/replica counts separately and counters reset on restart. Behind a proxy run uvicorn with
   `--proxy-headers --forwarded-allow-ips=<proxy>` or every lead shares the proxy IP. Add an edge/WAF limit
-  for real abuse protection. The endpoint stores leads only; it sends no email or webhook. Leads are
-  personal data: cover them in the privacy notice before the form goes live.
+  for real abuse protection. After the row is stored, the API notifies every configured channel:
+  SMTP email to `LEADS_NOTIFY_EMAIL` (needs `SMTP_HOST` and `SMTP_FROM`; `Reply-To` is the prospect)
+  and/or an HTTP POST to `LEADS_WEBHOOK_URL` (`LEADS_WEBHOOK_FORMAT=json` or `slack`). Optional
+  `LEADS_WEBHOOK_SECRET` sends `X-Zenkyra-Signature: sha256=<hmac-sha256 of the raw body>`. The webhook
+  URL must be https (http is allowed only for localhost) and must not contain credentials. If a channel
+  fails, the lead is still kept and `notify_status=failed` (the public response is only `{id}`). With
+  neither destination set, `notify_status=skipped` and nobody is told — set one before the form is public.
+  In `APP_ENV=production` the process logs a warning at startup when both are unset. Read the queue with
+  `GET /api/v1/admin/leads` (`X-Service-Token`). The password-set link from `POST /api/v1/admin/tenants`
+  is still only returned in that response; it is not emailed. Leads are personal data: cover them in the
+  privacy notice before the form goes live. An existing database needs:
+  `ALTER TABLE leads ADD COLUMN notify_status VARCHAR(16) NOT NULL DEFAULT 'skipped';`
+  `ALTER TABLE leads ADD COLUMN notify_error VARCHAR(300) NULL;`
+  `ALTER TABLE leads ADD COLUMN notified_at TIMESTAMPTZ NULL;`
 - Set `CORS_ALLOW_ORIGINS` to the frontend origin(s), comma-separated (default `http://localhost:3000`).
   Credentials are disabled: the frontend sends the JWT as `Authorization: Bearer`, not as a cookie.
 - Set `PASSWORD_SET_URL_BASE` to `https://<frontend>/set-password` (the Next.js page that consumes `?token=`).

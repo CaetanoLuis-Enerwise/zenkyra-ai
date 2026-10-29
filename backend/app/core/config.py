@@ -79,6 +79,21 @@ class Settings(BaseSettings):
     LEADS_RATE_LIMIT_MAX: int = 5
     LEADS_RATE_LIMIT_WINDOW_SECONDS: int = 600
 
+    # Tell a human when a real lead is stored. With neither destination set, the row is
+    # kept and notify_status=skipped — nobody is told. Set at least one before the form is public.
+    LEADS_NOTIFY_EMAIL: str | None = None
+    SMTP_HOST: str | None = None
+    SMTP_PORT: int = 587
+    SMTP_USER: str | None = None
+    SMTP_PASSWORD: str | None = None
+    SMTP_FROM: str | None = None
+    SMTP_STARTTLS: bool = True
+    # JSON body, or {"text": "..."} when slack (Slack incoming webhooks reject other shapes).
+    LEADS_WEBHOOK_URL: str | None = None
+    LEADS_WEBHOOK_SECRET: str | None = None
+    LEADS_WEBHOOK_FORMAT: Literal["json", "slack"] = "json"
+    LEADS_NOTIFY_TIMEOUT_SECONDS: float = Field(default=10.0, ge=1, le=30)
+
     @model_validator(mode="after")
     def derive_sync_database_url(self) -> "Settings":
         if self.DATABASE_URL_SYNC is None:

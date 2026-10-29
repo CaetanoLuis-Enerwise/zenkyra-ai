@@ -27,8 +27,8 @@ _PLANS: list[BillingPlan] = [
         name="Starter",
         price_display="€299 / mo",
         highlights=[
-            "1 agent · pre-built role",
-            "Up to 25 seats",
+            "Sales, Support and Ops agent runners",
+            "Upload PDFs · chat grounded on them",
             "Email support",
         ],
     ),
@@ -37,8 +37,8 @@ _PLANS: list[BillingPlan] = [
         name="Growth",
         price_display="€799 / mo",
         highlights=[
-            "Up to 5 agents",
-            "Live ROI dashboard",
+            "Same product as Starter",
+            "Task and LLM-call counts — not a claimed ROI",
             "Priority support",
         ],
     ),
@@ -47,8 +47,8 @@ _PLANS: list[BillingPlan] = [
         name="Enterprise",
         price_display="Custom",
         highlights=[
-            "Unlimited agents",
-            "VPC · BYO LLM",
+            "Scope agreed in writing",
+            "VPC and bring-your-own LLM are roadmap, not included",
             "Dedicated CSM",
         ],
     ),

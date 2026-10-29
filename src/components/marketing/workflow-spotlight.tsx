@@ -15,28 +15,28 @@ const flows = [
   {
     icon: Briefcase,
     title: "Revenue acceleration",
-    chain: ["Inbound lead", "Sales Agent", "Email + CRM"],
+    chain: ["Inbound lead", "Sales Agent", "Draft for review"],
     accent: "from-brand/25 via-brand/5 to-transparent",
     ring: "hover:border-brand/35 hover:shadow-brand/10",
   },
   {
     icon: CircleDollarSign,
     title: "Finance velocity",
-    chain: ["Invoice upload", "Finance Agent", "ERP posting"],
+    chain: ["Invoice upload", "Finance Agent", "Roadmap"],
     accent: "from-violet-500/25 via-violet-500/5 to-transparent",
     ring: "hover:border-violet-500/35 hover:shadow-violet-500/10",
   },
   {
     icon: Headphones,
     title: "Customer experience",
-    chain: ["Ticket opened", "Support Agent", "Resolved + QA"],
+    chain: ["Ticket text", "Support Agent", "Summary for review"],
     accent: "from-emerald-500/25 via-emerald-500/5 to-transparent",
     ring: "hover:border-emerald-500/35 hover:shadow-emerald-500/10",
   },
   {
     icon: Settings2,
     title: "Operations backbone",
-    chain: ["Internal request", "Ops Agent", "SOP execution"],
+    chain: ["Internal request", "Ops Agent", "Checklist draft"],
     accent: "from-amber-500/25 via-amber-500/5 to-transparent",
     ring: "hover:border-amber-500/35 hover:shadow-amber-500/10",
   },
@@ -53,13 +53,13 @@ export function WorkflowSpotlight() {
           transition={{ duration: 0.45 }}
           className="mx-auto max-w-3xl text-center"
         >
-          <p className="marketing-eyebrow">Representative deployments</p>
+          <p className="marketing-eyebrow">Example workflows</p>
           <h2 className="marketing-headline">
-            Agent-led workflows your teams recognise.
+            Jobs a pilot can draft. Not live integrations.
           </h2>
           <p className="marketing-sub">
-            Visual automation builder on top — wire triggers, approvals and
-            human-in-the-loop where regulation demands it.
+            These are examples, not customer deployments. There is no visual
+            automation builder, and CRM, ERP and helpdesk actions are not built.
           </p>
         </motion.div>
 

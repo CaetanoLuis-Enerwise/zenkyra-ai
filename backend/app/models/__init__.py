@@ -298,3 +298,10 @@ class Lead(Base):
     message: Mapped[str | None] = mapped_column(Text, nullable=True)
     source: Mapped[str] = mapped_column(String(16))
     user_agent: Mapped[str | None] = mapped_column(String(512), nullable=True)
+    # skipped = no notifier configured; sent = every configured channel accepted it;
+    # failed = at least one channel failed (the row is still kept).
+    notify_status: Mapped[str] = mapped_column(
+        String(16), default="skipped", server_default="skipped"
+    )
+    notify_error: Mapped[str | None] = mapped_column(String(300), nullable=True)
+    notified_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
