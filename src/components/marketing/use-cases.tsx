@@ -22,9 +22,9 @@ const cases = [
     bullets: [
       "Score inbound leads and draft replies for approval",
       "Draft proposals grounded on past closed-won deals",
-      "Update your CRM and book the meeting",
+      "A person reviews and sends every draft — CRM updates and booking are not shipped",
     ],
-    proof: "Capability: qualify, draft, book — not a published customer result",
+    proof: "Capability: classify and draft — not a published customer result",
     accent:
       "hover:border-brand/40 hover:shadow-brand/10 hover:ring-brand/15",
     glow: "from-brand/35",
@@ -48,11 +48,11 @@ const cases = [
     title: "Ops Agent",
     headline: "Take the repetitive requests off your team.",
     bullets: [
-      "Internal requests routed and resolved on-policy",
-      "SOPs and runbooks executed end-to-end",
-      "Vendor + procurement triage in Slack and Teams",
+      "Drafts a checklist for an internal request",
+      "SOP execution end-to-end is not shipped",
+      "Slack and Teams triage is not shipped",
     ],
-    proof: "Capability: run SOPs and internal requests — no claimed hours SLA",
+    proof: "Capability: draft a checklist — no claimed hours SLA",
     accent:
       "hover:border-amber-500/40 hover:shadow-amber-500/10 hover:ring-amber-500/15",
     glow: "from-amber-500/35",
@@ -66,7 +66,7 @@ const cases = [
       "Variance analysis the second numbers land",
       "Board-ready briefings drafted every Monday",
     ],
-    proof: "Capability: invoice match and Monday briefings — not a customer result",
+    proof: "On the roadmap, not in the API — not a customer result",
     accent:
       "hover:border-violet-500/40 hover:shadow-violet-500/10 hover:ring-violet-500/15",
     glow: "from-violet-500/35",

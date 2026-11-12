@@ -82,7 +82,7 @@ export function Hero() {
             className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4"
           >
             <span className="inline-flex w-fit items-center rounded-full border border-brand/25 bg-brand/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-brand">
-              Paid pilot · invoice · VAT extra
+              Paid pilot · invoice
             </span>
             <p className="text-xs text-muted-foreground">
               14-day paid technical pilot, €149, invoice. DPA before any customer PDF.
@@ -97,7 +97,7 @@ export function Hero() {
           >
             <li className="flex items-center gap-1.5">
               <ShieldCheck className="h-4 w-4 text-brand" />
-              No SOC 2 yet. Data stays in your tenant.
+              No SOC 2 yet. Each company has its own tenant. Document processing uses Google Gemini.
             </li>
             <li className="flex items-center gap-1.5">
               <Zap className="h-4 w-4 text-brand" />

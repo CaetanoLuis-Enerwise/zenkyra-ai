@@ -205,7 +205,7 @@ export default function OnboardingPage() {
       </Card>
 
       <p className="mt-6 text-center text-xs text-muted-foreground">
-        No SOC 2 yet. Data stays in your tenant.
+        No SOC 2 yet. Each company has its own tenant. Document processing uses Google Gemini.
       </p>
     </div>
   );

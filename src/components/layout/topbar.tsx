@@ -176,7 +176,7 @@ function TrustStrip() {
             <span className="hidden font-medium xl:inline">EU-first</span>
           </span>
         </TooltipTrigger>
-        <TooltipContent>No SOC 2 yet. Data stays in your tenant.</TooltipContent>
+        <TooltipContent>No SOC 2 yet. Each company has its own tenant. Document processing uses Google Gemini.</TooltipContent>
       </Tooltip>
     </div>
   );

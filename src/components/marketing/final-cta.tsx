@@ -62,7 +62,7 @@ export function FinalCTA() {
             <div className="mt-8 inline-flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-muted-foreground">
               <span className="inline-flex items-center gap-2">
                 <ShieldCheck className="h-3.5 w-3.5 text-brand" />
-                No SOC 2 yet. Data stays in your tenant.
+                No SOC 2 yet. Each company has its own tenant. Document processing uses Google Gemini.
               </span>
               <span className="hidden h-4 w-px bg-border sm:inline-block" aria-hidden />
               <span className="font-medium text-foreground/90">

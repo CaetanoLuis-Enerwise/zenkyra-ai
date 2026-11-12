@@ -11,7 +11,7 @@ const personas = [
       "EU-first. Private knowledge, your tenant.",
       "SSO/SCIM, single-tenant VPC and BYO-LLM are on the roadmap, not shipped",
     ],
-    proof: "No SOC 2 yet. Data stays in your tenant.",
+    proof: "No SOC 2 yet. Each company has its own tenant. Document processing uses Google Gemini.",
   },
   {
     icon: CircleDollarSign,
@@ -29,7 +29,7 @@ const personas = [
     role: "For the CHRO",
     title: "Scale operations, not headcount.",
     bullets: [
-      "Hire agents per role — Sales, Support, Ops, Finance",
+      "Hire agents per role — Sales, Support and Ops. Finance is on the roadmap",
       "Every employee gets a senior teammate on demand",
       "Performance reviews drafted on grounded data",
     ],
@@ -41,7 +41,7 @@ const personas = [
     title: "A workforce that doesn't sleep.",
     bullets: [
       "Triage, summarise, route — 24/7, in your tone",
-      "SOPs, runbooks and vendors, instantly executable",
+      "SOP execution and Slack or Teams triage are not shipped",
       "Answers grounded in your own documents",
     ],
     proof: "No published response-time figure. Measure it in the pilot.",

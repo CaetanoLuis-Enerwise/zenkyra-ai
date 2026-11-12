@@ -58,7 +58,7 @@ const COPY: Record<LeadKind, { title: string; description: string; submit: strin
   pilot: {
     title: "Start the €149 pilot",
     description:
-      "14-day paid technical pilot, €149 plus VAT, by invoice. Tell us who you are and we'll reply to schedule it. DPA before any customer PDF.",
+      "14-day paid technical pilot, €149, by invoice. Tell us who you are and we'll reply to schedule it. DPA before any customer PDF.",
     submit: "Request pilot",
   },
 };
@@ -302,7 +302,7 @@ export function DemoDialog() {
                 DPA before any customer PDF
               </Bullet>
               <Bullet icon={<Globe2 className="h-4 w-4 text-brand" />}>
-                No SOC 2 yet. Data stays in your tenant.
+                No SOC 2 yet. Each company has its own tenant. Document processing uses Google Gemini.
               </Bullet>
             </ul>
             <div className="mt-5 rounded-lg border border-border bg-card p-3 text-xs text-muted-foreground">

@@ -145,7 +145,7 @@ async function MockAgentsPage() {
             Talk to a solutions engineer
           </Button>
           <Badge variant="muted" className="relative mt-3 w-full justify-center">
-            14-day paid pilot · €149 + VAT
+            14-day paid pilot · €149
           </Badge>
         </Card>
       </section>

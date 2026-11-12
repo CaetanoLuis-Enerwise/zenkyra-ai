@@ -32,7 +32,7 @@ export function Faq() {
                 Need a DPA before any customer PDF?
               </div>
               <p className="mt-1.5 text-sm text-muted-foreground">
-                No SOC 2 yet. Data stays in your tenant. DPA before any customer PDF.
+                No SOC 2 yet. Each company has its own tenant. Document processing uses Google Gemini. DPA before any customer PDF.
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 <Button size="sm" onClick={() => openDemo("faq-trust")}>
