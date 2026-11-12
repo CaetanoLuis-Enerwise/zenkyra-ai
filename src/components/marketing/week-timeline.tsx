@@ -12,7 +12,7 @@ const steps = [
   {
     day: "Day 3",
     title: "First agent hired",
-    desc: "Pick Sales, Support, Ops or Finance. We tune voice and rules against your real workflows.",
+    desc: "Pick Sales, Support or Ops. Finance is on the roadmap, not in the API. We tune voice and rules against your real workflows.",
   },
   {
     day: "Week 1",

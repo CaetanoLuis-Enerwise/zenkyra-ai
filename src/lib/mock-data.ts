@@ -109,7 +109,7 @@ export const overviewStats: Stat[] = [
   {
     label: "Paid pilot length",
     value: "14 days",
-    delta: "€149 + VAT",
+    delta: "€149",
     trend: "flat",
     hint: "Technical pilot, not a live SLA",
     spark: sparkSeries(14, 0),
@@ -119,7 +119,7 @@ export const overviewStats: Stat[] = [
     value: "Your tenant",
     delta: "EU-first",
     trend: "flat",
-    hint: "Data stays in your tenant",
+    hint: "Own tenant. Document processing uses Google Gemini.",
     spark: sparkSeries(1, 0),
   },
   {
@@ -542,11 +542,11 @@ export const faqs = [
   },
   {
     q: "How long does it take to deploy our first agent?",
-    a: "We start with the 14-day paid technical pilot: €149 plus VAT, invoiced. DPA before any customer PDF. SSO, SCIM and private VPC deployment are on the roadmap, not shipped.",
+    a: "We start with the 14-day paid technical pilot: €149, invoiced. DPA before any customer PDF. SSO, SCIM and private VPC deployment are on the roadmap, not shipped.",
   },
   {
     q: "What does our security and compliance team need to review?",
-    a: "No SOC 2 yet. Data stays in your tenant. DPA before any customer PDF. GDPR and sub-processor list on request — we do not ship ISO 27001 reports, a Trust Pack, or a pen-test summary.",
+    a: "No SOC 2 yet. Each company has its own tenant. Document processing uses Google Gemini. The hosting region is confirmed in writing before any upload. DPA before any customer PDF. GDPR and sub-processor list on request — we do not ship ISO 27001 reports, a Trust Pack, or a pen-test summary.",
   },
   {
     q: "What if it doesn't work for us?",

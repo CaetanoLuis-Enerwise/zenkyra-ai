@@ -40,7 +40,7 @@ const plans: {
     features: [
       "Scope agreed in writing",
       "VPC and bring-your-own LLM are roadmap, not included",
-      "No SOC 2 yet. Data stays in your tenant.",
+      "No SOC 2 yet. Each company has its own tenant. Document processing uses Google Gemini.",
       "Dedicated CSM",
     ],
   },
@@ -80,7 +80,7 @@ export function BillingPlans() {
       </div>
 
       <p className="text-center text-xs text-muted-foreground">
-        Prices in EUR · VAT not included · invoiced manually · no card checkout
+        Prices in EUR · invoiced manually · no card checkout
       </p>
     </div>
   );

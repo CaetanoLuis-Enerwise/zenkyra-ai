@@ -15,7 +15,7 @@ const plans = [
     features: [
       "Sales, Support and Ops agent runners",
       "Upload PDFs · chat grounded on them",
-      "Invoiced monthly, VAT extra",
+      "Invoiced monthly",
       "Email support",
     ],
   },
@@ -26,7 +26,7 @@ const plans = [
     features: [
       "Same workspace capabilities as Starter",
       "Task and LLM-call counts — not a claimed ROI",
-      "Invoiced monthly, VAT extra",
+      "Invoiced monthly",
       "Priority support",
     ],
     highlight: true,
@@ -39,7 +39,7 @@ const plans = [
       "Scope agreed in writing",
       "Hosting region agreed in writing",
       "SSO, SCIM, VPC and BYO LLM are roadmap",
-      "No SOC 2 yet. Data stays in your tenant.",
+      "No SOC 2 yet. Each company has its own tenant. Document processing uses Google Gemini.",
       "Dedicated CSM + Solutions Engineer",
     ],
   },
@@ -79,7 +79,7 @@ export function PricingTeaser() {
               <div className="relative mt-3 flex items-baseline gap-1">
                 <span className="text-3xl font-semibold tracking-tight">{p.price}</span>
                 {p.price !== "Custom" && (
-                  <span className="text-sm text-muted-foreground">/ month + VAT</span>
+                  <span className="text-sm text-muted-foreground">/ month</span>
                 )}
               </div>
               <p className="relative mt-1 text-sm text-muted-foreground">{p.description}</p>

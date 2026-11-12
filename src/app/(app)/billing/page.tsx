@@ -16,7 +16,7 @@ function MockBillingPage() {
           <>
             <span>Demo data</span>
             <span className="hidden md:inline">·</span>
-            <span>Prices excl. VAT</span>
+            <span>Prices in EUR</span>
           </>
         }
       />
